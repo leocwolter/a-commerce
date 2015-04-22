@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.acommerce.dao.BookDAO;
 import br.com.acommerce.model.Book;
 
-@WebServlet("/new-product")
+@WebServlet("/new-book")
 public class NewBook extends HttpServlet{
 
 	@Override
@@ -30,12 +30,13 @@ public class NewBook extends HttpServlet{
 		BookDAO books = new BookDAO(connection);
 		
 		String authors = req.getParameter("authors");
-		String name = req.getParameter("authors");
-		String genre = req.getParameter("authors");
-		BigDecimal price = new BigDecimal(req.getParameter("authors"));
+		String name = req.getParameter("name");
+		String genre = req.getParameter("genre");
+		BigDecimal price = new BigDecimal(req.getParameter("price"));
 		Book book = new Book(name, genre, price, authors);
 		books.save(book);
 		
+		req.setAttribute("book", book);
 		req.getRequestDispatcher("/WEB-INF/jsp/book/new-success.jsp").forward(req, res);
 
 		

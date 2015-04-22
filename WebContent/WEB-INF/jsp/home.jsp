@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>A-commerce</title>
-</head>
-<body>
-
-<c:import url="/WEB-INF/jsp/_menu.jsp"/>
-
-</body>
-</html>
+<a:page title="Bem-vindo ao A-Commerce">
+	<table>
+		<c:forEach items="${books}" var="book">
+			<tr>
+				<td>${book.name}</td>
+				<td>${book.genre}</td>
+				<td>
+					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
+				</td>
+				<td>${book.authors}</td>
+			</tr>		
+		</c:forEach>
+	</table>
+</a:page>

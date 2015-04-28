@@ -1,3 +1,7 @@
+CREATE DATABASE acommerce;
+
+USE acommerce;
+
 CREATE TABLE `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,

@@ -1,4 +1,4 @@
-package br.com.acommerce.servlet;
+package br.com.acommerce.home;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.acommerce.dao.BookDAO;
+import br.com.acommerce.book.BookDAO;
 
 @WebServlet("/")
 public class HomeServlet extends HttpServlet {

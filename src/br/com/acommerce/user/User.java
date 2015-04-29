@@ -1,4 +1,4 @@
-package br.com.acommerce.model;
+package br.com.acommerce.user;
 
 public class User {
 

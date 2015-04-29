@@ -1,4 +1,4 @@
-package br.com.acommerce.dao;
+package br.com.acommerce.book;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.com.acommerce.model.Book;
 
 public class BookDAO {
 

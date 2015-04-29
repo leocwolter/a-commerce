@@ -1,4 +1,4 @@
-package br.com.acommerce.model;
+package br.com.acommerce.book;
 
 import java.math.BigDecimal;
 import java.util.List;

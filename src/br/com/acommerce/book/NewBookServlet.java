@@ -1,4 +1,4 @@
-package br.com.acommerce.servlet.book;
+package br.com.acommerce.book;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.acommerce.dao.BookDAO;
-import br.com.acommerce.model.Book;
-
 @WebServlet("/new-book")
-public class NewBook extends HttpServlet{
+public class NewBookServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)

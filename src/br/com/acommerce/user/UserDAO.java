@@ -1,11 +1,9 @@
-package br.com.acommerce.dao;
+package br.com.acommerce.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import br.com.acommerce.model.User;
 
 public class UserDAO {
 	

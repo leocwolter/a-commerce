@@ -16,6 +16,6 @@
 			Autores:
 			<input type="text" name="authors">
 		</label>
-		<input type="submit" value="Logar">
+		<input type="submit" value="Cadastrar">
 	</form>
 </a:page>

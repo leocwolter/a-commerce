@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS acommerce;
+
 CREATE DATABASE acommerce;
 
 USE acommerce;
@@ -24,17 +26,17 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `book_genre` (
+CREATE TABLE `book_category` (
 	`book_id` int(11) NOT NULL,
-	`genre_id` int(11) NOT NULL,
+	`category_id` int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id),
-    CONSTRAINT FOREIGN KEY (genre_id) REFERENCES genre(id)
+    CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `publisher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `number` varchar(255) NOT NULL,
+  `number` varchar(255) NOT NULL,category
   `street` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,

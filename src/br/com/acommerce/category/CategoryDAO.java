@@ -42,4 +42,34 @@ public class CategoryDAO {
 		}
 	}
 
+	public Category withId(Long id) {
+		try {
+			String sql = "select * from category";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(!resultSet.next())
+				throw new RuntimeException("Couldn't find any categories with id "+id);
+			
+			String name = resultSet.getString("name");
+			Category category = new Category(name);
+			category.setId(resultSet.getLong("id"));
+			return category;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void update(Category category) {
+		try {
+			String sql = "update category set name = ? where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, category.getName());
+			preparedStatement.setLong(2, category.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

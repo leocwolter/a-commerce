@@ -1,5 +1,7 @@
 package br.com.acommerce.category;
 
+import static java.lang.Long.valueOf;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -10,12 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/new-category")
-public class NewCategoryServlet extends HttpServlet{
+@WebServlet("/edit-category")
+public class EditCategoryServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		Connection connection = (Connection) req.getAttribute("connection");
+		CategoryDAO categories = new CategoryDAO(connection);
+		Category category = categories.withId(valueOf(req.getParameter("id")));
+		req.setAttribute("category", category);
 		req.getRequestDispatcher("/WEB-INF/jsp/category/form.jsp").forward(req, res);
 	}
 	
@@ -25,13 +31,14 @@ public class NewCategoryServlet extends HttpServlet{
 
 		Connection connection = (Connection) req.getAttribute("connection");
 		CategoryDAO categories = new CategoryDAO(connection);
+		Category category = categories.withId(valueOf(req.getParameter("id")));
 		
 		String name = req.getParameter("name");
-		Category category = new Category(name);
-		categories.save(category);
+		category.setName(name);
+		categories.update(category);
 		
 		req.setAttribute("category", category);
-		req.getRequestDispatcher("/WEB-INF/jsp/category/success.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/category/edit-success.jsp").forward(req, res);
 
 		
 	}

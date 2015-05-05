@@ -16,7 +16,7 @@ public class NewBookServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/jsp/book/new-form.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/book/form.jsp").forward(req, res);
 	}
 	
 	@Override

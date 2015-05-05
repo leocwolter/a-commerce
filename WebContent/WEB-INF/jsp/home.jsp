@@ -3,7 +3,7 @@
 		<c:forEach items="${books}" var="book">
 			<tr>
 				<td>${book.name}</td>
-				<td>${book.genre}</td>
+				<td>${book.categoriesAsString}</td>
 				<td>
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
 				</td>

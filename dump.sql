@@ -7,7 +7,6 @@ USE acommerce;
 CREATE TABLE `book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
   `authors` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -36,7 +35,7 @@ CREATE TABLE `book_category` (
 CREATE TABLE `publisher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `number` varchar(255) NOT NULL,category
+  `number` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,

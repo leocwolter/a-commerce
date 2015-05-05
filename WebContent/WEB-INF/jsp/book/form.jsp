@@ -6,7 +6,12 @@
 		</label>
 		<label>
 			Categorias:
-			<input type="text" name="categories" value="${book.categories}">
+			<select multiple name="categories">
+				<c:forEach items="${categories}" var="category">
+					<option value="${category.id}" ${book.contains(category) ? 'selected' : '' }>${category.name}</option>
+				</c:forEach>
+			</select>
+			
 		</label>
 		<label>
 			Preço:

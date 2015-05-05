@@ -34,7 +34,9 @@ public class CategoryDAO {
 			List<Category> categories = new ArrayList<>();
 			while (resultSet.next()) {
 				String name = resultSet.getString("name");
-				categories.add(new Category(name));
+				Category category = new Category(name);
+				category.setId(resultSet.getLong("id"));
+				categories.add(category);
 			}
 			return categories;
 		} catch (SQLException e) {
@@ -67,6 +69,23 @@ public class CategoryDAO {
 			preparedStatement.setString(1, category.getName());
 			preparedStatement.setLong(2, category.getId());
 			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public List<Category> ofBook(Long id) {
+		try {
+			String sql = "select distinct c.* from category c join book_category bc on bc.category_id = c.id where bc.book_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Category> categories = new ArrayList<>();
+			while (resultSet.next()) {
+				String name = resultSet.getString("name");
+				categories.add(new Category(name));
+			}
+			return categories;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

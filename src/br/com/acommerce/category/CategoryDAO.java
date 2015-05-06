@@ -94,4 +94,21 @@ public class CategoryDAO {
 		}
 	}
 
+	public void remove(Long id) {
+		try {
+			String sql = "delete from book_category where category_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+
+			sql = "delete from category where id = ?";
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

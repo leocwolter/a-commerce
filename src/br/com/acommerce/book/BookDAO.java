@@ -31,39 +31,10 @@ public class BookDAO {
 			preparedStatement.execute();
 			Long id = getLastBookId();
 			book.setId(id);
-			saveCategoryRelation(book);
+			overrideCategoryRelation(book);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	private Long getLastBookId() {
-		try {
-			String sql = "select id from book order by id desc limit 1";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if (!resultSet.next()) 
-				throw new RuntimeException("The database is empty. Create new books to solve this");
-			return resultSet.getLong("id");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void saveCategoryRelation(Book book) {
-		List<Category> categories = book.getCategories();
-		for (Category category : categories) {
-			try {
-				String sql = "insert into book_category (book_id, category_id) values ( ?, ?)";
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setLong(1, book.getId());
-				preparedStatement.setLong(2, category.getId());
-				preparedStatement.execute();
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		
 	}
 
 	public List<Book> all() {
@@ -87,5 +58,84 @@ public class BookDAO {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public Book withId(Long id) {
+		try {
+			String sql = "select * from book where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (! resultSet.next()) 
+				throw new RuntimeException("Couldn't find any books with id "+id);
+			
+			String name = resultSet.getString("name");
+			BigDecimal price = new BigDecimal(resultSet.getString("price"));
+			String authors = resultSet.getString("authors");
+			
+			Book book = new Book(name, categories.ofBook(id), price, authors);
+			book.setId(id);
+			return book;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void update(Book book) {
+		try {
+			String sql = "update book set name = ?, price = ?, authors = ? where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, book.getName());
+			preparedStatement.setString(2, book.getPrice().toPlainString());
+			preparedStatement.setString(3, book.getAuthors());
+			preparedStatement.setLong(4, book.getId());
+			preparedStatement.execute();
+			overrideCategoryRelation(book);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+
+	private Long getLastBookId() {
+		try {
+			String sql = "select id from book order by id desc limit 1";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (!resultSet.next()) 
+				throw new RuntimeException("The database is empty. Create new books to solve this");
+			return resultSet.getLong("id");
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void overrideCategoryRelation(Book book) {
+		List<Category> categories = book.getCategories();
+		removeCategoriesFrom(book);
+		for (Category category : categories) {
+			try {
+				String sql = "insert into book_category (book_id, category_id) values ( ?, ?)";
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setLong(1, book.getId());
+				preparedStatement.setLong(2, category.getId());
+				preparedStatement.execute();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+	}
+
+	private void removeCategoriesFrom(Book book) {
+		try {
+			String sql = "delete from book_category where book_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, book.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 }

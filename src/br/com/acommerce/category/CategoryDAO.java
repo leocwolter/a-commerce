@@ -83,7 +83,9 @@ public class CategoryDAO {
 			List<Category> categories = new ArrayList<>();
 			while (resultSet.next()) {
 				String name = resultSet.getString("name");
-				categories.add(new Category(name));
+				Category category = new Category(name);
+				category.setId(resultSet.getLong("id"));
+				categories.add(category);
 			}
 			return categories;
 		} catch (SQLException e) {

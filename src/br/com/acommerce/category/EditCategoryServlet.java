@@ -3,7 +3,6 @@ package br.com.acommerce.category;
 import static java.lang.Long.valueOf;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;

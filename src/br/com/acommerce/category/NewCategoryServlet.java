@@ -1,7 +1,6 @@
 package br.com.acommerce.category;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.Connection;
 
 import javax.servlet.ServletException;
@@ -31,7 +30,7 @@ public class NewCategoryServlet extends HttpServlet{
 		categories.save(category);
 		
 		req.setAttribute("category", category);
-		req.getRequestDispatcher("/WEB-INF/jsp/category/success.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/category/new-success.jsp").forward(req, res);
 
 		
 	}

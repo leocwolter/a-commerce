@@ -7,6 +7,7 @@
 				<th>Preço</th>
 				<th>Autores</th>
 				<th>&nbsp;</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<c:forEach items="${books}" var="book">
@@ -20,6 +21,11 @@
 				<td>
 					<a href="<c:url value="/edit-book?id=${book.id}"/>">
 						Alterar
+					</a>
+				</td>
+				<td>
+					<a href="<c:url value="/delete-book?id=${book.id}"/>">
+						Remover
 					</a>
 				</td>
 			</tr>		

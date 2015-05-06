@@ -111,7 +111,7 @@ public class BookDAO {
 
 	private void overrideCategoryRelation(Book book) {
 		List<Category> categories = book.getCategories();
-		removeCategoriesFrom(book);
+		removeCategoriesFrom(book.getId());
 		for (Category category : categories) {
 			try {
 				String sql = "insert into book_category (book_id, category_id) values ( ?, ?)";
@@ -126,11 +126,23 @@ public class BookDAO {
 		
 	}
 
-	private void removeCategoriesFrom(Book book) {
+	private void removeCategoriesFrom(Long id) {
 		try {
 			String sql = "delete from book_category where book_id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setLong(1, book.getId());
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void remove(Long id) {
+		try {
+			removeCategoriesFrom(id);
+			String sql = "delete from book where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

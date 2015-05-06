@@ -59,7 +59,7 @@ public class EditBookServlet extends HttpServlet{
 		books.update(book);
 		
 		req.setAttribute("book", book);
-		req.getRequestDispatcher("/WEB-INF/jsp/book/new-success.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/book/edit-success.jsp").forward(req, res);
 
 		
 	}

@@ -30,7 +30,9 @@ public class EditBookServlet extends HttpServlet{
 		Long id = Long.valueOf(req.getParameter("id"));
 		Book book = books.withId(id);
 		req.setAttribute("book", book);
-		req.setAttribute("categories", book.getCategories());
+		CategoryDAO categories = new CategoryDAO(connection);
+		List<Category> categoriesList = categories.all();
+		req.setAttribute("categories", categoriesList);
 		req.getRequestDispatcher("/WEB-INF/jsp/book/form.jsp").forward(req, res);
 	}
 	

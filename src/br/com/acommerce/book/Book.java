@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.joining;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.acommerce.category.Category;
 
@@ -36,9 +35,10 @@ public class Book {
 	}
 
 	
-	public boolean contains(String category){
-		return categories.stream().map(Category::toString)
-				.anyMatch((name) -> category.equals(name));
+	public boolean contains(Category category){
+		boolean anyMatch = categories.stream().map(Category::getName)
+				.anyMatch((name) -> category.getName().equals(name));
+		return anyMatch;
 	}
 
 	public List<Category> getCategories() {

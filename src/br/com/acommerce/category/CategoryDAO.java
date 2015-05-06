@@ -46,8 +46,9 @@ public class CategoryDAO {
 
 	public Category withId(Long id) {
 		try {
-			String sql = "select * from category";
+			String sql = "select * from category where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if(!resultSet.next())

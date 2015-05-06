@@ -7,10 +7,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>${title}</title>
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
+<%-- <link rel="stylesheet" href="<c:url value="/css/bootstrap-theme.min.css"/>"> --%>
 </head>
 <body>
 	<a:errors/>
 	<c:import url="/WEB-INF/jsp/_menu.jsp"/>
-	<jsp:doBody/>
+	<div class="container">
+		<jsp:doBody/>
+	</div>
 </body>
 </html>

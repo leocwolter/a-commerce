@@ -1,6 +1,6 @@
 <nav>
-	<ul>
-	<li> <a href="<c:url value="/"/>"> Home </a>
+	<ul class="nav nav-tabs">
+		<li><a href="<c:url value="/"/>"> Home </a></li>
 		<c:if test="${not empty loggedUser}">
 			<li><a href="<c:url value="/new-category"/>"> Nova categoria </a></li>
 			<li><a href="<c:url value="/new-book"/>"> Novo livro </a></li>
@@ -12,3 +12,4 @@
 		</c:if>
 	</ul>
 </nav>
+<br>

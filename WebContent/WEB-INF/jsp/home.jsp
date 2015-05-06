@@ -1,5 +1,5 @@
 <a:page title="Bem-vindo ao A-Commerce">
-	<table>
+	<table class="table striped">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -18,7 +18,7 @@
 				</td>
 				<td>${book.authors}</td>
 				<td>
-					<a href="edit-book?id=${book.id}">
+					<a href="<c:url value="/edit-book?id=${book.id}"/>">
 						Alterar
 					</a>
 				</td>

@@ -36,10 +36,12 @@ CREATE TABLE `publisher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `number` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
   `street` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
+  `complement` varchar(255) NOT NULL,
+  `zipCode` varchar(255) NOT NULL,
   `cnpj` varchar(255) NOT NULL,
-  `description` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

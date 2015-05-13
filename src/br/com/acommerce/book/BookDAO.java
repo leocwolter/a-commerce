@@ -48,19 +48,24 @@ public class BookDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<Book> books = new ArrayList<>();
 			while (resultSet.next()) {
-				String name = resultSet.getString("name");
-				BigDecimal price = new BigDecimal(resultSet.getString("price"));
-				String authors = resultSet.getString("authors");
-				Long id = resultSet.getLong("id");
-				
-				Book book = new Book(name, categories.ofBook(id), publishers.withId(id), price, authors);
-				book.setId(id);
-				books.add(book);
+				books.add(createBook(resultSet));
 			}
 			return books;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private Book createBook(ResultSet resultSet) throws SQLException {
+		String name = resultSet.getString("name");
+		BigDecimal price = new BigDecimal(resultSet.getString("price"));
+		String authors = resultSet.getString("authors");
+		Long id = resultSet.getLong("id");
+		Long publisherId = resultSet.getLong("publisher_id");
+		
+		Book book = new Book(name, categories.ofBook(id), publishers.withId(publisherId), price, authors);
+		book.setId(id);
+		return book;
 	}
 
 	public Book withId(Long id) {
@@ -71,15 +76,23 @@ public class BookDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (! resultSet.next()) 
 				throw new RuntimeException("Couldn't find any books with id "+id);
-			
-			String name = resultSet.getString("name");
-			BigDecimal price = new BigDecimal(resultSet.getString("price"));
-			String authors = resultSet.getString("authors");
-			Long publisherId = resultSet.getLong("publisher_id");
-			
-			Book book = new Book(name, categories.ofBook(id),  publishers.withId(publisherId), price, authors);
-			book.setId(id);
-			return book;
+			return createBook(resultSet);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public List<Book> withPublisher(Long publisherId) {
+		try {
+			String sql = "select * from book where publisher_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, publisherId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Book> books = new ArrayList<>();
+			while (resultSet.next()) {
+				books.add(createBook(resultSet));
+			}
+			return books;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -87,12 +100,13 @@ public class BookDAO {
 
 	public void update(Book book) {
 		try {
-			String sql = "update book set name = ?, price = ?, authors = ? where id = ?";
+			String sql = "update book set name = ?, price = ?, authors = ?, publisher_id = ? where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getPrice().toPlainString());
 			preparedStatement.setString(3, book.getAuthors());
-			preparedStatement.setLong(4, book.getId());
+			preparedStatement.setLong(4, book.getPublisher().getId());
+			preparedStatement.setLong(5, book.getId());
 			preparedStatement.execute();
 			overrideCategoryRelation(book);
 		} catch (SQLException e) {

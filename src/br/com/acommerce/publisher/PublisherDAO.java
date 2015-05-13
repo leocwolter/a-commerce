@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.acommerce.book.Book;
+import br.com.acommerce.book.BookDAO;
+
 public class PublisherDAO {
 
 	private Connection connection;
@@ -103,23 +106,25 @@ public class PublisherDAO {
 			throw new RuntimeException(e);
 		}
 	}
-//
-//	public void remove(Long id) {
-//		try {
-//			String sql = "delete from book_category where category_id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			preparedStatement.execute();
-//
-//			sql = "delete from category where id = ?";
-//			preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			preparedStatement.execute();
-//
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
+
+	public void remove(Long id) {
+		try {
+			
+			BookDAO books = new BookDAO(connection);
+			List<Book> bookList = books.withPublisher(id);
+			for (Book book : bookList) {
+				books.remove(book.getId());
+			}
+			
+			String sql = "delete from publisher where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private Publisher createPublisher(ResultSet resultSet) throws SQLException {
 		String name = resultSet.getString("name");

@@ -6,6 +6,7 @@
 				<th>Categorias</th>
 				<th>Preço</th>
 				<th>Autores</th>
+				<th>Editora</th>
 				<c:if test="${not empty loggedUser}">
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
@@ -20,6 +21,7 @@
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
 				</td>
 				<td>${book.authors}</td>
+				<td>${book.publisher.name}</td>
 				<c:if test="${not empty loggedUser}">
 					<td>
 						<a href="<c:url value="/edit-book?id=${book.id}"/>">

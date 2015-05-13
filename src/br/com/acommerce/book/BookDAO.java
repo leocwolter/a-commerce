@@ -10,24 +10,28 @@ import java.util.List;
 
 import br.com.acommerce.category.Category;
 import br.com.acommerce.category.CategoryDAO;
+import br.com.acommerce.publisher.PublisherDAO;
 
 public class BookDAO {
 
 	private final Connection connection;
-	private final CategoryDAO categories ;
+	private final CategoryDAO categories;
+	private final PublisherDAO publishers;
 
 	public BookDAO(Connection connection) {
 		this.connection = connection;
 		this.categories = new CategoryDAO(connection);
+		this.publishers = new PublisherDAO(connection);
 	}
 
 	public void save(Book book) {
 		try {
-			String sql = "insert into book (name, price, authors) values ( ?, ?, ?)";
+			String sql = "insert into book (name, price, authors, publisher_id) values ( ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getPrice().toPlainString());
 			preparedStatement.setString(3, book.getAuthors());
+			preparedStatement.setLong(4, book.getPublisher().getId());
 			preparedStatement.execute();
 			Long id = getLastBookId();
 			book.setId(id);
@@ -49,7 +53,7 @@ public class BookDAO {
 				String authors = resultSet.getString("authors");
 				Long id = resultSet.getLong("id");
 				
-				Book book = new Book(name, categories.ofBook(id), price, authors);
+				Book book = new Book(name, categories.ofBook(id), publishers.withId(id), price, authors);
 				book.setId(id);
 				books.add(book);
 			}
@@ -71,8 +75,9 @@ public class BookDAO {
 			String name = resultSet.getString("name");
 			BigDecimal price = new BigDecimal(resultSet.getString("price"));
 			String authors = resultSet.getString("authors");
+			Long publisherId = resultSet.getLong("publisher_id");
 			
-			Book book = new Book(name, categories.ofBook(id), price, authors);
+			Book book = new Book(name, categories.ofBook(id),  publishers.withId(publisherId), price, authors);
 			book.setId(id);
 			return book;
 		} catch (SQLException e) {
@@ -94,7 +99,18 @@ public class BookDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
+	public void remove(Long id) {
+		try {
+			removeCategoriesFrom(id);
+			String sql = "delete from book where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private Long getLastBookId() {
 		try {
@@ -125,22 +141,10 @@ public class BookDAO {
 		}
 		
 	}
-
+	
 	private void removeCategoriesFrom(Long id) {
 		try {
 			String sql = "delete from book_category where book_id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setLong(1, id);
-			preparedStatement.execute();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public void remove(Long id) {
-		try {
-			removeCategoriesFrom(id);
-			String sql = "delete from book where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, id);
 			preparedStatement.execute();

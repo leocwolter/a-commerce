@@ -10,6 +10,13 @@
 			</c:forEach>
 		</select>
 		<br>		
+		<label for="publisher">Editora:</label>
+		<select  class="form-control" name="publisher" id="publisher">
+			<c:forEach items="${publishers}" var="publisher">
+				<option value="${publisher.id}" ${book.isPublishedBy(publisher) ? 'selected' : '' }>${publisher.name}</option>
+			</c:forEach>
+		</select>
+		<br>		
 		<label for="price">Preço:</label>
 		<input type="text" class="form-control" name="price" value="${book.price}" id="price">
 		<br>		

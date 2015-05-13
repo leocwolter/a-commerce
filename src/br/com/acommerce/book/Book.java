@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import br.com.acommerce.category.Category;
+import br.com.acommerce.publisher.Publisher;
 
 public class Book {
 
@@ -14,10 +15,12 @@ public class Book {
 	private BigDecimal price;
 	private Long id;
 	private List<Category> categories;
+	private Publisher publisher;
 
-	public Book(String name, List<Category> categories, BigDecimal price, String authors) {
+	public Book(String name, List<Category> categories, Publisher publisher, BigDecimal price, String authors) {
 		this.name = name;
 		this.categories = categories;
+		this.publisher = publisher;
 		this.price = price;
 		this.authors = authors;
 	}
@@ -34,11 +37,14 @@ public class Book {
 		return price;
 	}
 
-	
 	public boolean contains(Category category){
 		boolean anyMatch = categories.stream().map(Category::getName)
 				.anyMatch((name) -> category.getName().equals(name));
 		return anyMatch;
+	}
+
+	public boolean isPublishedBy(Publisher publisher){
+		return publisher.getName().equals(this.publisher.getName());
 	}
 
 	public List<Category> getCategories() {
@@ -56,7 +62,9 @@ public class Book {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
 
 }

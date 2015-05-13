@@ -49,18 +49,26 @@ public class PublisherDAO {
 		}
 	}
 
-//	public void update(Publisher category) {
-//		try {
-//			String sql = "update category set name = ? where id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setString(1, category.getName());
-//			preparedStatement.setLong(2, category.getId());
-//			preparedStatement.execute();
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
+	public void update(Publisher publisher) {
+		try{
+			String sql = "update publisher set name = ?, street = ?, city = ?, state = ?, country = ?, zipCode = ?, cnpj = ?, complement = ?, number = ? where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, publisher.getName());
+			preparedStatement.setString(2, publisher.getStreet());
+			preparedStatement.setString(3, publisher.getCity());
+			preparedStatement.setString(4, publisher.getState());
+			preparedStatement.setString(5, publisher.getCountry());
+			preparedStatement.setString(6, publisher.getZipCode());
+			preparedStatement.setString(7, publisher.getCnpj());
+			preparedStatement.setString(8, publisher.getComplement());
+			preparedStatement.setInt(9, publisher.getNumber());
+			preparedStatement.setLong(10, publisher.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 	public Publisher withId(Long id) {
 		try {

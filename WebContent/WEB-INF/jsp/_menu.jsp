@@ -8,6 +8,9 @@
 			<li><a href="<c:url value="/new-publisher"/>"> Nova editora </a></li>
 			<li><a href="<c:url value="/publishers"/>"> Listar editoras </a></li>
 			
+			<li><a href="<c:url value="/new-author"/>"> Novo autor</a></li>
+			<li><a href="<c:url value="/authors"/>"> Listar autores </a></li>
+			
 			<li><a href="<c:url value="/new-book"/>"> Novo livro </a></li>
 			
 			<li><a href="<c:url value="/logout"/>"> Sair </a></li>

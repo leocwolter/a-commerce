@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.acommerce.publisher.Publisher;
+
 public class AuthorDAO {
 
 	private Connection connection;
@@ -51,73 +53,43 @@ public class AuthorDAO {
 			throw new RuntimeException(e);
 		}
 	}
-//
-//	public Author withId(Long id) {
-//		try {
-//			String sql = "select * from category where id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			ResultSet resultSet = preparedStatement.executeQuery();
-//
-//			if(!resultSet.next())
-//				throw new RuntimeException("Couldn't find any categories with id "+id);
-//			
-//			String name = resultSet.getString("name");
-//			Author category = new Author(name);
-//			category.setId(resultSet.getLong("id"));
-//			return category;
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//	public void update(Author category) {
-//		try {
-//			String sql = "update category set name = ? where id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setString(1, category.getName());
-//			preparedStatement.setLong(2, category.getId());
-//			preparedStatement.execute();
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//	public List<Author> ofBook(Long id) {
-//		try {
-//			String sql = "select distinct c.* from category c join book_category bc on bc.category_id = c.id where bc.book_id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			ResultSet resultSet = preparedStatement.executeQuery();
-//			List<Author> categories = new ArrayList<>();
-//			while (resultSet.next()) {
-//				String name = resultSet.getString("name");
-//				Author category = new Author(name);
-//				category.setId(resultSet.getLong("id"));
-//				categories.add(category);
-//			}
-//			return categories;
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
-//
-//	public void remove(Long id) {
-//		try {
-//			String sql = "delete from book_category where category_id = ?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			preparedStatement.execute();
-//
-//			sql = "delete from category where id = ?";
-//			preparedStatement = connection.prepareStatement(sql);
-//			preparedStatement.setLong(1, id);
-//			preparedStatement.execute();
-//
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
+
+	public void update(Author author) {
+		try{
+			String sql = "update author set name = ?, street = ?, city = ?, state = ?, country = ?, zipCode = ?, cpf = ?, complement = ?, number = ?, biography = ?, birthDay = ? where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, author.getName());
+			preparedStatement.setString(2, author.getStreet());
+			preparedStatement.setString(3, author.getCity());
+			preparedStatement.setString(4, author.getState());
+			preparedStatement.setString(5, author.getCountry());
+			preparedStatement.setString(6, author.getZipCode());
+			preparedStatement.setString(7, author.getCpf());
+			preparedStatement.setString(8, author.getComplement());
+			preparedStatement.setInt(9, author.getNumber());
+			preparedStatement.setString(10, author.getBiography());
+			preparedStatement.setDate(11, new Date(author.getBirthDay().getTimeInMillis()));
+			preparedStatement.setLong(12, author.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public Author withId(Long id) {
+		try {
+			String sql = "select * from author where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (! resultSet.next()) 
+				throw new RuntimeException("Couldn't find any authors with id "+id);				
+			return createAuthor(resultSet);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	private Author createAuthor(ResultSet resultSet) throws SQLException {
 		String name = resultSet.getString("name");
 		Calendar birthDay = Calendar.getInstance();
@@ -135,5 +107,7 @@ public class AuthorDAO {
 		author.setId(resultSet.getLong("id"));
 		return author;
 	}
+	
+	
 
 }

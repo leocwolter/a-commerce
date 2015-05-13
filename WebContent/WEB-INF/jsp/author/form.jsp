@@ -31,7 +31,7 @@
 		<textarea class="form-control" type="text" name="biography" id="biography">${author.biography}</textarea>
 		<br>
 		<label for="birthDay">Data de aniversário (dd/mm/yyyy):</label>
-		<input class="form-control" type="text" name="birthDay" value="${author.birthDay}" id="birthDay">
+		<input class="form-control" type="text" name="birthDay" value="<fmt:formatDate value="${author.birthDay.time}" pattern="dd/MM/yyyy"/>" id="birthDay">
 		<br>
 		<c:if test="${not empty author}">
 			<input type="hidden" name="id" value="${author.id}">

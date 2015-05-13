@@ -3,7 +3,11 @@ package br.com.acommerce.author;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class AuthorDAO {
 
@@ -32,24 +36,21 @@ public class AuthorDAO {
 			throw new RuntimeException(e);
 		}
 	}
-//
-//	public List<Author> all() {
-//		try {
-//			String sql = "select * from category";
-//			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//			ResultSet resultSet = preparedStatement.executeQuery();
-//			List<Author> categories = new ArrayList<>();
-//			while (resultSet.next()) {
-//				String name = resultSet.getString("name");
-//				Author category = new Author(name);
-//				category.setId(resultSet.getLong("id"));
-//				categories.add(category);
-//			}
-//			return categories;
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
+
+	public List<Author> all() {
+		try {
+			String sql = "select * from author";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Author> authors = new ArrayList<>();
+			while (resultSet.next()) {
+				authors.add(createAuthor(resultSet));
+			}
+			return authors;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 //
 //	public Author withId(Long id) {
 //		try {
@@ -117,5 +118,22 @@ public class AuthorDAO {
 //			throw new RuntimeException(e);
 //		}
 //	}
+	private Author createAuthor(ResultSet resultSet) throws SQLException {
+		String name = resultSet.getString("name");
+		Calendar birthDay = Calendar.getInstance();
+		birthDay.setTime(resultSet.getDate("birthDay"));
+		String biography = resultSet.getString("biography");
+		String cpf = resultSet.getString("cpf");
+		String street = resultSet.getString("street");
+		String city = resultSet.getString("city");
+		String state = resultSet.getString("state");
+		String country = resultSet.getString("country");
+		Integer number = resultSet.getInt("number");
+		String complement =  resultSet.getString("complement");
+		String zipCode =  resultSet.getString("zipCode");
+		Author author = new Author(name, birthDay, biography, cpf, street, city, state, country, number, complement, zipCode);
+		author.setId(resultSet.getLong("id"));
+		return author;
+	}
 
 }

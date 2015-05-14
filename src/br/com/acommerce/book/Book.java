@@ -5,19 +5,20 @@ import static java.util.stream.Collectors.joining;
 import java.math.BigDecimal;
 import java.util.List;
 
+import br.com.acommerce.author.Author;
 import br.com.acommerce.category.Category;
 import br.com.acommerce.publisher.Publisher;
 
 public class Book {
 
 	private String name;
-	private String authors;
 	private BigDecimal price;
 	private Long id;
 	private List<Category> categories;
 	private Publisher publisher;
+	private List<Author> authors;
 
-	public Book(String name, List<Category> categories, Publisher publisher, BigDecimal price, String authors) {
+	public Book(String name, List<Category> categories, Publisher publisher, BigDecimal price, List<Author> authors) {
 		this.name = name;
 		this.categories = categories;
 		this.publisher = publisher;
@@ -29,10 +30,10 @@ public class Book {
 		return name;
 	}
 
-	public String getAuthors() {
+	public List<Author> getAuthors() {
 		return authors;
 	}
-
+	
 	public BigDecimal getPrice() {
 		return price;
 	}

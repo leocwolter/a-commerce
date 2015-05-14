@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.acommerce.author.Author;
+import br.com.acommerce.author.AuthorDAO;
 import br.com.acommerce.category.Category;
 import br.com.acommerce.category.CategoryDAO;
 import br.com.acommerce.publisher.Publisher;
@@ -40,6 +42,10 @@ public class EditBookServlet extends HttpServlet{
 		PublisherDAO publishers = new PublisherDAO(connection);
 		List<Publisher> publisherList = publishers.all();
 		req.setAttribute("publishers", publisherList);
+		
+		AuthorDAO authors = new AuthorDAO(connection);
+		List<Author> authorList = authors.all();
+		req.setAttribute("authors", authorList);
 
 		req.getRequestDispatcher("/WEB-INF/jsp/book/form.jsp").forward(req, res);
 	}
@@ -52,8 +58,9 @@ public class EditBookServlet extends HttpServlet{
 		BookDAO books = new BookDAO(connection);
 		CategoryDAO categories = new CategoryDAO(connection);
 		PublisherDAO publishers = new PublisherDAO(connection);
+		AuthorDAO authors = new AuthorDAO(connection);
 
-		String authors = req.getParameter("authors");
+
 		String name = req.getParameter("name");
 		BigDecimal price = new BigDecimal(req.getParameter("price"));
 
@@ -64,9 +71,17 @@ public class EditBookServlet extends HttpServlet{
 												.map(categories::withId)
 												.collect(toList());
 
+		String[] authorIdStrings = req.getParameterValues("authors");
+		List<String> authorIds = asList(authorIdStrings);
+		List<Author> authorList = authorIds.stream()
+												.map(Long::valueOf)
+												.map(authors::withId)
+												.collect(toList());
+
+		
 		Long publisherId = valueOf(req.getParameter("publisher"));
 		
-		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authors);
+		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authorList);
 		Long id = valueOf(req.getParameter("id"));
 		book.setId(id);
 		books.update(book);

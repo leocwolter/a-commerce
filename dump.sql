@@ -14,7 +14,7 @@ CREATE TABLE `publisher` (
   `country` varchar(255) NOT NULL,
   `complement` varchar(255) NOT NULL,
   `zipCode` varchar(255) NOT NULL,
-  `cpf` varchar(255) NOT NULL,
+  `cnpj` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

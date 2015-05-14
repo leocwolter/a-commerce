@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.acommerce.publisher.Publisher;
-
 public class AuthorDAO {
 
 	private Connection connection;
@@ -106,6 +104,33 @@ public class AuthorDAO {
 		Author author = new Author(name, birthDay, biography, cpf, street, city, state, country, number, complement, zipCode);
 		author.setId(resultSet.getLong("id"));
 		return author;
+	}
+	
+	public void remove(Long id) {
+		try{
+			String sql = "delete from author where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public List<Author> ofBook(Long id) {
+		try {
+			String sql = "select a.* from book_author ba join author a on a.id = ba.author_id where ba.book_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Author> authors = new ArrayList<>();
+			while (resultSet.next()) {
+				authors.add(createAuthor(resultSet));
+			}
+			return authors;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	

@@ -19,10 +19,14 @@
 		<br>		
 		<label for="price">Preço:</label>
 		<input type="text" class="form-control" name="price" value="${book.price}" id="price">
-		<br>		
+		<br>	
 		<label for="authors">Autores:</label>
-		<input type="text" class="form-control" name="authors" value="${book.authors}" id="authors">
-		<br>		
+		<select  class="form-control" multiple name="authors" id="authors">
+			<c:forEach items="${authors}" var="author">
+				<option value="${author.id}" ${book.isWrittenBy(author) ? 'selected' : '' }>${author.name}</option>
+			</c:forEach>
+		</select>
+		<br>	
 		<c:if test="${not empty book.id}">
 			<input type="hidden" class="form-control" name="id" value="${book.id}">
 		</c:if>

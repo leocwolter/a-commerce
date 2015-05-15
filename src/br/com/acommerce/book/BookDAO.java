@@ -95,6 +95,23 @@ public class BookDAO {
 		}
 	}
 	
+	
+	public List<Book> withNameLike(String query) {
+		try {
+			String sql = "select * from book where name like ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, "%"+query+"%");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Book> books = new ArrayList<>();
+			while (resultSet.next()) {
+				books.add(createBook(resultSet));
+			}
+			return books;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public List<Book> withPublisher(Long publisherId) {
 		try {
 			String sql = "select * from book where publisher_id = ?";
@@ -211,6 +228,5 @@ public class BookDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 }

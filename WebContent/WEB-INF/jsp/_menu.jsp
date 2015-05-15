@@ -1,5 +1,5 @@
-<nav>
-	<ul class="nav nav-tabs">
+<nav class="navbar navbar-default">
+	<ul class="nav navbar-nav">
 		<li><a href="<c:url value="/"/>"> Home </a></li>
 		<c:if test="${not empty loggedUser}">
 			<li role="presentation" class="dropdown">
@@ -40,13 +40,19 @@
 					<li><a href="<c:url value="/new-book"/>">Criar</a></li>
 			    </ul>
 			</li>
-		
-			<li><a href="<c:url value="/logout"/>"> Sair </a></li>
-		</c:if>
-		<c:if test="${empty loggedUser}">
-			<li><a href="<c:url value="/sign-up"/>"> Cadastrar </a></li>
-			<li><a href="<c:url value="/login"/>"> Entrar </a></li>
-		</c:if>
-	</ul>
+			
+				<li><a href="<c:url value="/logout"/>"> Sair </a></li>
+			</c:if>
+			<c:if test="${empty loggedUser}">
+				<li><a href="<c:url value="/sign-up"/>"> Cadastrar </a></li>
+				<li><a href="<c:url value="/login"/>"> Entrar </a></li>
+			</c:if>
+		</ul>
+		<form action="simple-search" class="navbar-form navbar-left" role="search">
+			<div class="form-group">
+			  <input type="text" class="form-control" placeholder="Busca..." name="q">
+			</div>
+			<button type="submit" class="btn btn-default">Buscar</button>
+		</form>
 </nav>
 <br>

@@ -42,6 +42,7 @@
 				    </a>
 				    <ul class="dropdown-menu" role="menu">
 						<li><a href="<c:url value="/new-book"/>">Criar</a></li>
+						<li><a href="<c:url value="/books"/>">Lista</a></li>
 				    </ul>
 				</li>
 				<li><a href="<c:url value="/logout"/>"> Sair </a></li>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.acommerce.book.BookDAO;
 
 @WebServlet("/simple-search")
-public class NewAuthorServlet extends HttpServlet{
+public class SimpleSearchServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -28,7 +28,7 @@ public class NewAuthorServlet extends HttpServlet{
 		String query = req.getParameter("q");
 		BookDAO books = new BookDAO(connection);
 		req.setAttribute("books", books.withNameLike(query));
-		req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, res);;
+		req.getRequestDispatcher("/WEB-INF/jsp/book/list.jsp").forward(req, res);;
 	}
 	
 }

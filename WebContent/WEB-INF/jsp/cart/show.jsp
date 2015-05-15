@@ -8,10 +8,7 @@
 				<th>Preço</th>
 				<th>Idioma</th>
 				<th>Quantidade</th>
-				<c:if test="${not empty loggedUser}">
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
-				</c:if>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<c:forEach items="${cart.books}" var="book">
@@ -19,20 +16,18 @@
 				<td>
         			<a href="<c:url value="/book?id=${book.id}"/>">${book.name}</a>
 				</td>
-				<td>${book.categoriesAsString}</td>
 				<td>${book.authorsAsString}</td>
 				<td>${book.publisher.name}</td>
 				<td>
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
 				</td>
+				<td>${book.language}</td>
 				<td>${cart.howManyOf(book)}</td>
-				<c:if test="${not empty loggedUser}">
-					<td>
-						<a href="<c:url value="/remove-from-cart?id=${book.id}"/>">
-							Remover do carrinho
-						</a>
-					</td>
-				</c:if>
+				<td>
+					<a href="<c:url value="/remove-from-cart?id=${book.id}"/>">
+						Remover do carrinho
+					</a>
+				</td>
 			</tr>		
 		</c:forEach>
 	</table>

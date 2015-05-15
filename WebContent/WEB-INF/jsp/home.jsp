@@ -1,3 +1,3 @@
 <a:page title="Bem-vindo ao A-Commerce">
-	<a:books books="${books}"/>
+	<a:book-thumbs books="${books}"/>
 </a:page>

@@ -1,5 +1,5 @@
 <a:page title="Bem-vindo ao A-Commerce">
-	<table class="table striped">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Nome</th>

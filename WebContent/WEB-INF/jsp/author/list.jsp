@@ -1,5 +1,5 @@
 <a:page title="Autores">
-	<table class="table striped">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -25,8 +25,8 @@
 				<td>${author.city}</td>
 				<td>${author.state}</td>
 				<td>${author.country}</td>
-				<td>${author.street}</td>
 				<td>${author.zipCode}</td>
+				<td>${author.street}</td>
 				<td>${author.complement}</td>
 				<td>${author.number}</td>
 				<td>${author.cpf}</td>

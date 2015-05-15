@@ -1,5 +1,5 @@
 <a:page title="Categorias">
-	<table class="table striped">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Nome</th>

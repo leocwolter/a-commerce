@@ -1,4 +1,4 @@
 <a:page title="Resultado da pesquisa">
-	<a:books books="${books}"/>
+	<a:book-thumbs books="${books}"/>
 </a:page>	
 	

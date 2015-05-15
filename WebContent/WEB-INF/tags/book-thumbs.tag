@@ -16,6 +16,7 @@
 				</p>
 				<p>
 		        	<a href="/add-to-cart?id=${book.id}" class="btn btn-primary" role="button">Comprar</a>
+		        	<a href="/book?id=${book.id}" class="btn btn-default" role="button">Detalhes</a>
 				</p>
 		      </div>
 		    </div>

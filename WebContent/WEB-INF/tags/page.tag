@@ -12,7 +12,7 @@
 <body>
 	<a:errors/>
 	<c:import url="/WEB-INF/jsp/_menu.jsp"/>
-	<div class="container">
+	<div class="container-fluid">
 		<jsp:doBody/>
 	</div>
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

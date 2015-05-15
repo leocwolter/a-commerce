@@ -27,14 +27,18 @@ public class BookDAO {
 		this.publishers = new PublisherDAO(connection);
 		this.authors = new AuthorDAO(connection);
 	}
-
+	
 	public void save(Book book) {
 		try {
-			String sql = "insert into book (name, price, publisher_id) values ( ?, ?, ?)";
+			String sql = "insert into book (name, price, publisher_id, synopsis, toc, length, language) values ( ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getPrice().toPlainString());
 			preparedStatement.setLong(3, book.getPublisher().getId());
+			preparedStatement.setString(4, book.getSynopsis());
+			preparedStatement.setString(5, book.getToc());
+			preparedStatement.setInt(6, book.getLength());
+			preparedStatement.setString(7, book.getLanguage());
 			preparedStatement.execute();
 			Long id = getLastBookId();
 			book.setId(id);
@@ -65,9 +69,15 @@ public class BookDAO {
 		BigDecimal price = new BigDecimal(resultSet.getString("price"));
 		Long id = resultSet.getLong("id");
 		Long publisherId = resultSet.getLong("publisher_id");
+		String synopsis = resultSet.getString("synopsis");
+		String toc = resultSet.getString("toc");
+		Integer length = resultSet.getInt("length");
+		String language = resultSet.getString("language");
 		
-		Book book = new Book(name, categories.ofBook(id), publishers.withId(publisherId), price, authors.ofBook(id));
+		Book book = new Book(name, categories.ofBook(id), publishers.withId(publisherId),
+				price, authors.ofBook(id), synopsis, toc, length, language);
 		book.setId(id);
+		
 		return book;
 	}
 
@@ -103,11 +113,15 @@ public class BookDAO {
 
 	public void update(Book book) {
 		try {
-			String sql = "update book set name = ?, price = ?, authors = ?, publisher_id = ? where id = ?";
+			String sql = "update book set name = ?, price = ?, authors = ?, publisher_id = ?, synopsis = ?, toc = ?, length = ?, language = ? where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getPrice().toPlainString());
 			preparedStatement.setLong(4, book.getPublisher().getId());
+			preparedStatement.setString(4, book.getSynopsis());
+			preparedStatement.setString(4, book.getToc());
+			preparedStatement.setLong(4, book.getLength());
+			preparedStatement.setString(4, book.getLanguage());
 			preparedStatement.setLong(5, book.getId());
 			preparedStatement.execute();
 			overrideCategoryRelation(book);

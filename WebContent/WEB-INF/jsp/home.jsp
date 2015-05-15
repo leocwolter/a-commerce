@@ -7,6 +7,10 @@
 				<th>Preço</th>
 				<th>Autores</th>
 				<th>Editora</th>
+				<th>Sinopse</th>
+				<th>Tabela de Conteúdo</th>
+				<th>Tamanho</th>
+				<th>Idioma</th>
 				<c:if test="${not empty loggedUser}">
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
@@ -20,8 +24,12 @@
 				<td>
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
 				</td>
-				<td>${book.authors}</td>
+				<td>${book.authorsAsString}</td>
 				<td>${book.publisher.name}</td>
+				<td>${book.synopsis}</td>
+				<td>${book.toc}</td>
+				<td>${book.length}</td>
+				<td>${book.language}</td>
 				<c:if test="${not empty loggedUser}">
 					<td>
 						<a href="<c:url value="/edit-book?id=${book.id}"/>">

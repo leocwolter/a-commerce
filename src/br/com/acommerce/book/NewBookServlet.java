@@ -74,7 +74,13 @@ public class NewBookServlet extends HttpServlet{
 
 		Long publisherId = valueOf(req.getParameter("publisher"));
 		
-		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authorList);
+		String synopsis = req.getParameter("synopsis");
+		String toc = req.getParameter("toc");
+		Integer length = Integer.valueOf(req.getParameter("length"));
+		String language = req.getParameter("language");
+		
+		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authorList,
+				synopsis, toc, length, language);
 		books.save(book);
 		
 		req.setAttribute("book", book);

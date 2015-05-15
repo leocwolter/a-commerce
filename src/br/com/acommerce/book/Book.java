@@ -11,19 +11,45 @@ import br.com.acommerce.publisher.Publisher;
 
 public class Book {
 
+	private Long id;
 	private String name;
 	private BigDecimal price;
-	private Long id;
 	private List<Category> categories;
 	private Publisher publisher;
 	private List<Author> authors;
+	private String synopsis;
+	private String toc;
+	private Integer length;
+	private String language;
 
-	public Book(String name, List<Category> categories, Publisher publisher, BigDecimal price, List<Author> authors) {
+	public Book(String name, List<Category> categories, Publisher publisher,
+			BigDecimal price, List<Author> authors, String synopsis, String toc,
+			Integer length, String language) {
 		this.name = name;
 		this.categories = categories;
 		this.publisher = publisher;
 		this.price = price;
 		this.authors = authors;
+		this.synopsis = synopsis;
+		this.toc = toc;
+		this.length = length;
+		this.language = language;
+	}
+	
+	public String getSynopsis() {
+		return synopsis;
+	}
+	
+	public String getToc() {
+		return toc;
+	}
+	
+	public Integer getLength() {
+		return length;
+	}
+	
+	public String getLanguage() {
+		return language;
 	}
 
 	public String getName() {
@@ -54,6 +80,10 @@ public class Book {
 
 	public String getCategoriesAsString() {
 		return categories.stream().map(Category::getName).collect(joining(", "));
+	}
+	
+	public String getAuthorsAsString() {
+		return authors.stream().map(Author::getName).collect(joining(", "));
 	}
 
 	public Long getId() {

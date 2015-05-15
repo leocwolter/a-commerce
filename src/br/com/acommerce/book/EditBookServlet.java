@@ -81,7 +81,13 @@ public class EditBookServlet extends HttpServlet{
 		
 		Long publisherId = valueOf(req.getParameter("publisher"));
 		
-		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authorList);
+		String synopsis = req.getParameter("synopsis");
+		String toc = req.getParameter("toc");
+		Integer length = Integer.valueOf(req.getParameter("length"));
+		String language = req.getParameter("language");
+		Book book = new Book(name, categoriesList, publishers.withId(publisherId), price, authorList,
+				synopsis, toc, length, language);
+		
 		Long id = valueOf(req.getParameter("id"));
 		book.setId(id);
 		books.update(book);

@@ -27,6 +27,18 @@
 			</c:forEach>
 		</select>
 		<br>	
+		<label for="synopsis">Sinopse:</label>
+		<textarea class="form-control" name="synopsis" id="synopsis">${book.synopsis}</textarea>
+		<br>	
+		<label for="toc">Tabela de conteúdo:</label>
+		<textarea class="form-control" name="toc" id="toc">${book.toc}</textarea>
+		<br>	
+		<label for="length">Tamanho(em páginas):</label>
+		<input type="number" class="form-control" name="length" value="${book.length}" id="length" min="1">
+		<br>	
+		<label for="language">Idioma:</label>
+		<input type="text" class="form-control" name="language" value="${book.language}" id="language">
+		<br>	
 		<c:if test="${not empty book.id}">
 			<input type="hidden" class="form-control" name="id" value="${book.id}">
 		</c:if>

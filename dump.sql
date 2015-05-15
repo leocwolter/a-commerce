@@ -23,6 +23,10 @@ CREATE TABLE `book` (
   `name` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `publisher_id` int(11) NOT NULL,
+  `synopsis` varchar(255) NOT NULL,
+  `toc` varchar(255) NOT NULL,
+  `length` int(11) NOT NULL,
+  `language` varchar(255) NOT NULL,
   CONSTRAINT FOREIGN KEY (publisher_id) REFERENCES publisher(id),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

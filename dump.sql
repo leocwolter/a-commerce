@@ -63,3 +63,9 @@ CREATE TABLE `author` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `book_author` (
+	`book_id` int(11) NOT NULL,
+	`author_id` int(11) NOT NULL,
+    CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id),
+    CONSTRAINT FOREIGN KEY (author_id) REFERENCES author(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

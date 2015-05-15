@@ -1,13 +1,7 @@
 package br.com.acommerce.search;
 
-import static java.lang.Integer.valueOf;
-
 import java.io.IOException;
 import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +22,7 @@ public class SimpleSearchServlet extends HttpServlet{
 		String query = req.getParameter("q");
 		BookDAO books = new BookDAO(connection);
 		req.setAttribute("books", books.withNameLike(query));
-		req.getRequestDispatcher("/WEB-INF/jsp/book/list.jsp").forward(req, res);;
+		req.getRequestDispatcher("/WEB-INF/jsp/search/result.jsp").forward(req, res);;
 	}
 	
 }

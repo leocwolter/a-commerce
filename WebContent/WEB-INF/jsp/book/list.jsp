@@ -19,7 +19,9 @@
 		</thead>
 		<c:forEach items="${books}" var="book">
 			<tr>
-				<td>${book.name}</td>
+				<td>
+        			<a href="<c:url value="/book?id=${book.id}"/>">${book.name}</a>
+				</td>
 				<td>${book.categoriesAsString}</td>
 				<td>
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>

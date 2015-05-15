@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ attribute name="books" required="true" type="java.util.List"%>
 
-<c:forEach items="${books}" var="book">
-	<c:if test="${status.count % 5 == 0}">
+<c:forEach items="${books}" var="book" varStatus="status">
+	<c:if test="${status.count-1 % 4 == 0}">
 		<ul class="row list-unstyled">
 	</c:if>
 		  <li class="col-sm-5 col-md-3 text-center">
@@ -15,8 +15,8 @@
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>
 				</p>
 				<p>
-		        	<a href="/add-to-cart?id=${book.id}" class="btn btn-primary" role="button">Comprar</a>
-		        	<a href="/book?id=${book.id}" class="btn btn-default" role="button">Detalhes</a>
+		        	<a href="<c:url value="/add-to-cart?id=${book.id}"/>" class="btn btn-primary" role="button">Comprar</a>
+		        	<a href="<c:url value="/book?id=${book.id}"/>" class="btn btn-default" role="button">Detalhes</a>
 				</p>
 		      </div>
 		    </div>

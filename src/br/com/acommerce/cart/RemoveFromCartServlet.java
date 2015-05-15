@@ -4,6 +4,8 @@ import static java.lang.Long.valueOf;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.acommerce.book.Book;
 import br.com.acommerce.book.BookDAO;
 
-@WebServlet("/add-to-cart")
-public class AddToCartServlet extends HttpServlet{
+@WebServlet("/remove-from-cart")
+public class RemoveFromCartServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -25,10 +27,9 @@ public class AddToCartServlet extends HttpServlet{
 		Long id = valueOf(req.getParameter("id"));
 		BookDAO books = new BookDAO(connection);
 		
-		
 		Book book = books.withId(id);
 		Cart cart = (Cart) req.getSession().getAttribute("cart");
-		cart.add(book);
+		cart.remove(book);
 		
 		res.sendRedirect(req.getContextPath()+"/cart");
 	}

@@ -32,6 +32,10 @@ public class Cart {
 		return booksAndQuantity.keySet().stream()
 				.map(b -> b.getPrice().multiply(new BigDecimal(booksAndQuantity.get(b))))
 				.reduce((before, after) -> before.add(after))
-				.get();
+				.orElse(new BigDecimal("0.0"));
+	}
+
+	public void remove(Book book) {
+		booksAndQuantity.remove(book);
 	}
 }

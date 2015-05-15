@@ -5,6 +5,7 @@
 		</div>
 		
 		<ul class="nav navbar-nav">
+			<li><a href="<c:url value="/cart"/>">Meu carrinho</a></li>
 			<c:if test="${not empty loggedUser}">
 				<li role="presentation" class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">

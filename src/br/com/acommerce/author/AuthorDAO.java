@@ -108,8 +108,13 @@ public class AuthorDAO {
 	
 	public void remove(Long id) {
 		try{
-			String sql = "delete from author where id = ?";
+			String sql = "delete from book_author where author_id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+
+			sql = "delete from author where id = ?";
+			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, id);
 			preparedStatement.execute();
 		} catch (SQLException e) {

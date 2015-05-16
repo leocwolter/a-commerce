@@ -24,7 +24,8 @@ public class CheckoutServlet extends HttpServlet{
 		Cart cart = (Cart) req.getSession().getAttribute("cart");
 		User user = (User) req.getSession().getAttribute("loggedUser");
 		
-		Order checkout = cart.checkout(user);
+		Order order = cart.checkout(user);
+		orders.save(order);
 
 		res.sendRedirect(req.getContextPath()+"/cart");
 	}

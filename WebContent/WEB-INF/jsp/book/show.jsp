@@ -33,5 +33,4 @@
 		${book.language}
 	</p>
 	<a href="<c:url value="/add-to-cart?id=${book.id}"/>" class="btn btn-primary" role="button">Comprar</a>
-	<a href="<c:url value="/book?id=${book.id}"/>" class="btn btn-default" role="button">Detalhes</a>
 </a:page>

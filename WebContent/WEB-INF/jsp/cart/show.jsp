@@ -31,8 +31,14 @@
 			</tr>		
 		</c:forEach>
 	</table>
-	<p>
-		<label>Total: </label> ${cart.totalPrice}	
-	</p>
+	<br>
+	<div class="pull-left">
+		<label>Total: </label> ${cart.totalPrice}
+	</div>
+	<div class="pull-right">
+		<form action="/checkout">
+			<input type="submit" class="btn btn-primary" value="Comprar">
+		</form>
+	</div>
 </a:page>	
 	

@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(userToLogIn == null ){
 			Flash.addError("Não existe usuário com esse email e senha", req);
-			res.sendRedirect("sign-up");
+			res.sendRedirect(req.getContextPath()+"/login");
 			return;
 		}
 		

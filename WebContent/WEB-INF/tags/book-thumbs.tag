@@ -10,6 +10,18 @@
 		  <li class="col-sm-5 col-md-3 text-center">
 		    <div class="thumbnail">
 		      <div class="caption">
+		      	<c:if test="${not empty loggedUser}">
+					<c:if test="${not wishlist.contains(book)}">
+						<a href="<c:url value="/add-to-wishlist?id=${book.id}"/>" class="pull-right">
+							<span class="glyphicon glyphicon glyphicon-heart-empty"></span>
+						</a>
+					</c:if>
+					<c:if test="${wishlist.contains(book)}">
+						<a href="<c:url value="/remove-from-wishlist?id=${book.id}"/>" class="pull-right">
+							<span class="glyphicon glyphicon glyphicon-heart"></span>
+						</a>
+					</c:if>
+		      	</c:if>
 		        <h3>${book.name}</h3>
 				<p>
 					<fmt:formatNumber value="${book.price}" minFractionDigits="2" type="currency"/>

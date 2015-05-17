@@ -9,6 +9,7 @@
 			<c:if test="${not empty loggedUser}">
 				<li><a href="<c:url value="/profile"/>"> Perfil </a></li>
 				<li><a href="<c:url value="/my-orders"/>"> Minhas compras </a></li>
+				<li><a href="<c:url value="/my-wishlist"/>"> Minha lista de desejos </a></li>
 				<li role="presentation" class="dropdown">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
 				      Categorias <span class="caret"></span>

@@ -84,11 +84,18 @@ CREATE TABLE `order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ordered_book` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`order_id` int(11) NOT NULL,
 	`book_id` int(11) NOT NULL,
 	`quantity` int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (order_id) REFERENCES `order`(id),
+    CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `wishlisted_book` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`user_id` int(11) NOT NULL,
+	`book_id` int(11) NOT NULL,
+    CONSTRAINT FOREIGN KEY (user_id) REFERENCES `user`(id),
     CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id),
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

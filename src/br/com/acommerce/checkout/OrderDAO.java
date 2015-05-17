@@ -13,6 +13,7 @@ import br.com.acommerce.book.Book;
 import br.com.acommerce.book.BookDAO;
 import br.com.acommerce.cart.ShippingOption;
 import br.com.acommerce.user.User;
+import br.com.acommerce.user.UserDAO;
 
 public class OrderDAO {
 
@@ -45,20 +46,26 @@ public class OrderDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<Order> orders = new ArrayList<>();
 			while(resultSet.next()){
-				ShippingOption option = ShippingOption.valueOf(resultSet.getString("shippingOption"));
-				long id = resultSet.getLong("id");
-				Order order = new Order(orderedBooksOfOrder(id), user, option);
-				Date date = resultSet.getDate("creationDate");
-				Calendar creationDate = Calendar.getInstance();
-				creationDate.setTime(date);
-				order.setCreationDate(creationDate);
-				order.setId(id);
+				Order order = createOrder(resultSet);
 				orders.add(order);
 			}
 			return orders;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private Order createOrder(ResultSet resultSet) throws SQLException {
+		ShippingOption option = ShippingOption.valueOf(resultSet.getString("shippingOption"));
+		long id = resultSet.getLong("id");
+		UserDAO users = new UserDAO(connection);
+		Order order = new Order(orderedBooksOfOrder(id), users.withId(resultSet.getLong("owner_id")), option);
+		Date date = resultSet.getDate("creationDate");
+		Calendar creationDate = Calendar.getInstance();
+		creationDate.setTime(date);
+		order.setCreationDate(creationDate);
+		order.setId(id);
+		return order;
 	}
 
 	private List<OrderedBook> orderedBooksOfOrder(long orderId) {
@@ -123,6 +130,40 @@ public class OrderDAO {
 			}
 		}
 		
+	}
+	
+
+	public void removeWithBook(Long id) {
+		List<Order> orders = withBook(id);
+		for (Order order : orders) {
+			removeOrderedBooksOf(order);
+			try {
+				String sql = "delete from `order` where id = ?";
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setLong(1, order.getId());
+				preparedStatement.execute();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+
+
+	private List<Order> withBook(Long bookId) {
+		try {
+			String sql = "select * from `order` o join ordered_book ob on ob.order_id = o.id where ob.book_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, bookId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Order> orders = new ArrayList<>();
+			while(resultSet.next()){
+				Order order = createOrder(resultSet);
+				orders.add(order);
+			}
+			return orders;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void removeOrderedBooksOf(Order order) {

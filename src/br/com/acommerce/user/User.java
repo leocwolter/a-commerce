@@ -5,6 +5,7 @@ public class User {
 	private Long id;
 	private String email;
 	private String password;
+	private boolean admin;
 
 	public User(String email, String password) {
 		this.email = email;
@@ -33,10 +34,15 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
-		
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	
-	
+	public boolean isAdmin() {
+		return admin;
+	}	
 	
 	
 

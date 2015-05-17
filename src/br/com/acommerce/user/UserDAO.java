@@ -24,10 +24,7 @@ public class UserDAO {
 			preparedStatement.setString(2, password);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()){
-				String userEmail = resultSet.getString("email");
-				String userPassword = resultSet.getString("password");
-				User user = new User(userEmail, userPassword);
-				user.setId(resultSet.getLong("id"));
+				User user = createUser(resultSet);
 				return user;
 			}
 			return null;
@@ -75,6 +72,32 @@ public class UserDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+
+	public User withId(long id) {
+		try {
+			String sql = "select * from user where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				User user = createUser(resultSet);
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private User createUser(ResultSet resultSet) throws SQLException {
+		String userEmail = resultSet.getString("email");
+		String userPassword = resultSet.getString("password");
+		User user = new User(userEmail, userPassword);
+		user.setAdmin(resultSet.getBoolean("admin"));
+		user.setId(resultSet.getLong("id"));
+		return user;
 	}
 
 }

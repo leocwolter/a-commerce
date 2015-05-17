@@ -31,7 +31,7 @@ public class RemoveFromWishlistServlet extends HttpServlet{
 		
 		whishList.remove(book, loggedUser);
 		
-		req.getRequestDispatcher("/WEB-INF/jsp/wishlist/add-success.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/wishlist/remove-success.jsp").forward(req, res);
 	}
 	
 }

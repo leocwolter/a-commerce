@@ -12,6 +12,7 @@ import br.com.acommerce.author.Author;
 import br.com.acommerce.author.AuthorDAO;
 import br.com.acommerce.category.Category;
 import br.com.acommerce.category.CategoryDAO;
+import br.com.acommerce.checkout.OrderDAO;
 import br.com.acommerce.publisher.PublisherDAO;
 
 public class BookDAO {
@@ -150,6 +151,8 @@ public class BookDAO {
 
 	public void remove(Long id) {
 		try {
+			OrderDAO orders = new OrderDAO(connection);
+			orders.removeWithBook(id);
 			removeCategoriesFrom(id);
 			String sql = "delete from book where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -159,6 +162,7 @@ public class BookDAO {
 			throw new RuntimeException(e);
 		}
 	}
+
 
 	private Long getLastBookId() {
 		try {

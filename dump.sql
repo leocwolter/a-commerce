@@ -35,6 +35,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL UNIQUE,
   `password` varchar(45) NOT NULL,
+  `admin` boolean NOT NULL default false,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

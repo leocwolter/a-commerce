@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/edit-profile")
-public class EditProfileServlet extends HttpServlet{
+@WebServlet("/edit-user")
+public class EditUserServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -22,7 +22,6 @@ public class EditProfileServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		Connection connection = (Connection) req.getAttribute("connection");
-
 		UserDAO users = new UserDAO(connection);
 		User user = (User) req.getSession().getAttribute("loggedUser");
 		user.setEmail(req.getParameter("email"));

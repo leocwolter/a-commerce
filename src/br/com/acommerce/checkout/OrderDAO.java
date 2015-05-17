@@ -1,11 +1,14 @@
 package br.com.acommerce.checkout;
 
+import static java.util.Collections.emptyList;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.acommerce.user.User;
@@ -56,6 +59,51 @@ public class OrderDAO {
 			if (!resultSet.next()) 
 				throw new RuntimeException("The database is empty. Create an order to solve this");
 			return resultSet.getLong("id");
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void removeWithOwner(User user) {
+		List<Order> orders = withOwner(user);
+		for (Order order : orders) {
+			removeOrderedBooksOf(order);
+			try {
+				String sql = "delete from `order` where id = ?";
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setLong(1, order.getId());
+				preparedStatement.execute();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+	}
+
+	private void removeOrderedBooksOf(Order order) {
+		try {
+			String sql = "delete from `ordered_book` where order_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, order.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private List<Order> withOwner(User user) {
+		try {
+			String sql = "select * from `order` where owner_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, user.getId());
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Order> orders = new ArrayList<>();
+			while(resultSet.next()){
+				Order order = new Order(emptyList(), user, null);
+				order.setId(resultSet.getLong("id"));
+				orders.add(order);
+			}
+			return orders;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

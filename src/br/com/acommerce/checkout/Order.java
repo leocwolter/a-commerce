@@ -1,13 +1,8 @@
 package br.com.acommerce.checkout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
-import br.com.acommerce.book.Book;
 import br.com.acommerce.cart.ShippingOption;
 import br.com.acommerce.user.User;
 
@@ -19,15 +14,12 @@ public class Order {
 	private final List<OrderedBook> orderedBooks;
 	private final ShippingOption shipping;
 
-	public Order(Map<Book, Long> booksAndQuantity, User owner, ShippingOption shipping) {
-		Set<Entry<Book, Long>> entrySet = booksAndQuantity.entrySet();
-		List<OrderedBook> orderedBooks = new ArrayList<>();
-		for (Entry<Book, Long> entry : entrySet) {
-			OrderedBook orderedBook = new OrderedBook(this, entry.getKey(), entry.getValue());
-			orderedBooks.add(orderedBook);
-		}
+	public Order(List<OrderedBook> orderedBooks, User owner, ShippingOption shipping) {
 		this.shipping = shipping;
 		this.orderedBooks = orderedBooks;
+		for (OrderedBook orderedBook : orderedBooks) {
+			orderedBook.setOrder(this);
+		}
 		this.owner = owner;
 	}
 

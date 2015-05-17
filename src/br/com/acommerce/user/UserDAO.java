@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import br.com.acommerce.checkout.OrderDAO;
+
 public class UserDAO {
 	
 	private Connection connection;
@@ -55,6 +57,20 @@ public class UserDAO {
 			preparedStatement.setString(1, user.getEmail());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setLong(3, user.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+
+	public void remove(User user) {
+		try {
+			String sql = "delete from user where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			OrderDAO orders = new OrderDAO(connection);
+			orders.removeWithOwner(user);
+			preparedStatement.setLong(1, user.getId());
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

@@ -9,8 +9,7 @@ public class OrderedBook {
 	private Long quantity;
 	private Order order;
 
-	public OrderedBook(Order order, Book book, Long quantity) {
-		this.order = order;
+	public OrderedBook(Book book, Long quantity) {
 		this.book = book;
 		this.quantity = quantity;
 	}
@@ -29,6 +28,11 @@ public class OrderedBook {
 
 	public Order getOrder() {
 		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+		
 	}
 
 }

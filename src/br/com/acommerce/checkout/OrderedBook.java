@@ -1,5 +1,7 @@
 package br.com.acommerce.checkout;
 
+import java.math.BigDecimal;
+
 import br.com.acommerce.book.Book;
 
 public class OrderedBook {
@@ -21,6 +23,10 @@ public class OrderedBook {
 	public Book getBook() {
 		return book;
 	}
+	
+	public String getName() {
+		return book.getName();
+	}
 
 	public Long getQuantity() {
 		return quantity;
@@ -34,5 +40,13 @@ public class OrderedBook {
 		this.order = order;
 		
 	}
-
+	
+	public BigDecimal getPrice(){
+		return book.getPrice();
+	}
+	
+	public BigDecimal getTotalPrice(){
+		return book.getPrice().multiply(new BigDecimal(quantity));
+	}
+	
 }

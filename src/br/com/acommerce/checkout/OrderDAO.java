@@ -1,16 +1,17 @@
 package br.com.acommerce.checkout;
 
-import static java.util.Collections.emptyList;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.List;
 
+import br.com.acommerce.book.Book;
+import br.com.acommerce.book.BookDAO;
+import br.com.acommerce.cart.ShippingOption;
 import br.com.acommerce.user.User;
 
 public class OrderDAO {
@@ -34,6 +35,50 @@ public class OrderDAO {
 			throw new RuntimeException(e);
 		}		
 		saveItems(order.getOrderedBooks());
+	}
+
+	public List<Order> withOwner(User user) {
+		try {
+			String sql = "select * from `order` where owner_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, user.getId());
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Order> orders = new ArrayList<>();
+			while(resultSet.next()){
+				ShippingOption option = ShippingOption.valueOf(resultSet.getString("shippingOption"));
+				long id = resultSet.getLong("id");
+				Order order = new Order(orderedBooksOfOrder(id), user, option);
+				Date date = resultSet.getDate("creationDate");
+				Calendar creationDate = Calendar.getInstance();
+				creationDate.setTime(date);
+				order.setCreationDate(creationDate);
+				order.setId(id);
+				orders.add(order);
+			}
+			return orders;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private List<OrderedBook> orderedBooksOfOrder(long orderId) {
+		try {
+			String sql = "select * from `ordered_book` where order_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, orderId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<OrderedBook> orderedBooks = new ArrayList<>();
+			BookDAO books = new BookDAO(connection);
+			while(resultSet.next()){
+				long bookId = resultSet.getLong("book_id");
+				Book book = books.withId(bookId);
+				long quantity = resultSet.getLong("quantity");
+				orderedBooks.add(new OrderedBook(book, quantity));
+			}
+			return orderedBooks;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void saveItems(List<OrderedBook> orderedBooks) {
@@ -90,24 +135,5 @@ public class OrderDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
-	private List<Order> withOwner(User user) {
-		try {
-			String sql = "select * from `order` where owner_id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setLong(1, user.getId());
-			ResultSet resultSet = preparedStatement.executeQuery();
-			List<Order> orders = new ArrayList<>();
-			while(resultSet.next()){
-				Order order = new Order(emptyList(), user, null);
-				order.setId(resultSet.getLong("id"));
-				orders.add(order);
-			}
-			return orders;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 
 }

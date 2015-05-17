@@ -53,7 +53,6 @@ public class Cart {
 			books.add(new OrderedBook(entry.getKey(), entry.getValue()));
 		}
 		return new Order(books, user, shippingOption);
-		
 	}
 
 	public void setShippingOption(ShippingOption shippingOption) {

@@ -16,6 +16,7 @@ import br.com.acommerce.user.User;
 public class Cart {
 
 	private Map<Book, Long> booksAndQuantity = new HashMap<>();
+	private ShippingOption shippingOption;
 
 	public void add(Book book) {
 		if(booksAndQuantity.containsKey(book)) {
@@ -46,9 +47,17 @@ public class Cart {
 	}
 
 	public Order checkout(User user) {
-		return new Order(booksAndQuantity, user);
+		return new Order(booksAndQuantity, user, shippingOption);
 		
 	}
 
+	public void setShippingOption(ShippingOption shippingOption) {
+		this.shippingOption = shippingOption;
+
+	}
+	
+	public BigDecimal getFinalPrice(){
+		return getTotalPrice().add(shippingOption.getPrice());
+	}
 
 }

@@ -20,10 +20,11 @@ public class OrderDAO {
 	
 	public void save(Order order) {
 		try {
-			String sql = "insert into `order` (owner_id, creationDate) values (?, ?)";
+			String sql = "insert into `order` (owner_id, creationDate, shippingOption) values (?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, order.getOwner().getId());
 			preparedStatement.setDate(2, new Date(order.getCreationDate().getTimeInMillis()));
+			preparedStatement.setString(3, order.getShippingOption().name());
 			preparedStatement.execute();
 			order.setId(getLastOrderId());
 		} catch (SQLException e) {

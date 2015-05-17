@@ -78,6 +78,7 @@ CREATE TABLE `order` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`creationDate` date NOT NULL,
 	`owner_id` int(11) NOT NULL,
+	`shippingOption` varchar(255) NOT NULL,
     CONSTRAINT FOREIGN KEY (owner_id) REFERENCES `user`(id),
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

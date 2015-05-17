@@ -40,7 +40,7 @@
 			Para comprar você precisa estar logado. <a href='<c:url value="/login?url=cart"/>'>Clique aqui para se logar</a>
 		</c:if>
 		<c:if test="${not empty loggedUser}">
-			<form action="<c:url value="/checkout"/>" method = "POST">
+			<form action="<c:url value="/choose-shipping"/>" method = "POST">
 				<input type="submit" class="btn btn-primary" value="Comprar">
 			</form>
 		</c:if>

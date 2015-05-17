@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import br.com.acommerce.book.Book;
+import br.com.acommerce.cart.ShippingOption;
 import br.com.acommerce.user.User;
 
 public class Order {
@@ -16,14 +17,16 @@ public class Order {
 	private final User owner; 
 	private final Calendar creationDate = Calendar.getInstance();
 	private final List<OrderedBook> orderedBooks;
+	private final ShippingOption shipping;
 
-	public Order(Map<Book, Long> booksAndQuantity, User owner) {
+	public Order(Map<Book, Long> booksAndQuantity, User owner, ShippingOption shipping) {
 		Set<Entry<Book, Long>> entrySet = booksAndQuantity.entrySet();
 		List<OrderedBook> orderedBooks = new ArrayList<>();
 		for (Entry<Book, Long> entry : entrySet) {
 			OrderedBook orderedBook = new OrderedBook(this, entry.getKey(), entry.getValue());
 			orderedBooks.add(orderedBook);
 		}
+		this.shipping = shipping;
 		this.orderedBooks = orderedBooks;
 		this.owner = owner;
 	}
@@ -48,4 +51,7 @@ public class Order {
 		this.id = id;
 	}
 
+	public ShippingOption getShippingOption() {
+		return shipping;
+	}
 }

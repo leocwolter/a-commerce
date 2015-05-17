@@ -28,6 +28,8 @@ public class CheckoutServlet extends HttpServlet{
 		orders.save(order);
 		
 		req.setAttribute("order", order);
+		req.getSession().setAttribute("cart", null);
+		
 		req.getRequestDispatcher("/WEB-INF/jsp/checkout/new-success.jsp").forward(req, res);
 
 	}

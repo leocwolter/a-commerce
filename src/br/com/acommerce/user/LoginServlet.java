@@ -1,4 +1,4 @@
-package br.com.acommerce.user.servlet;
+package br.com.acommerce.user;
 
 
 import java.io.IOException;
@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.acommerce.infra.Flash;
-import br.com.acommerce.user.User;
-import br.com.acommerce.user.UserDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

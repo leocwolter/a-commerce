@@ -1,4 +1,4 @@
-package br.com.acommerce.user.servlet;
+package br.com.acommerce.user;
 
 
 import java.io.IOException;

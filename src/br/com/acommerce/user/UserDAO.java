@@ -47,4 +47,18 @@ public class UserDAO {
 		}
 	}
 
+
+	public void update(User user) {
+		try {
+			String sql = "update user set email = ?, password = ? where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, user.getEmail());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.setLong(3, user.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

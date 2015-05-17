@@ -1,4 +1,4 @@
-package br.com.acommerce.user.servlet;
+package br.com.acommerce.user;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.acommerce.user.User;
-import br.com.acommerce.user.UserDAO;
 import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 @WebServlet("/sign-up")
@@ -19,7 +17,7 @@ public class SignUpServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/jsp/signup/form.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/user/form.jsp").forward(req, res);
 	}
 	
 	@Override

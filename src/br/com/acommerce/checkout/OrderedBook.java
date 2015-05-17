@@ -7,8 +7,10 @@ public class OrderedBook {
 	private Long id;
 	private Book book;
 	private Long quantity;
+	private Order order;
 
-	public OrderedBook(Book book, Long quantity) {
+	public OrderedBook(Order order, Book book, Long quantity) {
+		this.order = order;
 		this.book = book;
 		this.quantity = quantity;
 	}
@@ -23,6 +25,10 @@ public class OrderedBook {
 
 	public Long getQuantity() {
 		return quantity;
+	}
+
+	public Order getOrder() {
+		return order;
 	}
 
 }

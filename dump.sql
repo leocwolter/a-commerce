@@ -73,3 +73,23 @@ CREATE TABLE `book_author` (
     CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id),
     CONSTRAINT FOREIGN KEY (author_id) REFERENCES author(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`creationDate` date NOT NULL,
+	`owner_id` int(11) NOT NULL,
+    CONSTRAINT FOREIGN KEY (owner_id) REFERENCES `user`(id),
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ordered_book` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`order_id` int(11) NOT NULL,
+	`book_id` int(11) NOT NULL,
+	`quantity` int(11) NOT NULL,
+    CONSTRAINT FOREIGN KEY (order_id) REFERENCES `order`(id),
+    CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id),
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+	

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.acommerce.cart.Cart;
 import br.com.acommerce.user.User;
 
-@WebServlet("/add-to-cart")
+@WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet{
 
 	@Override
@@ -26,8 +26,10 @@ public class CheckoutServlet extends HttpServlet{
 		
 		Order order = cart.checkout(user);
 		orders.save(order);
+		
+		req.setAttribute("order", order);
+		req.getRequestDispatcher("/WEB-INF/jsp/checkout/new-success.jsp").forward(req, res);
 
-		res.sendRedirect(req.getContextPath()+"/cart");
 	}
 	
 }

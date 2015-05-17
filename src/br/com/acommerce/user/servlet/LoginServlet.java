@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		req.getSession().setAttribute("url", req.getParameter("url"));
 		req.getRequestDispatcher("/WEB-INF/jsp/login/form.jsp").forward(req, res);;
 	}
 	
@@ -39,6 +40,13 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		req.getSession().setAttribute("loggedUser", userToLogIn);
+		
+		String url = (String) req.getSession().getAttribute("url");
+		if(url != null){
+			req.getSession().setAttribute("url", null);
+			res.sendRedirect(req.getContextPath()+"/"+url);
+			return;
+		}
 		
 		req.getRequestDispatcher("/WEB-INF/jsp/login/success.jsp").forward(req, res);
 

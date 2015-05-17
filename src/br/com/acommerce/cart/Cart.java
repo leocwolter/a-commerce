@@ -46,13 +46,7 @@ public class Cart {
 	}
 
 	public Order checkout(User user) {
-		Set<Entry<Book, Long>> entrySet = booksAndQuantity.entrySet();
-		List<OrderedBook> orderedBooks = new ArrayList<>();
-		for (Entry<Book, Long> entry : entrySet) {
-			OrderedBook orderedBook = new OrderedBook(entry.getKey(), entry.getValue());
-			orderedBooks.add(orderedBook);
-		}
-		return new Order(orderedBooks, user);
+		return new Order(booksAndQuantity, user);
 		
 	}
 

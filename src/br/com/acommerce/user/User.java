@@ -2,8 +2,9 @@ package br.com.acommerce.user;
 
 public class User {
 
-	private String email;
-	private String password;
+	private Long id;
+	private final String email;
+	private final String password;
 
 	public User(String email, String password) {
 		this.email = email;
@@ -16,6 +17,15 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+		
 	}
 	
 	

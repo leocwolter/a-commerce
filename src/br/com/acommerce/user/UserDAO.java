@@ -24,7 +24,9 @@ public class UserDAO {
 			if(resultSet.next()){
 				String userEmail = resultSet.getString("email");
 				String userPassword = resultSet.getString("password");
-				return new User(userEmail, userPassword);
+				User user = new User(userEmail, userPassword);
+				user.setId(resultSet.getLong("id"));
+				return user;
 			}
 			return null;
 		} catch (SQLException e) {

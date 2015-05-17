@@ -9,7 +9,7 @@ public class ConnectionFactory {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			return DriverManager.getConnection("jdbc:mysql://localhost/acommerce", "root", "fiap");
+			return DriverManager.getConnection("jdbc:mysql://localhost:3307/acommerce", "root", "1234");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

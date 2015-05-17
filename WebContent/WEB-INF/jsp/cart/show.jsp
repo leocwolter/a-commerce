@@ -36,9 +36,14 @@
 		<label>Total: </label> ${cart.totalPrice}
 	</div>
 	<div class="pull-right">
-		<form action="/checkout">
-			<input type="submit" class="btn btn-primary" value="Comprar">
-		</form>
+		<c:if test="${empty loggedUser}">
+			Para comprar você precisa estar logado. <a href='<c:url value="/login?url=cart"/>'>Clique aqui para se logar</a>
+		</c:if>
+		<c:if test="${not empty loggedUser}">
+			<form action="<c:url value="/checkout"/>" method = "POST">
+				<input type="submit" class="btn btn-primary" value="Comprar">
+			</form>
+		</c:if>
 	</div>
 </a:page>	
 	

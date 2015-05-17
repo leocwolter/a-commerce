@@ -41,7 +41,7 @@ public class NewBookServlet extends HttpServlet{
 		AuthorDAO authors = new AuthorDAO(connection);
 		List<Author> authorList = authors.all();
 		req.setAttribute("authors", authorList);
-
+		
 		req.getRequestDispatcher("/WEB-INF/jsp/book/form.jsp").forward(req, res);
 	}
 	

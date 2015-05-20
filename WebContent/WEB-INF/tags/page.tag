@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-	<a:errors/>
 	<c:import url="/WEB-INF/jsp/_menu.jsp"/>
+	<a:errors/>
 	<div class="container-fluid">
 		<jsp:doBody/>
 	</div>

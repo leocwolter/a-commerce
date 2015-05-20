@@ -57,6 +57,7 @@
 				<li><a href="<c:url value="/sign-up"/>"> Cadastrar </a></li>
 				<li><a href="<c:url value="/login"/>"> Entrar </a></li>
 			</c:if>
+			<li> <a href="<c:url value="/advanced-search"/>">Busca avançada</a>
 		</ul>
 		<form action="simple-search" class="navbar-form navbar-left" role="search">
 			<div class="form-group">

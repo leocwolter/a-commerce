@@ -13,7 +13,7 @@
 		${book.publisher.name}
 	</p>
 	<p>
-		<label>Editora:</label>
+		<label>Autores:</label>
 		${book.authorsAsString}
 	</p>
 	<p>

@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import br.com.acommerce.author.Author;
 import br.com.acommerce.author.AuthorDAO;
@@ -14,6 +16,7 @@ import br.com.acommerce.category.Category;
 import br.com.acommerce.category.CategoryDAO;
 import br.com.acommerce.checkout.OrderDAO;
 import br.com.acommerce.publisher.PublisherDAO;
+import br.com.acommerce.search.SearchableTable;
 
 public class BookDAO {
 
@@ -94,6 +97,21 @@ public class BookDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public Set<Book> withData(String query, List<SearchableTable> tables) {
+		Set<Book> books = new HashSet<>();
+		for (SearchableTable table : tables) {
+			try {
+				ResultSet resultSet = table.executeQuery(connection, query);
+				while (resultSet.next()) {
+					books.add(createBook(resultSet));
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return books;
 	}
 	
 	

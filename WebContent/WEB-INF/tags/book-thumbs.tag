@@ -4,7 +4,7 @@
 <%@ attribute name="books" required="true" type="java.util.List"%>
 
 <c:forEach items="${books}" var="book" varStatus="status">
-	<c:if test="${status.count-1 % 4 == 0}">
+	<c:if test="${status.count % 4 == 0}">
 		<ul class="row list-unstyled">
 	</c:if>
 		  <li class="col-sm-5 col-md-3 text-center">
@@ -33,7 +33,7 @@
 		      </div>
 		    </div>
 		  </li>
-	<c:if test="${status.count % 5 == 0}">
+	<c:if test="${status.count % 4 == 0}">
 		</ul>
 	</c:if>
 </c:forEach>

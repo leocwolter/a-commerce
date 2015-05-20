@@ -77,7 +77,7 @@ CREATE TABLE `book_author` (
 
 CREATE TABLE `order` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`creationDate` date NOT NULL,
+	`creationDate` datetime NOT NULL,
 	`owner_id` int(11) NOT NULL,
 	`shippingOption` varchar(255) NOT NULL,
     CONSTRAINT FOREIGN KEY (owner_id) REFERENCES `user`(id),

@@ -23,7 +23,7 @@
 				</c:forEach>
 				</td>
 				<td>
-					<fmt:formatDate value="${order.creationDate.time}" pattern="dd/MM/yyyy"/>
+					<fmt:formatDate value="${order.creationDate.time}" pattern="dd/MM/yyyy HH:mm:ss"/>
 				</td>
 				<td>${order.shippingOption.name()} - ${order.shippingOption.price}</td>
 				<td>

@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -29,7 +30,7 @@ public class OrderDAO {
 			String sql = "insert into `order` (owner_id, creationDate, shippingOption) values (?, ?, ?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, order.getOwner().getId());
-			preparedStatement.setDate(2, new Date(order.getCreationDate().getTimeInMillis()));
+			preparedStatement.setTimestamp(2, new Timestamp(order.getCreationDate().getTimeInMillis()));
 			preparedStatement.setString(3, order.getShippingOption().name());
 			preparedStatement.execute();
 			order.setId(getLastOrderId());
@@ -61,9 +62,9 @@ public class OrderDAO {
 		long id = resultSet.getLong("id");
 		UserDAO users = new UserDAO(connection);
 		Order order = new Order(orderedBooksOfOrder(id), users.withId(resultSet.getLong("owner_id")), option);
-		Date date = resultSet.getDate("creationDate");
+		Timestamp timestamp = resultSet.getTimestamp("creationDate");
 		Calendar creationDate = Calendar.getInstance();
-		creationDate.setTime(date);
+		creationDate.setTimeInMillis(timestamp.getTime());
 		order.setCreationDate(creationDate);
 		order.setId(id);
 		return order;

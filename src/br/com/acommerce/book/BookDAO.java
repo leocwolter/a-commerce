@@ -131,16 +131,16 @@ public class BookDAO {
 
 	public void update(Book book) {
 		try {
-			String sql = "update book set name = ?, price = ?, authors = ?, publisher_id = ?, synopsis = ?, toc = ?, length = ?, language = ? where id = ?";
+			String sql = "update book set name = ?, price = ?, publisher_id = ?, synopsis = ?, toc = ?, length = ?, language = ? where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, book.getName());
 			preparedStatement.setString(2, book.getPrice().toPlainString());
-			preparedStatement.setLong(4, book.getPublisher().getId());
+			preparedStatement.setLong(3, book.getPublisher().getId());
 			preparedStatement.setString(4, book.getSynopsis());
-			preparedStatement.setString(4, book.getToc());
-			preparedStatement.setLong(4, book.getLength());
-			preparedStatement.setString(4, book.getLanguage());
-			preparedStatement.setLong(5, book.getId());
+			preparedStatement.setString(5, book.getToc());
+			preparedStatement.setLong(6, book.getLength());
+			preparedStatement.setString(7, book.getLanguage());
+			preparedStatement.setLong(8, book.getId());
 			preparedStatement.execute();
 			overrideCategoryRelation(book);
 			overrideAuthorRelation(book);

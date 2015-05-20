@@ -1,5 +1,6 @@
 package br.com.acommerce.checkout;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -80,7 +81,8 @@ public class OrderDAO {
 				long bookId = resultSet.getLong("book_id");
 				Book book = books.withId(bookId);
 				long quantity = resultSet.getLong("quantity");
-				orderedBooks.add(new OrderedBook(book, quantity));
+				BigDecimal price = new BigDecimal(resultSet.getString("price"));
+				orderedBooks.add(new OrderedBook(book, quantity, price));
 			}
 			return orderedBooks;
 		} catch (SQLException e) {
@@ -91,11 +93,12 @@ public class OrderDAO {
 	private void saveItems(List<OrderedBook> orderedBooks) {
 		for (OrderedBook orderedBook : orderedBooks) {
 			try {
-				String sql = "insert into ordered_book (book_id, quantity, order_id) values (?, ?, ?)";
+				String sql = "insert into ordered_book (book_id, quantity, order_id, price) values (?, ?, ?, ?)";
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setLong(1, orderedBook.getBook().getId());
 				preparedStatement.setLong(2, orderedBook.getQuantity());
 				preparedStatement.setLong(3, orderedBook.getOrder().getId());
+				preparedStatement.setString(4, orderedBook.getPrice().toPlainString());
 				preparedStatement.execute();
 			} catch (SQLException e) {
 				throw new RuntimeException(e);

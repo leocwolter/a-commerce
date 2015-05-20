@@ -88,6 +88,7 @@ CREATE TABLE `ordered_book` (
 	`order_id` int(11) NOT NULL,
 	`book_id` int(11) NOT NULL,
 	`quantity` int(11) NOT NULL,
+	`price` varchar(255) NOT NULL,
     CONSTRAINT FOREIGN KEY (order_id) REFERENCES `order`(id),
     CONSTRAINT FOREIGN KEY (book_id) REFERENCES book(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

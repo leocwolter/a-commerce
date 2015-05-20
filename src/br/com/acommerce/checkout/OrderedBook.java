@@ -10,12 +10,18 @@ public class OrderedBook {
 	private Book book;
 	private Long quantity;
 	private Order order;
+	private BigDecimal price;
 
 	public OrderedBook(Book book, Long quantity) {
-		this.book = book;
-		this.quantity = quantity;
+		this(book, quantity, book.getPrice());
 	}
 	
+	public OrderedBook(Book book, long quantity, BigDecimal price) {
+		this.book = book;
+		this.quantity = quantity;
+		this.price = price;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -38,15 +44,14 @@ public class OrderedBook {
 
 	public void setOrder(Order order) {
 		this.order = order;
-		
 	}
 	
 	public BigDecimal getPrice(){
-		return book.getPrice();
+		return price;
 	}
 	
 	public BigDecimal getTotalPrice(){
-		return book.getPrice().multiply(new BigDecimal(quantity));
+		return price.multiply(new BigDecimal(quantity));
 	}
 	
 }

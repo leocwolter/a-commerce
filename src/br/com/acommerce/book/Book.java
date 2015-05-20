@@ -74,6 +74,10 @@ public class Book {
 		return publisher.getName().equals(this.publisher.getName());
 	}
 
+	public boolean isWrittenBy(Author author){
+		return authors.stream().map(Author::getId).anyMatch(id -> id.equals(author.getId()));
+	}
+
 	public List<Category> getCategories() {
 		return categories;
 	}

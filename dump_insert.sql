@@ -46,7 +46,7 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (1,'Guilherme','1222','São Paulo','Av Lins de Vasconcelos','São Paulo','Brasil','Prédio UN2','11111-111','12345678900','1994-02-10','Sou um estudante de Sistemas da Informação'),(2,'Leonardo','1234','ZL','Av Campo Limpo','São Paulo','Brasil','Conj. Habitacional','22222-222','12345678988','1995-08-18','Oi, meu nome é Valtinho.'),(3,'Gustavo','0000','Da Leste','Av Te Roubei','São Paulo','Brasil','Cohab','33333-333','00000000001','1900-09-30','Vou te roubei'),(4,'Mateus Poli ','0909','Osasco','Rua Mario Maglio','São Paulo','Brasil','Casa','44444-444','09090909090','1994-04-10','Leiam meus livros Baixinhos'),(5,'Vizinho do Xuxa','1000','Osasco','Rua Mario Maglio','São Paulo ','Brasil ','Casa ','44444-444','11111111111','1994-09-10','Escuto o xuxa treinar'),(6,'Enzo Toshio','2424','Pantanal','Ypê 4','Mata Grosso','Brasil','Árvore','00000-001','09090909919','1994-08-17','Cadê a Jane ?'),(7,'Paulo','2424','Pantanal','Ypê 4','Mata Grosso','Brasil','Árvore','09090-000','09090909009','1994-03-17','Partiu Slackline'),(8,'','','','','','','','','','0000-00-00','');
+INSERT INTO `author` VALUES (1,'Guilherme','1222','SÃ£o Paulo','Av Lins de Vasconcelos','SÃ£o Paulo','Brasil','PrÃ©dio UN2','11111-111','12345678900','1994-02-10','Sou um estudante de Sistemas da InformaÃ§Ã£o'),(2,'Leonardo','1234','ZL','Av Campo Limpo','SÃ£o Paulo','Brasil','Conj. Habitacional','22222-222','12345678988','1995-08-18','Oi, meu nome Ã© Valtinho.'),(3,'Gustavo','0000','Da Leste','Av Te Roubei','SÃ£o Paulo','Brasil','Cohab','33333-333','00000000001','1900-09-30','Vou te roubei'),(4,'Mateus Poli ','0909','Osasco','Rua Mario Maglio','SÃ£o Paulo','Brasil','Casa','44444-444','09090909090','1994-04-10','Leiam meus livros Baixinhos'),(5,'Vizinho do Xuxa','1000','Osasco','Rua Mario Maglio','SÃ£o Paulo ','Brasil ','Casa ','44444-444','11111111111','1994-09-10','Escuto o xuxa treinar'),(6,'Enzo Toshio','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','00000-001','09090909919','1994-08-17','CadÃª a Jane ?'),(7,'Paulo','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','09090-000','09090909009','1994-03-17','Partiu Slackline'),(8,'','','','','','','','','','0000-00-00','');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (25,'Como Ser Um Tarzan ','0.99',1,'É um livro de como ser um morador de Embu ','Cap 1 - XXXX',1,'Português'),(26,'Vou Te Roubei','100.00',1,'Descreve o perfil de ladrão moderno nos tranportes publicos','Cap 1 - YYYY',1000,'Português '),(27,'Bodybuilder','90.00',2,'Te ajuda a atingir objetivos pesados','Cap 2 - ZZZZ',810,'Português '),(28,'Manual do Slackline','110.00',1,'Como se equilibrar nos fios de poste na região de São Paulo','Cap 1 - Slack',115,'Português '),(29,'Trabalho com Isso','90.00',2,'Mostra de forma efetiva que ele sabe de tudo','Sem Divisão ',10,'Português'),(30,'Jane, Cadê Você?','220.00',2,'Sobrevivência da jovem mulher Enzo pela floresta','Sem Divisão ',98,'Português'),(31,'Mr. Leonardo','1000.00',1,'The BEST... !','Cap. 1 a 10 ',2500,'Inglês'),(32,'Xuxa Barulhento ','10.00',1,'Descreve a vida de um vizinho reprimido pela violência do Xuxa','Sem Divisão',410,'Espanhol');
+INSERT INTO `book` VALUES (25,'Como Ser Um Tarzan ','0.99',1,'Ã‰ um livro de como ser um morador de Embu ','Cap 1 - XXXX',1,'PortuguÃªs'),(26,'Vou Te Roubei','100.00',1,'Descreve o perfil de ladrÃ£o moderno nos tranportes publicos','Cap 1 - YYYY',1000,'PortuguÃªs '),(27,'Bodybuilder','90.00',2,'Te ajuda a atingir objetivos pesados','Cap 2 - ZZZZ',810,'PortuguÃªs '),(28,'Manual do Slackline','110.00',1,'Como se equilibrar nos fios de poste na regiÃ£o de SÃ£o Paulo','Cap 1 - Slack',115,'PortuguÃªs '),(29,'Trabalho com Isso','90.00',2,'Mostra de forma efetiva que ele sabe de tudo','Sem DivisÃ£o ',10,'PortuguÃªs'),(30,'Jane, CadÃª VocÃª?','220.00',2,'SobrevivÃªncia da jovem mulher Enzo pela floresta','Sem DivisÃ£o ',98,'PortuguÃªs'),(31,'Mr. Leonardo','1000.00',1,'The BEST... !','Cap. 1 a 10 ',2500,'InglÃªs'),(32,'Xuxa Barulhento ','10.00',1,'Descreve a vida de um vizinho reprimido pela violÃªncia do Xuxa','Sem DivisÃ£o',410,'Espanhol');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `creationDate` date NOT NULL,
+  `creationDate` timestamp NOT NULL,
   `owner_id` int(11) NOT NULL,
   `shippingOption` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
@@ -178,16 +178,6 @@ CREATE TABLE `order` (
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `order`
---
-
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,'2015-01-01',2,'SEDEX'),(2,'2015-04-10',3,'SEDEX'),(3,'2014-01-31',4,'SEDEX');
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ordered_book`
@@ -200,22 +190,14 @@ CREATE TABLE `ordered_book` (
   `order_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
+  `price` varchar(255) NOT NULL,
   KEY `order_id` (`order_id`),
   KEY `book_id` (`book_id`),
   CONSTRAINT `ordered_book_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
   CONSTRAINT `ordered_book_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=Innordered_bookoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `ordered_book`
---
-
-LOCK TABLES `ordered_book` WRITE;
-/*!40000 ALTER TABLE `ordered_book` DISABLE KEYS */;
-INSERT INTO `ordered_book` VALUES (1,25,1),(1,26,1),(1,27,1),(2,28,1),(2,29,1),(3,30,2),(3,31,1),(3,32,1);
-/*!40000 ALTER TABLE `ordered_book` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `publisher`
@@ -246,7 +228,7 @@ CREATE TABLE `publisher` (
 
 LOCK TABLES `publisher` WRITE;
 /*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
-INSERT INTO `publisher` VALUES (1,'Abril','70','Osasco','Rua Mario Maglio','São Paulo','Brasil','Casa','06070-040','0909909090909'),(2,'Moderna','09','São Paulo','Av Lins de Vasconcelos','São Paulo','Brasil','Prédio Comercial','09090-101','09092019121');
+INSERT INTO `publisher` VALUES (1,'Abril','70','Osasco','Rua Mario Maglio','SÃ£o Paulo','Brasil','Casa','06070-040','0909909090909'),(2,'Moderna','09','SÃ£o Paulo','Av Lins de Vasconcelos','SÃ£o Paulo','Brasil','PrÃ©dio Comercial','09090-101','09092019121');
 /*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
 UNLOCK TABLES;
 

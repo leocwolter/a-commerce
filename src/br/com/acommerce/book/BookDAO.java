@@ -171,6 +171,7 @@ public class BookDAO {
 		try {
 			OrderDAO orders = new OrderDAO(connection);
 			orders.removeWithBook(id);
+			removeAuthorsFrom(id);
 			removeCategoriesFrom(id);
 			String sql = "delete from book where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

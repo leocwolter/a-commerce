@@ -28,7 +28,7 @@ public class EditUserServlet extends HttpServlet{
 		user.setPassword(req.getParameter("password"));
 		users.update(user);
 		
-		req.getRequestDispatcher("/WEB-INF/jsp/user/form.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/user/edit-success.jsp").forward(req, res);
 
 	}
 	

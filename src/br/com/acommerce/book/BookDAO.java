@@ -56,7 +56,7 @@ public class BookDAO {
 
 	public List<Book> all() {
 		try {
-			String sql = "select * from book";
+			String sql = "select * from book order by rand()";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<Book> books = new ArrayList<>();

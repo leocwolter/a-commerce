@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS acommerce;
+
+CREATE DATABASE acommerce;
+
+USE acommerce;
+
 -- MySQL dump 10.13  Distrib 5.5.43, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: acommerce
@@ -46,7 +52,7 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (1,'Guilherme','1222','SÃ£o Paulo','Av Lins de Vasconcelos','SÃ£o Paulo','Brasil','PrÃ©dio UN2','11111-111','12345678900','1994-02-10','Sou um estudante de Sistemas da InformaÃ§Ã£o'),(2,'Leonardo','1234','ZL','Av Campo Limpo','SÃ£o Paulo','Brasil','Conj. Habitacional','22222-222','12345678988','1995-08-18','Oi, meu nome Ã© Valtinho.'),(3,'Gustavo','0000','Da Leste','Av Te Roubei','SÃ£o Paulo','Brasil','Cohab','33333-333','00000000001','1900-09-30','Vou te roubei'),(4,'Mateus Poli ','0909','Osasco','Rua Mario Maglio','SÃ£o Paulo','Brasil','Casa','44444-444','09090909090','1994-04-10','Leiam meus livros Baixinhos'),(5,'Vizinho do Xuxa','1000','Osasco','Rua Mario Maglio','SÃ£o Paulo ','Brasil ','Casa ','44444-444','11111111111','1994-09-10','Escuto o xuxa treinar'),(6,'Enzo Toshio','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','00000-001','09090909919','1994-08-17','CadÃª a Jane ?'),(7,'Paulo','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','09090-000','09090909009','1994-03-17','Partiu Slackline'),(8,'','','','','','','','','','0000-00-00','');
+INSERT INTO `author` VALUES (1,'Guilherme','1222','SÃ£o Paulo','Av Lins de Vasconcelos','SÃ£o Paulo','Brasil','PrÃ©dio UN2','11111-111','12345678900','1994-02-10','Sou um estudante de Sistemas da InformaÃ§Ã£o'),(2,'Leonardo','1234','ZL','Av Campo Limpo','SÃ£o Paulo','Brasil','Conj. Habitacional','22222-222','12345678988','1995-08-18','Oi, meu nome Ã© Valtinho.'),(3,'Gustavo','0000','Da Leste','Av Te Roubei','SÃ£o Paulo','Brasil','Cohab','33333-333','00000000001','1900-09-30','Vou te roubei'),(4,'Mateus Poli ','0909','Osasco','Rua Mario Maglio','SÃ£o Paulo','Brasil','Casa','44444-444','09090909090','1994-04-10','Leiam meus livros Baixinhos'),(5,'Vizinho do Xuxa','1000','Osasco','Rua Mario Maglio','SÃ£o Paulo ','Brasil ','Casa ','44444-444','11111111111','1994-09-10','Escuto o xuxa treinar'),(6,'Enzo Toshio','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','00000-001','09090909919','1994-08-17','CadÃª a Jane ?'),(7,'Paulo','2424','Pantanal','YpÃª 4','Mata Grosso','Brasil','Ã�rvore','09090-000','09090909009','1994-03-17','Partiu Slackline');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 

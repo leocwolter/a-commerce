@@ -17,6 +17,7 @@ import br.com.acommerce.category.CategoryDAO;
 import br.com.acommerce.checkout.OrderDAO;
 import br.com.acommerce.publisher.PublisherDAO;
 import br.com.acommerce.search.SearchableTable;
+import br.com.acommerce.wishlist.WishListDAO;
 
 public class BookDAO {
 
@@ -173,6 +174,7 @@ public class BookDAO {
 			orders.removeWithBook(id);
 			removeAuthorsFrom(id);
 			removeCategoriesFrom(id);
+			removeFromWithList(id);
 			String sql = "delete from book where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, id);
@@ -182,6 +184,10 @@ public class BookDAO {
 		}
 	}
 
+
+	private void removeFromWithList(Long id) {
+		new WishListDAO(connection).remove(withId(id));
+	}
 
 	private Long getLastBookId() {
 		try {

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.acommerce.checkout.OrderDAO;
 
@@ -98,6 +100,22 @@ public class UserDAO {
 		user.setAdmin(resultSet.getBoolean("admin"));
 		user.setId(resultSet.getLong("id"));
 		return user;
+	}
+
+
+	public List<User> all() {
+		try {
+			String sql = "select * from user";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<User> users = new ArrayList<>();
+			while(resultSet.next()){
+				users.add(createUser(resultSet));
+			}
+			return users;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

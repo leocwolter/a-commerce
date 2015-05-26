@@ -18,10 +18,23 @@ public class DeleteUserServlet extends HttpServlet{
 
 		Connection connection = (Connection) req.getAttribute("connection");
 		UserDAO users = new UserDAO(connection);
-		User loggedUser = (User) req.getSession().getAttribute("loggedUser");
-		users.remove(loggedUser);
 		
-		res.sendRedirect(req.getContextPath()+"/logout");
+		
+		User user;
+		String id = req.getParameter("id");
+		if(id == null){
+			user = (User) req.getSession().getAttribute("loggedUser");
+		}else{
+			user = users.withId(Long.valueOf(id));
+		}
+
+		users.remove(user);
+		
+		if(user.equals(req.getSession().getAttribute("loggedUser"))){
+			res.sendRedirect(req.getContextPath()+"/logout");
+		} else{
+			res.sendRedirect(req.getContextPath()+"/");
+		}
 	}
 	
 }

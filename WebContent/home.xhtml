@@ -18,23 +18,29 @@
 				<li class="col-sm-5 col-md-3 text-center">
 					<div class="thumbnail">
 						<div class="caption">
-<!-- 							<c:if test="${not empty loggedUser}"> -->
-<!-- 								<c:if test="${not wishlist.contains(book)}"> -->
-<!-- 									<a href="<c:url value=" /add-to-wishlist?id=${book.id} "/>" class="pull-right"> -->
-<!-- 									<span class="glyphicon glyphicon glyphicon-heart-empty"></span> -->
-<!-- 									</a> -->
-<!-- 								</c:if> -->
-<!-- 								<c:if test="${wishlist.contains(book)}"> -->
-<!-- 									<a href="<c:url value=" /remove-from-wishlist?id=${book.id} "/>" class="pull-right"> -->
-<!-- 									<span class="glyphicon glyphicon glyphicon-heart"></span> -->
-<!-- 									</a> -->
-<!-- 								</c:if> -->
-<!-- 							</c:if> -->
+							<h:form rendered="#{!wishListBean.contains(book)}">
+								<h:commandLink styleClass="pull-right" action="#{wishListBean.add(book)}">
+									<span class="glyphicon glyphicon glyphicon-heart-empty" />
+								</h:commandLink>
+							</h:form>
+							<h:form rendered="#{wishListBean.contains(book)}">
+								<h:commandLink styleClass="pull-right" action="#{wishListBean.remove(book)}">
+									<span class="glyphicon glyphicon glyphicon-heart" />
+								</h:commandLink>
+							</h:form>
 							<h3>${book.name}</h3>
-<!-- 							<p> -->
-<!-- 								<fmt:formatNumber value="${book.price}" minFractionDigits="2" -->
-<!-- 									type="currency" /> -->
-<!-- 							</p> -->
+							<p>
+						        <h:outputText value="#{book.price}" >
+									<f:convertNumber locale="pt_BR" type="currency" value="#{book.price}" minFractionDigits="2" />
+					            </h:outputText>
+							</p>
+							<p>
+								<h:form>
+									<h:commandLink styleClass="btn btn-primary" action="#{wishListBean.add(book)}" value="Comprar"/>
+									<h:commandLink styleClass="btn btn-default" action="#{wishListBean.add(book)}" value="Detalhes"/>
+								</h:form>
+							</p>
+							
 <!-- 							<p> -->
 <!-- 								<a href="<c:url value=" /add-to-cart?id=${book.id} "/>" -->
 <!-- 								class="btn btn-primary" role="button">Comprar</a> <a -->

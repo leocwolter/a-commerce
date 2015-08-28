@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Autores</th>
+				<th>Editora</th>
+				<th>Preço</th>
+				<th>Idioma</th>
+				<th>Quantidade</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<ui:repeat value="#{cartBean.books}"  var="book">
+			<tr>
+				<td>
+					<h:form>
+						<h:commandLink value="#{book.name}" action="#{booksBean.show(book)}"/>
+					</h:form>
+				</td>
+				<td>#{book.authorsAsString}</td>
+				<td>#{book.publisher.name}</td>
+				<td>
+			        <h:outputText value="#{book.price}" >
+						<f:convertNumber locale="pt_BR" type="currency" value="#{book.price}" minFractionDigits="2" />
+		            </h:outputText>
+				</td>
+				<td>#{book.language}</td>
+				<td>#{cartBean.howManyOf(book)}</td>
+				<td>
+					<h:form>
+						<h:commandLink value="#{book.name}" action="#{cartBean.remove(book)}"/>
+					</h:form>
+				</td>
+			</tr>		
+		</ui:repeat>
+	</table>
+<!-- 	<br> -->
+<!-- 	<div class="pull-left"> -->
+<!-- 		<label>Total: </label> ${cart.totalPrice} -->
+<!-- 	</div> -->
+<!-- 	<div class="pull-right"> -->
+<!-- 		<c:if test="${empty loggedUser}"> -->
+<!-- 			Para comprar você precisa estar logado. <a href='<c:url value="/login?url=cart"/>'>Clique aqui para se logar</a> -->
+<!-- 		</c:if> -->
+<!-- 		<c:if test="${not empty loggedUser}"> -->
+<!-- 			<form action="<c:url value="/choose-shipping"/>" method = "POST"> -->
+<!-- 				<input type="submit" class="btn btn-primary" value="Comprar"> -->
+<!-- 			</form> -->
+<!-- 		</c:if> -->
+<!-- 	</div> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

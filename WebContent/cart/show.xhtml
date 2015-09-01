@@ -7,63 +7,72 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Home</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 </head>
 <body>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Autores</th>
-				<th>Editora</th>
-				<th>Preço</th>
-				<th>Idioma</th>
-				<th>Quantidade</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<ui:repeat value="#{cartBean.books}"  var="book">
-			<tr>
-				<td>
-					<h:form>
-						<h:commandLink value="#{book.name}" action="#{booksBean.show(book)}"/>
-					</h:form>
-				</td>
-				<td>#{book.authorsAsString}</td>
-				<td>#{book.publisher.name}</td>
-				<td>
-			        <h:outputText value="#{book.price}" >
-						<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
-		            </h:outputText>
-				</td>
-				<td>#{book.language}</td>
-				<td>#{cartBean.howManyOf(book)}</td>
-				<td>
-					<h:form>
-						<h:commandLink value="Remover do carrinho" action="#{cartBean.remove(book)}"/>
-					</h:form>
-				</td>
-			</tr>		
-		</ui:repeat>
-	</table>
-	<br/>
-	<div class="pull-left">
-		<label>Total: </label>
-		<h:outputText value="#{cartBean.totalPrice}">
-			<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
-		</h:outputText>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml" />
+	<div class="container-fluid">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Autores</th>
+					<th>Editora</th>
+					<th>Preço</th>
+					<th>Idioma</th>
+					<th>Quantidade</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<ui:repeat value="#{cartBean.books}" var="book">
+				<tr>
+					<td><h:form>
+							<h:commandLink value="#{book.name}"
+								action="#{booksBean.show(book)}" />
+						</h:form></td>
+					<td>#{book.authorsAsString}</td>
+					<td>#{book.publisher.name}</td>
+					<td><h:outputText value="#{book.price}">
+							<f:convertNumber locale="pt_BR" type="currency"
+								minFractionDigits="2" />
+						</h:outputText></td>
+					<td>#{book.language}</td>
+					<td>#{cartBean.howManyOf(book)}</td>
+					<td><h:form>
+							<h:commandLink value="Remover do carrinho"
+								action="#{cartBean.remove(book)}" />
+						</h:form></td>
+				</tr>
+			</ui:repeat>
+		</table>
+		<br />
+		<div class="pull-left">
+			<label>Total: </label>
+			<h:outputText value="#{cartBean.totalPrice}">
+				<f:convertNumber locale="pt_BR" type="currency"
+					minFractionDigits="2" />
+			</h:outputText>
+		</div>
+		<div class="pull-right">
+			<h:panelGroup rendered="#{not userSessionBean.logged}">
+				Para comprar você precisa estar logado. <h:link
+					value="Clique aqui para se logar" outcome="/login">
+					<f:param name="page" value="cart" />
+				</h:link>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{userSessionBean.logged}">
+				<h:form>
+					<h:commandLink styleClass="btn btn-primary"
+						value="Comprar" action="#{cartBean.chooseShipping}" />
+				</h:form>
+			</h:panelGroup>
+		</div>
 	</div>
-	<div class="pull-right">
-		<h:panelGroup rendered="#{not userSessionBean.logged}">
-			Para comprar você precisa estar logado. <h:link value="Clique aqui para se logar" outcome="/login"><f:param name="page" value="cart"/></h:link>
-		</h:panelGroup>
-		<h:panelGroup rendered="#{userSessionBean.logged}">
-			<h:form>
-				<h:commandLink styleClass="btn btn-primary" value="Remover do carrinho" action="#{cartBean.chooseShipping}"/>
-			</h:form>
-		</h:panelGroup>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,92 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h:link styleClass="navbar-brand" value="A-Commerce" outcome="/home"/>
+			</div>
+			
+			<ul class="nav navbar-nav">
+				<li><h:link value="Carrinho" outcome="/cart/show"/></li>
+					<h:panelGroup rendered="#{userSessionBean.logged}">
+						<li><h:link value="Perfil" outcome="/profile"/></li>
+						<li><h:link value="Minhas compras" outcome="/my-orders"/></li>
+						<li><h:link value="Minha lista de desejos" outcome="/my-wishlist"/></li>
+						<h:panelGroup rendered="#{userSessionBean.user.admin}">
+							<li role="presentation" class="dropdown">
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+							      Categorias <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu" role="menu">
+									<li><h:link value="Criar" outcome="/new-category"/></li>
+									<li><h:link value="Lista" outcome="/categories"/></li>
+							    </ul>
+							</li>
+				
+							<li role="presentation" class="dropdown">
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+							      Editoras <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu" role="menu">
+									<li><h:link value="Criar" outcome="/new-publisher"/></li>
+									<li><h:link value="Lista" outcome="/publishers"/></li>
+							    </ul>
+							</li>
+						
+							<li role="presentation" class="dropdown">
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+							      Autores <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu" role="menu">
+									<li><h:link value="Criar" outcome="/new-author"/></li>
+									<li><h:link value="Lista" outcome="/authors"/></li>
+							    </ul>
+							</li>
+						
+							<li role="presentation" class="dropdown">
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+							      Livros <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu" role="menu">
+									<li><h:link value="Criar" outcome="/new-book"/></li>
+									<li><h:link value="Lista" outcome="/books"/></li>
+							    </ul>
+							</li>
+							
+							
+							<li role="presentation" class="dropdown">
+							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+							      Usuários <span class="caret"></span>
+							    </a>
+							    <ul class="dropdown-menu" role="menu">
+	   								<li><h:link value="Criar" outcome="/sign-up"/></li>
+									<li><h:link value="Lista" outcome="/users"/></li>
+							    </ul>
+							</li>
+						</h:panelGroup>
+						<li>
+							<h:form>
+								<h:commandLink value="Sair" action="#{userSessionBean.logout}"/>
+							</h:form>
+						</li>
+					</h:panelGroup>
+					<h:panelGroup rendered="#{not userSessionBean.logged}">
+						<li><h:link value="Cadastrar" outcome="/signup/form"/></li>
+						<li><h:link value="Entrar" outcome="/login/form"/></li>
+					</h:panelGroup>
+				<li><h:link value="Busca avançada" outcome="/advanced-search"/></li>
+			</ul>
+			<form action="simple-search" class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Busca..." name="q"/>
+				</div>
+				<button type="submit" class="btn btn-default">Buscar</button>
+			</form>
+		</div>
+	</nav>
+	<br/>
+<!-- 	<a:errors /> -->
+</ui:composition>

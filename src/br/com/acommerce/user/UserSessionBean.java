@@ -8,6 +8,10 @@ import javax.faces.bean.SessionScoped;
 public class UserSessionBean {
 	private User user;
 	
+	public String signup(String email, String password){
+		return login(email, password);
+	}
+	
 	public String login(String email, String password) {
 		this.user = new User(email, password);
 		return "/home?faces-redirect=true";

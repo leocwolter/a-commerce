@@ -12,7 +12,7 @@
 			<ul class="nav navbar-nav">
 				<li><h:link value="Carrinho" outcome="/cart/show"/></li>
 					<h:panelGroup rendered="#{userSessionBean.logged}">
-						<li><h:link value="Perfil" outcome="/profile"/></li>
+						<li><h:link value="Perfil" outcome="/user/show"/></li>
 						<li><h:link value="Minhas compras" outcome="/my-orders"/></li>
 						<li><h:link value="Minha lista de desejos" outcome="/my-wishlist"/></li>
 						<h:panelGroup rendered="#{userSessionBean.user.admin}">
@@ -62,7 +62,7 @@
 							      Usuários <span class="caret"></span>
 							    </a>
 							    <ul class="dropdown-menu" role="menu">
-	   								<li><h:link value="Criar" outcome="/sign-up"/></li>
+	   								<li><h:link value="Criar" outcome="/signup/form"/></li>
 									<li><h:link value="Lista" outcome="/users"/></li>
 							    </ul>
 							</li>

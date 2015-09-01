@@ -17,7 +17,7 @@
 			</div>
 			
 			<ul class="nav navbar-nav">
-				<li><h:link value="Carrinho" outcome="/show-cart"/></li>
+				<li><h:link value="Carrinho" outcome="/cart/show"/></li>
 					<h:panelGroup rendered="#{userSessionBean.logged}">
 						<li><h:link value="Perfil" outcome="/profile"/></li>
 						<li><h:link value="Minhas compras" outcome="/my-orders"/></li>
@@ -128,9 +128,7 @@
 			</ui:repeat>
 		</ul>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>

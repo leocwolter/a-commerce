@@ -33,33 +33,36 @@
 				<td>#{book.publisher.name}</td>
 				<td>
 			        <h:outputText value="#{book.price}" >
-						<f:convertNumber locale="pt_BR" type="currency" value="#{book.price}" minFractionDigits="2" />
+						<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
 		            </h:outputText>
 				</td>
 				<td>#{book.language}</td>
 				<td>#{cartBean.howManyOf(book)}</td>
 				<td>
 					<h:form>
-						<h:commandLink value="#{book.name}" action="#{cartBean.remove(book)}"/>
+						<h:commandLink value="Remover do carrinho" action="#{cartBean.remove(book)}"/>
 					</h:form>
 				</td>
 			</tr>		
 		</ui:repeat>
 	</table>
-<!-- 	<br> -->
-<!-- 	<div class="pull-left"> -->
-<!-- 		<label>Total: </label> ${cart.totalPrice} -->
-<!-- 	</div> -->
-<!-- 	<div class="pull-right"> -->
-<!-- 		<c:if test="${empty loggedUser}"> -->
-<!-- 			Para comprar você precisa estar logado. <a href='<c:url value="/login?url=cart"/>'>Clique aqui para se logar</a> -->
-<!-- 		</c:if> -->
-<!-- 		<c:if test="${not empty loggedUser}"> -->
-<!-- 			<form action="<c:url value="/choose-shipping"/>" method = "POST"> -->
-<!-- 				<input type="submit" class="btn btn-primary" value="Comprar"> -->
-<!-- 			</form> -->
-<!-- 		</c:if> -->
-<!-- 	</div> -->
+	<br/>
+	<div class="pull-left">
+		<label>Total: </label>
+		<h:outputText value="#{cartBean.totalPrice}">
+			<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
+		</h:outputText>
+	</div>
+	<div class="pull-right">
+		<h:panelGroup rendered="#{not userSessionBean.logged}">
+			Para comprar você precisa estar logado. <h:link value="Clique aqui para se logar" outcome="/login"><f:param name="page" value="cart"/></h:link>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{userSessionBean.logged}">
+			<h:form>
+				<h:commandLink styleClass="btn btn-primary" value="Remover do carrinho" action="#{cartBean.chooseShipping}"/>
+			</h:form>
+		</h:panelGroup>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>

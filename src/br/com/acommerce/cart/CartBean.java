@@ -1,5 +1,6 @@
 package br.com.acommerce.cart;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +14,31 @@ import br.com.acommerce.book.Book;
 @SessionScoped
 public class CartBean {
 	
-	private List<Book> books = new ArrayList<>();
+	private Cart cart = new Cart();
 	
 	public String add(Book book) {
-		books.add(book);
-		return "show-cart";
+		cart.add(book);
+		return "cart/show?faces-redirect=true";
 	}
 	
 	public String remove(Book book) {
-		books.remove(book);
-		return "show-cart";
+		cart.remove(book);
+		return "cart/show?faces-redirect=true";
 	}
 	
 	public List<Book> getBooks() {
-		return books;
+		return new ArrayList<>(cart.getBooks());
 	}
 	
-	public int howManyOf(Book book){
-		return 2;
+	public Long howManyOf(Book book){
+		return cart.howManyOf(book);
+	}
+	
+	public BigDecimal getTotalPrice() {
+		return cart.getTotalPrice();
+	}
+	
+	public String chooseShipping(){
+		return "cart/chooseShipping?faces-redirect=true";
 	}
 }

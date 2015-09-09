@@ -3,7 +3,6 @@ package br.com.acommerce.cart;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -27,6 +26,12 @@ public class CartBean {
 	public String remove(Book book) {
 		cart.remove(book);
 		return "cart/show?faces-redirect=true";
+	}
+	
+	public String showFinalPrice() {
+		cart.setShippingOption(shippingOption);
+		return "cart/show-final-price?faces-redirect=true";
+
 	}
 	
 	public List<Book> getBooks() {

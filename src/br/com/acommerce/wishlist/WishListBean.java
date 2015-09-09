@@ -1,28 +1,36 @@
 package br.com.acommerce.wishlist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import br.com.acommerce.book.Book;
+import br.com.acommerce.infra.ConnectionFactory;
+import br.com.acommerce.user.UserSessionBean;
 
 @ManagedBean
 @SessionScoped
 public class WishListBean {
 	
-	private List<Book> wishList = new ArrayList<Book>();
+	@ManagedProperty("#{userSessionBean}")
+	private UserSessionBean userSessionBean;
 
 	public void add(Book book){
-		wishList.add(book);
+		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
+		wishList.add(book, userSessionBean.getUser());
 	}
 	
 	public void remove(Book book){
+		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
 		wishList.remove(book);
 	}
 	
 	public boolean contains(Book book){
-		return wishList.contains(book);
+		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
+		return wishList.of(userSessionBean.getUser()).contains(book);
+	}
+	
+	public void setUserSessionBean(UserSessionBean userSessionBean) {
+		this.userSessionBean = userSessionBean;
 	}
 }

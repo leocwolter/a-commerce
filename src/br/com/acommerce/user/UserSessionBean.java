@@ -3,17 +3,22 @@ package br.com.acommerce.user;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import br.com.acommerce.infra.ConnectionFactory;
+
 @SessionScoped
-@ManagedBean
+@ManagedBean(name="userSessionBean")
 public class UserSessionBean {
 	private User user;
 	
 	public String signup(String email, String password){
+		UserDAO users = new UserDAO(ConnectionFactory.getConnection());
+		users.save(new User(email, password));
 		return login(email, password);
 	}
 	
 	public String login(String email, String password) {
-		this.user = new User(email, password);
+		UserDAO users = new UserDAO(ConnectionFactory.getConnection());
+		this.user = users.getWithEmailAndPassword(email, password);
 		return "/home?faces-redirect=true";
 	}
 	

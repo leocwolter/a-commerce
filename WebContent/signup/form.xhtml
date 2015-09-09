@@ -17,7 +17,7 @@
 			<h:inputText styleClass="form-control" value="#{email}"/>
 			<br/>
 			<label for="password">Senha:</label>
-			<h:inputText styleClass="form-control" value="#{password}"/>
+			<h:inputSecret styleClass="form-control" value="#{password}"/>
 			<br/>
 			<h:commandButton styleClass="btn btn-default" value="Cadastrar" action="#{userSessionBean.signup(email, password)}" />
 		</h:form>

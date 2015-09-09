@@ -57,8 +57,8 @@
 		</div>
 		<div class="pull-right">
 			<h:panelGroup rendered="#{not userSessionBean.logged}">
-				Para comprar você precisa estar logado. <h:link
-					value="Clique aqui para se logar" outcome="/login">
+				Para comprar você precisa estar logado.
+				<h:link value="Clique aqui para se logar" outcome="/login/form">
 					<f:param name="page" value="cart" />
 				</h:link>
 			</h:panelGroup>

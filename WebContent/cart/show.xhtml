@@ -62,12 +62,7 @@
 					<f:param name="page" value="cart" />
 				</h:link>
 			</h:panelGroup>
-			<h:panelGroup rendered="#{userSessionBean.logged}">
-				<h:form>
-					<h:commandLink styleClass="btn btn-primary"
-						value="Comprar" action="#{cartBean.chooseShipping}" />
-				</h:form>
-			</h:panelGroup>
+			<h:link styleClass="btn btn-primary" rendered="#{userSessionBean.logged}" value="Comprar" outcome="/cart/show-shipping"/>
 		</div>
 	</div>
 	<script

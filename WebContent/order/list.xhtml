@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+	<div class="container-fluid">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Livros</th>
+					<th>Data de compra</th>
+					<th>Frete</th>
+					<th>Preço total</th>
+				</tr>
+			</thead>
+			<ui:repeat items="#{orderBean.list}" var="order">
+				<tr>
+					<td>
+					<ui:repeat items="${order.orderedBooks}" var="book" varStatus="status">
+						Nome: 
+						<h:commandLink styleClass="pull-right" action="#{booksBean.show(book)}" value="#{book.name}"/>
+						<br/>
+						Preço individual: 
+						<h:outputText value="#{book.price}" >
+							<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
+						</h:outputText>
+						<br/>
+						Qtd: ${book.quantity}
+						<h:panelGroup rendered="#{status.count != order.orderedBooks.size()}">
+							<hr/>
+						</h:panelGroup>
+					</ui:repeat>
+					</td>
+					<td>
+						<h:outputText value="#{order.creationDate.time}" >
+							<f:convertDateTime locale="pt_BR"/>
+						</h:outputText>
+					</td>
+					<td>
+						#{order.shippingOption.name()} - 
+						<h:outputText value="#{order.shippingOption.price}" >
+							<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
+						</h:outputText>
+					</td>
+					<td>
+						<h:outputText value="#{order.totalPrice}" >
+							<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
+						</h:outputText>
+					</td>
+				</tr>		
+			</ui:repeat>
+		</table>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+

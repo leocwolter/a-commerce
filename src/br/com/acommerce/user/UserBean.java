@@ -1,10 +1,8 @@
 package br.com.acommerce.user;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
 
-@SessionScoped
-@ManagedBean
+@Named
 public class UserBean {
 	
 	public String delete(){

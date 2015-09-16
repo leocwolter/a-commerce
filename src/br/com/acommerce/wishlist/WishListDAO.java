@@ -7,17 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.acommerce.book.Book;
 import br.com.acommerce.book.BookDAO;
 import br.com.acommerce.user.User;
 
+@RequestScoped
 public class WishListDAO {
 
+	@Inject
 	private Connection connection;
-
-	public WishListDAO(Connection connection) {
-		this.connection = connection;
-	}
+	@Inject
+	private BookDAO books;
 
 	public void add(Book book, User user) {
 		try {
@@ -38,7 +41,6 @@ public class WishListDAO {
 			preparedStatement.setLong(1, loggedUser.getId());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<Book> wishlistedBooks = new ArrayList<>();
-			BookDAO books = new BookDAO(connection);
 			while(resultSet.next()){
 				wishlistedBooks.add(books.withId(resultSet.getLong("book_id")));
 			}

@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.acommerce.author.Author;
 import br.com.acommerce.author.AuthorDAO;
 import br.com.acommerce.category.Category;
@@ -19,19 +22,22 @@ import br.com.acommerce.publisher.PublisherDAO;
 import br.com.acommerce.search.SearchableTable;
 import br.com.acommerce.wishlist.WishListDAO;
 
+@RequestScoped
 public class BookDAO {
 
-	private final Connection connection;
-	private final CategoryDAO categories;
-	private final PublisherDAO publishers;
-	private final AuthorDAO authors;
-
-	public BookDAO(Connection connection) {
-		this.connection = connection;
-		this.categories = new CategoryDAO(connection);
-		this.publishers = new PublisherDAO(connection);
-		this.authors = new AuthorDAO(connection);
-	}
+	@Inject
+	private CategoryDAO categories;
+	@Inject
+	private PublisherDAO publishers;
+	@Inject
+	private AuthorDAO authors;
+	@Inject
+	private OrderDAO orders;
+	@Inject
+	private WishListDAO wishList;
+	
+	@Inject
+	private Connection connection;
 	
 	public void save(Book book) {
 		try {
@@ -170,7 +176,6 @@ public class BookDAO {
 
 	public void remove(Long id) {
 		try {
-			OrderDAO orders = new OrderDAO(connection);
 			orders.removeWithBook(id);
 			removeAuthorsFrom(id);
 			removeCategoriesFrom(id);
@@ -186,7 +191,7 @@ public class BookDAO {
 
 
 	private void removeFromWithList(Long id) {
-		new WishListDAO(connection).remove(withId(id));
+		wishList.remove(withId(id));
 	}
 
 	private Long getLastBookId() {

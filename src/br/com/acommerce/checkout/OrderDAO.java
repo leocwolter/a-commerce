@@ -10,20 +10,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.acommerce.book.Book;
 import br.com.acommerce.book.BookDAO;
 import br.com.acommerce.cart.ShippingOption;
 import br.com.acommerce.user.User;
 import br.com.acommerce.user.UserDAO;
 
+@RequestScoped
 public class OrderDAO {
-
+	@Inject
 	private Connection connection;
+	@Inject
+	private BookDAO books;
+	@Inject
+	private UserDAO users;
 
-	public OrderDAO(Connection connection) {
-		this.connection = connection;
-	}
-	
 	public void save(Order order) {
 		try {
 			String sql = "insert into `order` (owner_id, creationDate, shippingOption) values (?, ?, ?)";
@@ -59,7 +63,6 @@ public class OrderDAO {
 	private Order createOrder(ResultSet resultSet) throws SQLException {
 		ShippingOption option = ShippingOption.valueOf(resultSet.getString("shippingOption"));
 		long id = resultSet.getLong("id");
-		UserDAO users = new UserDAO(connection);
 		Order order = new Order(orderedBooksOfOrder(id), users.withId(resultSet.getLong("owner_id")), option);
 		Timestamp timestamp = resultSet.getTimestamp("creationDate");
 		Calendar creationDate = Calendar.getInstance();
@@ -76,7 +79,6 @@ public class OrderDAO {
 			preparedStatement.setLong(1, orderId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			List<OrderedBook> orderedBooks = new ArrayList<>();
-			BookDAO books = new BookDAO(connection);
 			while(resultSet.next()){
 				long bookId = resultSet.getLong("book_id");
 				Book book = books.withId(bookId);

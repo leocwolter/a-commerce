@@ -1,22 +1,22 @@
 package br.com.acommerce.cart;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 import br.com.acommerce.book.Book;
 
 
 @SessionScoped
-@ManagedBean(name="cartBean")
-public class CartBean {
+@Named
+public class CartBean implements Serializable {
 	
 	private Cart cart = new Cart();
 	private ShippingOption shippingOption;
-	
 	
 	public String add(Book book) {
 		cart.add(book);

@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+@RequestScoped
 public class AuthorDAO {
 
+	@Inject
 	private Connection connection;
 
-	public AuthorDAO(Connection connection) {
-		this.connection = connection;
-	}
 	public void save(Author author) {
 		try {
 			String sql = "insert into author (name, birthDay, biography, zipCode, cpf, street, city, state, country, number, complement) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

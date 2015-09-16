@@ -7,17 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.acommerce.checkout.OrderDAO;
 
+@RequestScoped
 public class UserDAO {
 	
+	@Inject
 	private Connection connection;
+	@Inject
+	private OrderDAO orders;
 
-	public UserDAO(Connection connection) {
-		this.connection = connection;
-	}
-
-	
 	public User getWithEmailAndPassword(String email, String password) {
 		try {
 			String sql = "select * from user where email = ? and password = ?";
@@ -67,7 +69,6 @@ public class UserDAO {
 		try {
 			String sql = "delete from user where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			OrderDAO orders = new OrderDAO(connection);
 			orders.removeWithOwner(user);
 			preparedStatement.setLong(1, user.getId());
 			preparedStatement.execute();

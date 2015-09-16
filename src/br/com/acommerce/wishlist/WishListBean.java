@@ -1,32 +1,32 @@
 package br.com.acommerce.wishlist;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.com.acommerce.book.Book;
-import br.com.acommerce.infra.ConnectionFactory;
 import br.com.acommerce.user.UserSessionBean;
 
-@ManagedBean
+@Named
 @SessionScoped
-public class WishListBean {
+public class WishListBean implements Serializable{
 	
-	@ManagedProperty("#{userSessionBean}")
+	@Inject
 	private UserSessionBean userSessionBean;
+	@Inject
+	private WishListDAO wishList;
 
 	public void add(Book book){
-		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
 		wishList.add(book, userSessionBean.getUser());
 	}
 	
 	public void remove(Book book){
-		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
 		wishList.remove(book);
 	}
 	
 	public boolean contains(Book book){
-		WishListDAO wishList = new WishListDAO(ConnectionFactory.getConnection());
 		return wishList.of(userSessionBean.getUser()).contains(book);
 	}
 	

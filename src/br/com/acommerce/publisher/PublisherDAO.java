@@ -7,17 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
 import br.com.acommerce.book.Book;
 import br.com.acommerce.book.BookDAO;
 
+@RequestScoped
 public class PublisherDAO {
 
+	@Inject
 	private Connection connection;
+	@Inject
+	private BookDAO books;
 
-	public PublisherDAO(Connection connection) {
-		this.connection = connection;
-	}
-
+	
 	public void save(Publisher publisher) {
 		try {
 			String sql = "insert into publisher (name, street, city, state, country, zipCode, cnpj, complement, number) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -110,7 +114,6 @@ public class PublisherDAO {
 	public void remove(Long id) {
 		try {
 			
-			BookDAO books = new BookDAO(connection);
 			List<Book> bookList = books.withPublisher(id);
 			for (Book book : bookList) {
 				books.remove(book.getId());

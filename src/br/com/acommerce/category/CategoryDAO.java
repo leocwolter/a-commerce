@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+@RequestScoped
 public class CategoryDAO {
 
+	@Inject
 	private Connection connection;
-
-	public CategoryDAO(Connection connection) {
-		this.connection = connection;
-	}
 
 	public void save(Category book) {
 		try {

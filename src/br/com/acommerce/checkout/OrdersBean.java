@@ -2,22 +2,23 @@ package br.com.acommerce.checkout;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import br.com.acommerce.infra.ConnectionFactory;
 import br.com.acommerce.user.User;
 import br.com.acommerce.user.UserSessionBean;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class OrdersBean {
 	
-	@ManagedProperty("#{userSessionBean}")
+	@Inject
 	private UserSessionBean userSessionBean;
+	@Inject
+	private OrderDAO orders;
 	
 	public List<Order> list() {
-		OrderDAO orders = new OrderDAO(ConnectionFactory.getConnection());
-		
 		User user = userSessionBean.getUser();
 		return orders.withOwner(user);
 	}

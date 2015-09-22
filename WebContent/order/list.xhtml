@@ -21,12 +21,14 @@
 					<th>Preço total</th>
 				</tr>
 			</thead>
-			<ui:repeat items="#{orderBean.list}" var="order">
+			<ui:repeat value="#{ordersBean.list}" var="order">
 				<tr>
 					<td>
-					<ui:repeat items="${order.orderedBooks}" var="book" varStatus="status">
+					<ui:repeat value="#{order.orderedBooks}" var="book" varStatus="status">
 						Nome: 
-						<h:commandLink styleClass="pull-right" action="#{booksBean.show(book)}" value="#{book.name}"/>
+						<h:form>
+							<h:commandLink styleClass="pull-right" action="#{booksBean.show(book)}" value="#{book.name}"/>
+						</h:form>
 						<br/>
 						Preço individual: 
 						<h:outputText value="#{book.price}" >

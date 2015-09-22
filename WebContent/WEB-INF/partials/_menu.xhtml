@@ -13,7 +13,7 @@
 				<li><h:link value="Carrinho" outcome="/cart/show"/></li>
 					<h:panelGroup rendered="#{userSessionBean.logged}">
 						<li><h:link value="Perfil" outcome="/user/show"/></li>
-						<li><h:link value="Minhas compras" outcome="/my-orders"/></li>
+						<li><h:link value="Minhas compras" outcome="/order/list"/></li>
 						<li><h:link value="Minha lista de desejos" outcome="/my-wishlist"/></li>
 						<h:panelGroup rendered="#{userSessionBean.user.admin}">
 							<li role="presentation" class="dropdown">

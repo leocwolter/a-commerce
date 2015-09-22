@@ -63,5 +63,9 @@ public class Cart {
 	public BigDecimal getFinalPrice(){
 		return getTotalPrice().add(shippingOption.getPrice());
 	}
+	
+	public ShippingOption getShippingOption() {
+		return shippingOption;
+	}
 
 }

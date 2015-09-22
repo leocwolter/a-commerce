@@ -18,7 +18,7 @@ public class OrdersBean {
 	@Inject
 	private OrderDAO orders;
 	
-	public List<Order> list() {
+	public List<Order> getList() {
 		User user = userSessionBean.getUser();
 		return orders.withOwner(user);
 	}

@@ -16,22 +16,19 @@ import br.com.acommerce.book.Book;
 public class CartBean implements Serializable {
 	
 	private Cart cart = new Cart();
-	private ShippingOption shippingOption;
 	
 	public String add(Book book) {
 		cart.add(book);
-		return "cart/show?faces-redirect=true";
+		return "show?faces-redirect=true";
 	}
 	
 	public String remove(Book book) {
 		cart.remove(book);
-		return "cart/show?faces-redirect=true";
+		return "show?faces-redirect=true";
 	}
 	
 	public String showFinalPrice() {
-		cart.setShippingOption(shippingOption);
-		return "cart/show-final-price?faces-redirect=true";
-
+		return "show-final-price?faces-redirect=true";
 	}
 	
 	public List<Book> getBooks() {
@@ -46,10 +43,6 @@ public class CartBean implements Serializable {
 		return cart.getTotalPrice();
 	}
 	
-	public String chooseShipping(){
-		return "cart/chooseShipping?faces-redirect=true";
-	}
-
 	public Cart getCart() {
 		return cart;
 	}
@@ -60,13 +53,5 @@ public class CartBean implements Serializable {
 
 	public ShippingOption[] getShippingOptions(){
 		return ShippingOption.values();
-	}
-	
-	public ShippingOption getShippingOption() {
-		return shippingOption;
-	}
-	
-	public void setShippingOption(ShippingOption shippingOption) {
-		this.shippingOption = shippingOption;
 	}
 }

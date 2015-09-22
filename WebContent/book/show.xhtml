@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+	<div class="container-fluid">
+	<h2>${book.name}</h2>
+	<p>
+		<label>Preço:</label>
+		<h:outputText value="#{booksBean.book.price}" >
+			<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
+		</h:outputText>
+	</p>
+	<p>
+		<label>Categorias:</label>
+		#{booksBean.book.categoriesAsString}
+	</p>
+	<p>
+		<label>Editora:</label>
+		#{booksBean.book.publisher.name}
+	</p>
+	<p>
+		<label>Autores:</label>
+		#{booksBean.book.authorsAsString}
+	</p>
+	<p>
+		<label>Sinopse:</label>
+		#{booksBean.book.synopsis}
+	</p>
+	<p>
+		<label>Tabela de conteúdo:</label>
+		#{booksBean.book.toc}
+	</p>
+	<p>
+		<label>Tamanho:</label>
+		#{booksBean.book.length}
+	</p>
+	<p>
+		<label>Idioma:</label>
+		#{booksBean.book.language}
+	</p>
+	<a href="<c:url value="/add-to-cart?id=${book.id}"/>" class="btn btn-primary" role="button">Comprar</a>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

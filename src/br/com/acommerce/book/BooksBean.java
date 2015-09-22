@@ -13,12 +13,14 @@ public class BooksBean {
 	
 	@Inject
 	private BookDAO books;
+	private Book book;
 	
 	public List<Book> getList() throws SQLException{
 		return books.all();
 	}
 	
-	public void show(Book book){
-		
+	public String show(Book book){
+		this.book = book;
+		return "show?faces-redirect=true";
 	}
 }

@@ -1,15 +1,16 @@
 package br.com.acommerce.book;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@RequestScoped
 @Named
-public class BooksBean {
+@SessionScoped
+public class BooksBean implements Serializable{
 	
 	@Inject
 	private BookDAO books;
@@ -21,6 +22,11 @@ public class BooksBean {
 	
 	public String show(Book book){
 		this.book = book;
-		return "show?faces-redirect=true";
+		return "show?faces-redirect=true&includeViewParams=true";
 	}
+	
+	public Book getBook() {
+		return book;
+	}
+	
 }

@@ -30,7 +30,7 @@
 								</h:form>
 							</h:panelGroup>
 							
-							<h3>${book.name}</h3>
+							<h3>#{book.name}</h3>
 							<p>
 						        <h:outputText value="#{book.price}" >
 									<f:convertNumber locale="pt_BR" type="currency" value="#{book.price}" minFractionDigits="2" />
@@ -39,7 +39,9 @@
 							<p>
 								<h:form>
 									<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add(book)}" value="Comprar"/>
-									<h:commandLink styleClass="btn btn-default" action="#{wishListBean.add(book)}" value="Detalhes"/>
+								</h:form>
+								<h:form>
+									<h:commandLink styleClass="btn btn-default" action="#{booksBean.show(book)}" value="Detalhes"/>
 								</h:form>
 							</p>
 							

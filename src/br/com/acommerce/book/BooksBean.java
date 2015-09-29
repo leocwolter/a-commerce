@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class BooksBean implements Serializable{
 	
 	@Inject
@@ -20,13 +20,12 @@ public class BooksBean implements Serializable{
 		return books.all();
 	}
 	
-	public String show(Book book){
-		this.book = book;
-		return "show?faces-redirect=true&includeViewParams=true";
-	}
-	
 	public Book getBook() {
 		return book;
+	}
+	
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	
 }

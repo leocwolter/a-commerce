@@ -10,16 +10,16 @@ import javax.inject.Named;
 
 import br.com.acommerce.book.Book;
 
-
 @SessionScoped
 @Named
 public class CartBean implements Serializable {
 	
 	private Cart cart = new Cart();
+	private Book book;
 	
-	public String add(Book book) {
+	public String add() {
 		cart.add(book);
-		return "show?faces-redirect=true";
+		return "success?faces-redirect=true";
 	}
 	
 	public String remove(Book book) {
@@ -53,5 +53,9 @@ public class CartBean implements Serializable {
 
 	public ShippingOption[] getShippingOptions(){
 		return ShippingOption.values();
+	}
+	
+	public void setBook(Book book) {
+		this.book = book;
 	}
 }

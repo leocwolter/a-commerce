@@ -38,11 +38,13 @@
 							</p>
 							<p>
 								<h:form>
-									<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add(book)}" value="Comprar"/>
+									<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add}" value="Comprar">
+										<f:setPropertyActionListener value="#{book}" target="#{cartBean.book}"/>
+									</h:commandLink>
 								</h:form>
-								<h:form>
-									<h:commandLink styleClass="btn btn-default" action="#{booksBean.show(book)}" value="Detalhes"/>
-								</h:form>
+								<h:link outcome="show" value="Detalhes">
+									<f:param styleClass="btn btn-default" name="id" value="#{book.id}"/>
+								</h:link>
 							</p>
 							
 						</div>

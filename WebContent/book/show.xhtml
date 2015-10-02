@@ -51,10 +51,11 @@
 		<label>Idioma:</label>
 		#{booksBean.book.language}
 	</p>
-	
 	<h:form>
-		<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add(booksBean.book)}" value="Comprar"/>
-	</h:form>	
+		<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add}" value="Comprar">
+			<f:setPropertyActionListener value="#{booksBean.book}" target="#{cartBean.book}"/>
+		</h:commandLink>
+	</h:form>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

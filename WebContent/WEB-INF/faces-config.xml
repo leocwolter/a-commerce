@@ -9,7 +9,16 @@
 	    <from-view-id>/book/list.xhtml</from-view-id>
 	    <navigation-case>
 	        <from-action>#{cartBean.add}</from-action>
-	        <from-outcome>success</from-outcome>
+	        <from-outcome>success?faces-redirect=true</from-outcome>
+	        <to-view-id>/cart/show.xhtml</to-view-id>
+	    </navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+	    <from-view-id>/book/show.xhtml</from-view-id>
+	    <navigation-case>
+	        <from-action>#{cartBean.add}</from-action>
+	        <from-outcome>success?faces-redirect=true</from-outcome>
 	        <to-view-id>/cart/show.xhtml</to-view-id>
 	    </navigation-case>
 	</navigation-rule>

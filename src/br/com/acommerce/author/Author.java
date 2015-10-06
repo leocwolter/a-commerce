@@ -34,6 +34,10 @@ public class Author {
 		this.zipCode = zipCode;
 	}
 
+	public Author() {
+		this.birthDay = Calendar.getInstance();
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -86,5 +90,48 @@ public class Author {
 		return zipCode;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBirthDay(Calendar birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
 
 }

@@ -14,7 +14,7 @@
 					<h:panelGroup rendered="#{userSessionBean.logged}">
 						<li><h:link value="Perfil" outcome="/user/show"/></li>
 						<li><h:link value="Minhas compras" outcome="/order/list"/></li>
-						<li><h:link value="Minha lista de desejos" outcome="/my-wishlist"/></li>
+						<li><h:link value="Minha lista de desejos" outcome="/wishlist/list"/></li>
 						<h:panelGroup rendered="#{userSessionBean.user.admin}">
 							<li role="presentation" class="dropdown">
 							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -79,12 +79,12 @@
 					</h:panelGroup>
 				<li><h:link value="Busca avançada" outcome="/advanced-search"/></li>
 			</ul>
-			<form action="simple-search" class="navbar-form navbar-left" role="search">
+			<h:form styleClass="navbar-form navbar-left" role="search">
 				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Busca..." name="q"/>
+				  <h:inputText value="#{simpleSearchBean.query}" styleClass="form-control" placeholder="Busca..."/>
 				</div>
-				<button type="submit" class="btn btn-default">Buscar</button>
-			</form>
+				<h:commandButton styleClass="btn btn-default" value="Buscar" action="/search/result"/>
+			</h:form>
 		</div>
 	</nav>
 	<br/>

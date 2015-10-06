@@ -13,14 +13,14 @@
 	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
 	<div class="container-fluid">
 		<h:form>
-			<h:inputHidden value="#{user.id}"/>
+			<h:inputHidden value="#{userSessionBean.user.id}"/>
 			<label for="email">Email:</label>
 			<h:inputText styleClass="form-control" value="#{userSessionBean.user.email}"/>
 			<br/>
 			<label for="password">Senha:</label>
 			<h:inputText styleClass="form-control" value="#{userSessionBean.user.password}"/>
 			<br/>
-			<h:commandButton styleClass="btn btn-default" value="Logar" action="#{userBean.edit}" />
+			<h:commandButton styleClass="btn btn-default" value="Editar" action="#{userBean.edit}" />
 		</h:form>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

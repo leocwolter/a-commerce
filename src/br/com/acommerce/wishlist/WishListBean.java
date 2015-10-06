@@ -1,8 +1,9 @@
 package br.com.acommerce.wishlist;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -10,8 +11,8 @@ import br.com.acommerce.book.Book;
 import br.com.acommerce.user.UserSessionBean;
 
 @Named
-@SessionScoped
-public class WishListBean implements Serializable{
+@RequestScoped
+public class WishListBean {
 	
 	@Inject
 	private UserSessionBean userSessionBean;
@@ -30,7 +31,7 @@ public class WishListBean implements Serializable{
 		return wishList.of(userSessionBean.getUser()).contains(book);
 	}
 	
-	public void setUserSessionBean(UserSessionBean userSessionBean) {
-		this.userSessionBean = userSessionBean;
+	public List<Book> getList() {
+		return wishList.of(userSessionBean.getUser());
 	}
 }

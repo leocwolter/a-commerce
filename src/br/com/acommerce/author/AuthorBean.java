@@ -1,5 +1,7 @@
 package br.com.acommerce.author;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +26,10 @@ public class AuthorBean {
 	
 	public Author getAuthor() {
 		return author;
+	}
+	
+	public List<Author> getList() {
+		return authors.all();
 	}
 	
 }

@@ -1,50 +1,71 @@
-<a:page title="Autores">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Cidade</th>
-				<th>Estado</th>
-				<th>País</th>
-				<th>CEP</th>
-				<th>Rua</th>
-				<th>Complemento</th>
-				<th>Numero</th>
-				<th>CPF</th>
-				<th>Biografia</th>
-				<th>Data de aniversário</th>
-				<c:if test="${not empty loggedUser}">
-					<th>&nbsp;</th>
-					<th>&nbsp;</th>
-				</c:if>
-			</tr>
-		</thead>
-		<c:forEach items="${authors}" var="author">
-			<tr>
-				<td>${author.name}</td>
-				<td>${author.city}</td>
-				<td>${author.state}</td>
-				<td>${author.country}</td>
-				<td>${author.zipCode}</td>
-				<td>${author.street}</td>
-				<td>${author.complement}</td>
-				<td>${author.number}</td>
-				<td>${author.cpf}</td>
-				<td>${author.biography}</td>
-				<td><fmt:formatDate value="${author.birthDay.time}" pattern="dd/MM/yyyy"/></td>
-				<c:if test="${not empty loggedUser}">
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+	<div class="container-fluid">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Cidade</th>
+					<th>Estado</th>
+					<th>País</th>
+					<th>CEP</th>
+					<th>Rua</th>
+					<th>Complemento</th>
+					<th>Numero</th>
+					<th>CPF</th>
+					<th>Biografia</th>
+					<th>Data de aniversário</th>
+					<h:panelGroup rendered="#{userSessionBean.logged}">
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</h:panelGroup>
+				</tr>
+			</thead>
+			<ui:repeat value="#{authorBean.list}" var="author">
+				<tr>
+					<td>#{author.name}</td>
+					<td>#{author.city}</td>
+					<td>#{author.state}</td>
+					<td>#{author.country}</td>
+					<td>#{author.zipCode}</td>
+					<td>#{author.street}</td>
+					<td>#{author.complement}</td>
+					<td>#{author.number}</td>
+					<td>#{author.cpf}</td>
+					<td>#{author.biography}</td>
 					<td>
-						<a href="<c:url value="/edit-author?id=${author.id}"/>">
-							Alterar
-						</a>
+						<h:outputText value="#{author.birthDay.time}" >
+							<f:convertDateTime locale="pt_BR"/>
+						</h:outputText>
 					</td>
-					<td>
-						<a href="<c:url value="/delete-author?id=${author.id}"/>">
-							Remover
-						</a>
-					</td>
-				</c:if>
-			</tr>		
-		</c:forEach>
-	</table>
-</a:page>
+	<!-- 				<h:panelGroup rendered="#{userSessionBean.logged}"> -->
+	<!-- 					<td> -->
+	<!-- 						<a href="<c:url value="/edit-author?id=#{author.id}"/>"> -->
+	<!-- 							Alterar -->
+	<!-- 						</a> -->
+	<!-- 					</td> -->
+	<!-- 					<td> -->
+	<!-- 						<a href="<c:url value="/delete-author?id=#{author.id}"/>"> -->
+	<!-- 							Remover -->
+	<!-- 						</a> -->
+	<!-- 					</td> -->
+	<!-- 				</h:panelGroup> -->
+				</tr>		
+			</ui:repeat>
+		</table>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

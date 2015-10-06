@@ -49,18 +49,18 @@
 							<f:convertDateTime locale="pt_BR"/>
 						</h:outputText>
 					</td>
-	<!-- 				<h:panelGroup rendered="#{userSessionBean.logged}"> -->
-	<!-- 					<td> -->
-	<!-- 						<a href="<c:url value="/edit-author?id=#{author.id}"/>"> -->
-	<!-- 							Alterar -->
-	<!-- 						</a> -->
-	<!-- 					</td> -->
-	<!-- 					<td> -->
-	<!-- 						<a href="<c:url value="/delete-author?id=#{author.id}"/>"> -->
-	<!-- 							Remover -->
-	<!-- 						</a> -->
-	<!-- 					</td> -->
-	<!-- 				</h:panelGroup> -->
+					<h:panelGroup rendered="#{userSessionBean.logged}">
+						<td>
+							<h:link outcome="/author/edit-form" value="Editar">
+								<f:param styleClass="btn btn-default" name="id" value="#{author.id}"/>
+							</h:link>
+						</td>
+						<td>
+							<h:form>
+								<h:commandLink action="#{authorBean.delete(author)}" value="Deletar"/>
+							</h:form>
+						</td>
+					</h:panelGroup>
 				</tr>		
 			</ui:repeat>
 		</table>

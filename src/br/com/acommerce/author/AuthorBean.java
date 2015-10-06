@@ -17,7 +17,16 @@ public class AuthorBean {
 	
 	public String save(){
 		authors.save(author);
-		return "list";
+		return "list?faces-redirect=true";
+	}
+	
+	public String update(){
+		authors.update(author);
+		return "list?faces-redirect=true";
+	}
+	
+	public void delete(Author author) {
+		authors.remove(author.getId());
 	}
 
 	public void setAuthor(Author author) {

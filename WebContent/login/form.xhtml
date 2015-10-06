@@ -14,10 +14,14 @@
 	<div class="container-fluid">
 		<h:form>
 			<label for="email">Email:</label>
-			<h:inputText styleClass="form-control" value="#{email}"/>
+			<h:inputText required="true" styleClass="form-control" value="#{email}" id="email">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
 			<br/>
 			<label for="password">Senha:</label>
-			<h:inputSecret styleClass="form-control" value="#{password}"/>
+			<h:inputText required="true" styleClass="form-control" value="#{password}" id="password">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
 			<br/>
 			<h:commandButton styleClass="btn btn-default" value="Logar" action="#{userSessionBean.login(email, password)}" />
 		</h:form>

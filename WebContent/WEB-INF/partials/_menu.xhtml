@@ -81,12 +81,12 @@
 			</ul>
 			<h:form styleClass="navbar-form navbar-left" role="search">
 				<div class="form-group">
-				  <h:inputText value="#{simpleSearchBean.query}" styleClass="form-control" placeholder="Busca..."/>
+				  <h:inputText value="#{simpleSearchBean.query}" styleClass="form-control" placeholder="Busca..." required="true"/>
 				</div>
 				<h:commandButton styleClass="btn btn-default" value="Buscar" action="/search/result"/>
 			</h:form>
 		</div>
 	</nav>
 	<br/>
-<!-- 	<a:errors /> -->
+	<h:messages errorClass="alert alert-danger" />
 </ui:composition>

@@ -15,10 +15,14 @@
 		<h:form>
 			<h:inputHidden value="#{userSessionBean.user.id}"/>
 			<label for="email">Email:</label>
-			<h:inputText styleClass="form-control" value="#{userSessionBean.user.email}"/>
+			<h:inputText required="true" styleClass="form-control" value="#{userSessionBean.user.email}" id="email">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
 			<br/>
 			<label for="password">Senha:</label>
-			<h:inputText styleClass="form-control" value="#{userSessionBean.user.password}"/>
+			<h:inputText required="true" styleClass="form-control" value="#{userSessionBean.user.password}" id="password">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
 			<br/>
 			<h:commandButton styleClass="btn btn-default" value="Editar" action="#{userBean.edit}" />
 		</h:form>

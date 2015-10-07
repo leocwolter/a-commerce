@@ -16,48 +16,41 @@
 	<div class="container-fluid">
 	<h:form>
 		<label for="name">Nome:</label>
-		<h:inputText required type="text" styleClass="form-control"  value="#{book.name}" id="name"/>
+		<h:inputText required="true" type="text" styleClass="form-control" value="#{booksBean.book.name}" id="name"/>
 		<br/>		
 		<label for="categories">Selecione as Categorias:</label>
-		<select required styleClass="form-control" multiple  id="categories">
-			<c:forEach items="#{categories}" var="category">
-				<option value="#{category.id}" #{book.contains(category) ? 'selected' : '' }>#{category.name}</option>
-			</c:forEach>
-		</select>
+		<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.categories}" id="categorias" converter="#{categoryConverter}">
+			<f:selectItems value="#{categoryBean.list}" var="category" itemLabel="#{category.name}" itemValue="#{category.id}" /> <br/>
+		</h:selectManyListbox>
 		<br/>		
 		<label for="publisher">Selecione uma Editora:</label>
-		<select required styleClass="form-control"  id="publisher">
-			<c:forEach items="#{publishers}" var="publisher">
-				<option value="#{publisher.id}" #{book.isPublishedBy(publisher) ? 'selected' : '' }>#{publisher.name}</option>
-			</c:forEach>
-		</select>
+		<h:selectOneListbox styleClass="form-control" value="#{booksBean.book.publisher}" id="editora" converter="#{publisherConverter}">
+			<f:selectItems value="#{publisherBean.list}" var="publisher" itemLabel="#{publisher.name}" itemValue="#{publisher.id}" /> <br/>
+		</h:selectOneListbox>
 		<br/>		
 		<label for="price">Preço:</label>
-		<h:inputText required type="text" styleClass="form-control"  value="#{book.price}" id="price"/>
+		<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.price}" id="price">
+			<f:converter converterId="javax.faces.BigDecimal" />
+		</h:inputText>
 		<br/>	
 		<label for="authors">Selecione os Autores:</label>
-		<select required styleClass="form-control" multiple  id="authors">
-			<c:forEach items="#{authors}" var="author">
-				<option value="#{author.id}" #{book.isWrittenBy(author) ? 'selected' : '' }>#{author.name}</option>
-			</c:forEach>
-		</select>
+		<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.authors}" id="autores" converter="${authorConverter}">
+			<f:selectItems value="#{authorBean.list}" var="author" itemLabel="#{author.name}" itemValue="#{author.id}" /> <br/>
+		</h:selectManyListbox>
 		<br/>	
 		<label for="synopsis">Sinopse:</label>
-		<textarea required styleClass="form-control"  id="synopsis">#{book.synopsis}</textarea>
+		<h:inputTextarea required="true" styleClass="form-control"  id="synopsis" value="#{booksBean.book.synopsis}"/>
 		<br/>	
 		<label for="toc">Tabela de conteúdo:</label>
-		<textarea required styleClass="form-control"  id="toc">#{book.toc}</textarea>
+		<h:inputTextarea required="true" styleClass="form-control"  id="toc" value="#{booksBean.book.toc}"/>
 		<br/>	
 		<label for="length">Tamanho(em páginas):</label>
-		<h:inputText required type="number" styleClass="form-control"  value="#{book.length}" id="length" min="1"/>
+		<h:inputText required="true" type="number" styleClass="form-control"  value="#{booksBean.book.length}" id="length" min="1"/>
 		<br/>	
 		<label for="language">Idioma:</label>
-		<h:inputText required type="text" styleClass="form-control"  value="#{book.language}" id="language"/>
+		<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.language}" id="language"/>
 		<br/>	
-		<c:if test="#{not empty book.id}">
-			<h:inputText type="hidden" styleClass="form-control"  value="#{book.id}"/>
-		</c:if>
-		<h:inputText styleClass="btn btn-default" type="submit" value="Cadastrar"/>
+		<h:commandButton styleClass="btn btn-default" action="#{booksBean.save}" value="Cadastrar"/>
 	</h:form>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

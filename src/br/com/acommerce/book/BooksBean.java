@@ -14,7 +14,7 @@ public class BooksBean implements Serializable{
 	
 	@Inject
 	private BookDAO books;
-	private Book book;
+	private Book book = new Book();
 	
 	public List<Book> getList() throws SQLException{
 		return books.all();
@@ -26,6 +26,11 @@ public class BooksBean implements Serializable{
 	
 	public void setBook(Book book) {
 		this.book = book;
+	}
+	
+	public String save(){
+		books.save(book);
+		return "list";
 	}
 	
 }

@@ -1,4 +1,4 @@
-package br.com.acommerce.author;
+package br.com.acommerce.category;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -7,24 +7,22 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.acommerce.category.Category;
-
 @RequestScoped
 @Named
-public class AuthorConverter implements Converter{
+public class CategoryConverter implements Converter{
 
 	@Inject
-	private AuthorDAO authors;
+	private CategoryDAO categories;
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
-		return authors.withId(Long.valueOf(value));
+		return categories.withId(Long.valueOf(value));
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		if(arg2.getClass().isAssignableFrom(Author.class))
-			return ((Author)arg2).getId().toString();
+		if(arg2.getClass().isAssignableFrom(Category.class))
+			return ((Category)arg2).getId().toString();
 		
 		return arg2.toString();
 	}

@@ -3,6 +3,7 @@ package br.com.acommerce.book;
 import static java.util.stream.Collectors.joining;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.acommerce.author.Author;
@@ -33,6 +34,47 @@ public class Book {
 		this.synopsis = synopsis;
 		this.toc = toc;
 		this.length = length;
+		this.language = language;
+	}
+	
+	public Book() {
+		this.categories = new ArrayList<>();
+		this.authors = new ArrayList<>();
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
+	}
+
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+
+	public void setToc(String toc) {
+		this.toc = toc;
+	}
+
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 	

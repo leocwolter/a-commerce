@@ -9,18 +9,25 @@ import javax.inject.Named;
 public class UserBean {
 	
 	@Inject
-	private UserSessionBean userSession;
-	
-	@Inject
 	private UserDAO users;
 	
-	public String delete(){
-		users.remove(userSession.getUser());
+	private User user = new User();
+	 
+	public String delete(User user){
+		users.remove(user);
 		return "/home?faces-redirect=true";
 	}
 	
 	public String edit() {
-		users.update(userSession.getUser());
+		users.update(user);
 		return "/home?faces-redirect=true";
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

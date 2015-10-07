@@ -1,6 +1,5 @@
 package br.com.acommerce.book;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class BooksBean implements Serializable{
+public class BooksBean{
 	
 	@Inject
 	private BookDAO books;
@@ -30,7 +29,12 @@ public class BooksBean implements Serializable{
 	
 	public String save(){
 		books.save(book);
-		return "list";
+		return "list?faces-redirect=true";
+	}
+	
+	public String delete(Book book){
+		books.remove(book.getId());
+		return "list?faces-redirect=true";
 	}
 	
 }

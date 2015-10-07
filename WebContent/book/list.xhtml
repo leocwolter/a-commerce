@@ -46,7 +46,12 @@
 									<f:param styleClass="btn btn-default" name="id" value="#{book.id}"/>
 								</h:link>
 							</p>
-							
+							<div>
+								
+								<h:form rendered="#{userSessionBean.logged and userSessionBean.user.admin}">
+									<h:commandLink action="#{booksBean.delete(book)}" value="Deletar"/>
+								</h:form>
+							</div>
 						</div>
 					</div>
 				</li>

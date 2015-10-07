@@ -17,7 +17,9 @@
 			<label>Email:</label> #{userSessionBean.user.email}
 		</p>
 		<h:form>
-			<h:link outcome="/user/edit-form" styleClass="btn btn-primary" value="Editar"/>
+			<h:link outcome="/user/edit-form" styleClass="btn btn-primary" value="Editar">
+				<f:param name="id" value="#{userSessionBean.user.id}" />
+			</h:link>
 			<h:commandLink action="#{userBean.delete(userSessionBean.user)}" styleClass="btn btn-danger" value="Deletar"/>		
 		</h:form>
 	</div>

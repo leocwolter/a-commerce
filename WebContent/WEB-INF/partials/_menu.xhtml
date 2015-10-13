@@ -77,11 +77,11 @@
 						<li><h:link value="Cadastrar" outcome="/signup/form"/></li>
 						<li><h:link value="Entrar" outcome="/login/form"/></li>
 					</h:panelGroup>
-				<li><h:link value="Busca avançada" outcome="/advanced-search"/></li>
+				<li><h:link value="Busca avançada" outcome="/search/form"/></li>
 			</ul>
 			<h:form styleClass="navbar-form navbar-left" role="search">
 				<div class="form-group">
-				  <h:inputText value="#{simpleSearchBean.query}" styleClass="form-control" placeholder="Busca..." required="true"/>
+				  <h:inputText value="#{searchBean.query}" styleClass="form-control" placeholder="Busca..." required="true"/>
 				</div>
 				<h:commandButton styleClass="btn btn-default" value="Buscar" action="/search/result"/>
 			</h:form>

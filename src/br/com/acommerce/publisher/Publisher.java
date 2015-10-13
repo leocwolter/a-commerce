@@ -28,6 +28,8 @@ public class Publisher {
 		this.number = number;
 	}
 
+	public Publisher() {}
+
 	public Long getId() {
 		return id;
 	}

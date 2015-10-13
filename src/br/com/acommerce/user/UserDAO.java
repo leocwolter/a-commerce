@@ -11,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import br.com.acommerce.checkout.OrderDAO;
+import br.com.acommerce.wishlist.WishListDAO;
 
 @RequestScoped
 public class UserDAO {
@@ -19,6 +20,8 @@ public class UserDAO {
 	private Connection connection;
 	@Inject
 	private OrderDAO orders;
+	@Inject
+	private WishListDAO wishList;
 
 	public User getWithEmailAndPassword(String email, String password) {
 		try {
@@ -70,6 +73,7 @@ public class UserDAO {
 			String sql = "delete from user where id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			orders.removeWithOwner(user);
+			wishList.removeWithOwner(user);
 			preparedStatement.setLong(1, user.getId());
 			preparedStatement.execute();
 		} catch (SQLException e) {

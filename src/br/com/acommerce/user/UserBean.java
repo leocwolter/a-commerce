@@ -1,5 +1,7 @@
 package br.com.acommerce.user;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,12 +17,12 @@ public class UserBean {
 	 
 	public String delete(User user){
 		users.remove(user);
-		return "/home?faces-redirect=true";
+		return "/list?faces-redirect=true";
 	}
 	
 	public String edit() {
 		users.update(user);
-		return "/home?faces-redirect=true";
+		return "/list?faces-redirect=true";
 	}
 	
 	public User getUser() {
@@ -29,5 +31,9 @@ public class UserBean {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public List<User> getList(){
+		return users.all();
 	}
 }

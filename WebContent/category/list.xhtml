@@ -15,25 +15,25 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Email</th>
-					<h:panelGroup render="#{userSessionBean.user.admin}">
+					<th>Nome</th>
+					<h:panelGroup rendered="#{userSessionBean.logged}">
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 					</h:panelGroup>
 				</tr>
 			</thead>
-			<ui:repeat value="#{userBean.list}" var="user">
+			<ui:repeat value="#{categoryBean.list}" var="category">
 				<tr>
-					<td>#{user.email}</td>
-					<h:panelGroup render="#{userSessionBean.user.admin}">
+					<td>#{category.name}</td>
+					<h:panelGroup rendered="#{userSessionBean.logged}">
 						<td>
-							<h:link outcome="/user/edit-form" styleClass="btn btn-primary" value="Editar">
-								<f:param name="id" value="#{user.id}" />
+							<h:link outcome="/category/edit-form" value="Editar">
+								<f:param styleClass="btn btn-default" name="id" value="#{category.id}"/>
 							</h:link>
 						</td>
 						<td>
 							<h:form>
-								<h:commandLink action="#{userBean.delete(user)}" value="Deletar"/>
+								<h:commandLink action="#{categoryBean.delete(category)}" value="Deletar"/>
 							</h:form>
 						</td>
 					</h:panelGroup>

@@ -10,6 +10,8 @@ public class Category {
 		this.name = name;
 	}
 
+	public Category() {}
+
 	public String getName() {
 		return name;
 	}
@@ -26,7 +28,6 @@ public class Category {
 	public Long getId() {
 		return id;
 	}
-	
 
 	@Override
 	public int hashCode() {

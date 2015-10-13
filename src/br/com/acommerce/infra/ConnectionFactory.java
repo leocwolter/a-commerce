@@ -1,7 +1,6 @@
 package br.com.acommerce.infra;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;

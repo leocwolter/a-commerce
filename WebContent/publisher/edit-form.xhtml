@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<f:metadata>
+	<f:viewParam name="id" value="#{publisherBean.publisher}" converter="#{publisherConverter}"/>
+</f:metadata>
+<body>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+	<div class="container-fluid">
+		<h:form>
+			<label for="name">Nome:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.name}" id="name"/>
+			<br/>
+			<label for="street">Rua:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.street}" id="street"/>
+			<br/>
+			<label for="city">Cidade:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.city}" id="city"/>
+			<br/>
+			<label for="state">Estado:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.state}" id="state"/>
+			<br/>
+			<label for="country">País:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.country}" id="country"/>
+			<br/>
+			<label for="zipCode">CEP:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.zipCode}" id="zipCode"/>
+			<br/>
+			<label for="cnpj">CNPJ:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.cnpj}" id="cnpj"/>
+			<br/>
+			<label for="complement">Complemento:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.complement}" id="complement"/>
+			<br/>
+			<label for="number">Número:</label>
+			<h:inputText required="true" styleClass="form-control" value="#{publisherBean.publisher.number}" id="number"/>
+			<br/>
+			<h:commandButton styleClass="btn btn-default" value="Cadastrar" action="#{publisherBean.update}"/>
+		</h:form>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

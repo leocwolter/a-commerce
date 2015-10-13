@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+<body>
+	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+	<div class="container-fluid">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Rua</th>
+				<th>Cidade</th>
+				<th>Estado</th>
+				<th>País</th>
+				<th>CEP</th>
+				<th>CNPJ</th>
+				<th>Complemento</th>
+				<th>Numero</th>
+				<h:panelGroup rendered="#{userSessionBean.logged}">
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</h:panelGroup>
+			</tr>
+		</thead>
+		<ui:repeat value="#{publisherBean.list}" var="publisher">
+			<tr>
+				<td>#{publisher.name}</td>
+				<td>#{publisher.street}</td>
+				<td>#{publisher.city}</td>
+				<td>#{publisher.state}</td>
+				<td>#{publisher.country}</td>
+				<td>#{publisher.zipCode}</td>
+				<td>#{publisher.cnpj}</td>
+				<td>#{publisher.complement}</td>
+				<td>#{publisher.number}</td>
+				<h:panelGroup rendered="#{userSessionBean.logged}">
+					<td>
+						<h:link outcome="/publisher/edit-form" value="Editar">
+							<f:param styleClass="btn btn-default" name="id" value="#{publisher.id}"/>
+						</h:link>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink action="#{publisherBean.delete(publisher)}" value="Deletar"/>
+						</h:form>
+					</td>
+				</h:panelGroup>
+			</tr>		
+		</ui:repeat>
+	</table>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

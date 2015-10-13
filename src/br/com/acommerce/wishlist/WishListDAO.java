@@ -73,4 +73,15 @@ public class WishListDAO {
 		}
 	}
 
+	public void removeWithOwner(User user) {
+		try {
+			String sql = "delete from wishlisted_book where user_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, user.getId());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

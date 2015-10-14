@@ -12,48 +12,50 @@
 </head>
 
 <body>
-	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
-	<div class="container-fluid">
-		<h:form>
-			<label for="name">Nome:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.name}" id="name"/>
-			<br/>
-			<label for="street">Rua:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.street}" id="street"/>
-			<br/>
-			<label for="city">Cidade:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.city}" id="city"/>
-			<br/>
-			<label for="state">Estado:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.state}" id="state"/>
-			<br/>
-			<label for="country">País:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.country}" id="country"/>
-			<br/>
-			<label for="zipCode">CEP:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.zipCode}" id="zipCode"/>
-			<br/>
-			<label for="cpf">CPF:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.cpf}" id="cpf"/>
-			<br/>
-			<label for="complement">Complemento:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.complement}" id="complement"/>
-			<br/>
-			<label for="number">Número:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.number}" id="number"/>
-			<br/>
-			<label for="biography">Biografia:</label>
-			<h:inputTextarea required="true" styleClass="form-control" id="biography" value="#{authorBean.author.biography}"/>
-			<br/>
-			<label for="birthDay">Data de aniversário (dd/mm/yyyy):</label>
-			<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.birthDay.time}" id="birthDay">
-				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-			</h:inputText>
-			<br/>
-			<h:commandButton styleClass="btn btn-default" value="Cadastrar" action="#{authorBean.save}"/>
-		</h:form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+		<div class="container-fluid">
+			<h:form>
+				<label for="name">#{msgs.name}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.name}" id="name"/>
+				<br/>
+				<label for="street">#{msgs.street}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.street}" id="street"/>
+				<br/>
+				<label for="city">#{msgs.city}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.city}" id="city"/>
+				<br/>
+				<label for="state">#{msgs.state}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.state}" id="state"/>
+				<br/>
+				<label for="country">#{msgs.country}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.country}" id="country"/>
+				<br/>
+				<label for="zipCode">#{msgs.zipCode}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.zipCode}" id="zipCode"/>
+				<br/>
+				<label for="cpf">#{msgs.cpf}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.cpf}" id="cpf"/>
+				<br/>
+				<label for="complement">#{msgs.complement}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.complement}" id="complement"/>
+				<br/>
+				<label for="number">#{msgs.number}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.number}" id="number"/>
+				<br/>
+				<label for="biography">#{msgs.biography}:</label>
+				<h:inputTextarea required="true" styleClass="form-control" id="biography" value="#{authorBean.author.biography}"/>
+				<br/>
+				<label for="birthDay">#{msgs.birthday}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{authorBean.author.birthDay.time}" id="birthDay">
+					<f:convertDateTime type="date" dateStyle="short" />
+				</h:inputText>
+				<br/>
+				<h:commandButton styleClass="btn btn-default" value="#{msgs.create}" action="#{authorBean.save}"/>
+			</h:form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

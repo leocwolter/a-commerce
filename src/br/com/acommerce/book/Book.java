@@ -2,6 +2,7 @@ package br.com.acommerce.book;
 
 import static java.util.stream.Collectors.joining;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,10 @@ import br.com.acommerce.author.Author;
 import br.com.acommerce.category.Category;
 import br.com.acommerce.publisher.Publisher;
 
-public class Book {
+public class Book implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String name;
 	private BigDecimal price;

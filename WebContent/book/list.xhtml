@@ -50,7 +50,7 @@
 								<div>
 									
 									<h:form rendered="#{userSessionBean.logged and userSessionBean.user.admin}">
-										<h:commandLink action="#{booksBean.delete(book)}" value="Deletar"/>
+										<h:commandLink action="#{booksBean.delete(book)}" value="#{msgs.delete}"/>
 									</h:form>
 								</div>
 							</div>

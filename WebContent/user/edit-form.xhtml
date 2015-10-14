@@ -10,27 +10,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 </head>
 <body>
-	<f:metadata>
-		<f:viewParam name="id" value="#{userBean.user}" converter="#{userConverter}"/>
-	</f:metadata>
-	
-	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
-	<div class="container-fluid">
-		<h:form>
-			<label for="email">Email:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{userBean.user.email}" id="email">
-				<f:validateLength minimum="2"/>
-			</h:inputText>
-			<br/>
-			<label for="password">Senha:</label>
-			<h:inputText required="true" styleClass="form-control" value="#{userBean.user.password}" id="password">
-				<f:validateLength minimum="2"/>
-			</h:inputText>
-			<br/>
-			<h:commandButton styleClass="btn btn-default" value="Editar" action="#{userBean.edit}" />
-		</h:form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<f:metadata>
+			<f:viewParam name="id" value="#{userBean.user}" converter="#{userConverter}"/>
+		</f:metadata>
+		
+		<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+		<div class="container-fluid">
+			<h:form>
+				<label for="email">#{msgs.email}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{userBean.user.email}" id="email">
+					<f:validateLength minimum="2"/>
+				</h:inputText>
+				<br/>
+				<label for="password">#{msgs.password}:</label>
+				<h:inputText required="true" styleClass="form-control" value="#{userBean.user.password}" id="password">
+					<f:validateLength minimum="2"/>
+				</h:inputText>
+				<br/>
+				<h:commandButton styleClass="btn btn-default" value="#{msgs.edit}" action="#{userBean.edit}" />
+			</h:form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

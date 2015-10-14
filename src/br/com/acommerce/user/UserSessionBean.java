@@ -11,8 +11,8 @@ import javax.inject.Named;
 public class UserSessionBean implements Serializable {
 	@Inject
 	private UserDAO users;
-	
 	private User user;
+	
 	public String signup(String email, String password){
 		users.save(new User(email, password));
 		return login(email, password);

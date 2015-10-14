@@ -43,7 +43,7 @@
 						<td>#{book.language}</td>
 						<td>#{cartBean.howManyOf(book)}</td>
 						<td><h:form>
-								<h:commandLink value="Remover do carrinho"
+								<h:commandLink value="#{msgs.removeFromCart}"
 									action="#{cartBean.remove(book)}" />
 							</h:form></td>
 					</tr>
@@ -53,18 +53,18 @@
 			<div class="pull-left">
 				<label>Total: </label>
 				<h:outputText value="#{cartBean.totalPrice}">
-					<f:convertNumber locale="pt_BR" type="currency"
+					<f:convertNumber type="currency"
 						minFractionDigits="2" />
 				</h:outputText>
 			</div>
 			<div class="pull-right">
 				<h:panelGroup rendered="#{not userSessionBean.logged}">
-					Para comprar você precisa estar logado.
-					<h:link value="Clique aqui para se logar" outcome="/login/form">
+					#{msgs.needToLogIn}
+					<h:link value="#{msgs.clickToLogIn}" outcome="/login/form">
 						<f:param name="page" value="cart" />
 					</h:link>
 				</h:panelGroup>
-				<h:link styleClass="btn btn-primary" rendered="#{userSessionBean.logged}" value="Comprar" outcome="/cart/show-shipping"/>
+				<h:link styleClass="btn btn-primary" rendered="#{userSessionBean.logged}" value="#{msgs.buy}" outcome="/cart/show-shipping"/>
 			</div>
 		</div>
 		<script

@@ -12,22 +12,24 @@
 </head>
 
 <body>
-	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
-	<div class="container-fluid">
-		<h2>Selecione pelo que quer buscar: </h2>
-		<br/>
-		<h:form>
-	   		<h:selectManyCheckbox value="#{searchBean.tables}">
-	   			<f:selectItems value="#{searchBean.tableValues}" />
-	   		</h:selectManyCheckbox>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+		<div class="container-fluid">
+			<h2>#{msgs.whatToSearchFor}: </h2>
 			<br/>
-			<label for="q">Valor a ser buscado: </label>
-			<h:inputText required="true" styleClass="form-control" value="#{searchBean.query}" id="q"/>
-			<br/>
-			<h:commandButton styleClass="btn btn-default" value="Buscar" action="/search/result"/>
-		</h:form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+			<h:form>
+		   		<h:selectManyCheckbox value="#{searchBean.tables}">
+		   			<f:selectItems value="#{searchBean.tableValues}" />
+		   		</h:selectManyCheckbox>
+				<br/>
+				<label for="q">#{msgs.searchQuery}: </label>
+				<h:inputText required="true" styleClass="form-control" value="#{searchBean.query}" id="q"/>
+				<br/>
+				<h:commandButton styleClass="btn btn-default" value="#{msgs.search}" action="/search/result"/>
+			</h:form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

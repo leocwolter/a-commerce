@@ -1,8 +1,8 @@
 package br.com.acommerce.wishlist;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,7 +18,14 @@ public class WishListBean {
 	private UserSessionBean userSessionBean;
 	@Inject
 	private WishListDAO wishList;
-
+	
+	private List<Book> list;
+	
+	@PostConstruct
+	public void setup(){
+		list = wishList.of(userSessionBean.getUser());
+	}
+	
 	public void add(Book book){
 		wishList.add(book, userSessionBean.getUser());
 	}
@@ -32,6 +39,7 @@ public class WishListBean {
 	}
 	
 	public List<Book> getList() {
-		return wishList.of(userSessionBean.getUser());
+		return list;
 	}
+	
 }

@@ -12,48 +12,50 @@
 </head>
 
 <body>
-	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
-	<div class="container-fluid">
-	<h:form>
-		<label for="name">Nome:</label>
-		<h:inputText required="true" type="text" styleClass="form-control" value="#{booksBean.book.name}" id="name"/>
-		<br/>		
-		<label for="categories">Selecione as Categorias:</label>
-		<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.categories}" id="categorias" converter="#{categoryConverter}">
-			<f:selectItems value="#{categoryBean.list}" var="category" itemLabel="#{category.name}" itemValue="#{category.id}" /> <br/>
-		</h:selectManyListbox>
-		<br/>		
-		<label for="publisher">Selecione uma Editora:</label>
-		<h:selectOneListbox styleClass="form-control" value="#{booksBean.book.publisher}" id="editora" converter="#{publisherConverter}">
-			<f:selectItems value="#{publisherBean.list}" var="publisher" itemLabel="#{publisher.name}" itemValue="#{publisher.id}" /> <br/>
-		</h:selectOneListbox>
-		<br/>		
-		<label for="price">Preço:</label>
-		<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.price}" id="price">
-			<f:converter converterId="javax.faces.BigDecimal" />
-		</h:inputText>
-		<br/>	
-		<label for="authors">Selecione os Autores:</label>
-		<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.authors}" id="autores" converter="${authorConverter}">
-			<f:selectItems value="#{authorBean.list}" var="author" itemLabel="#{author.name}" itemValue="#{author.id}" /> <br/>
-		</h:selectManyListbox>
-		<br/>	
-		<label for="synopsis">Sinopse:</label>
-		<h:inputTextarea required="true" styleClass="form-control"  id="synopsis" value="#{booksBean.book.synopsis}"/>
-		<br/>	
-		<label for="toc">Tabela de conteúdo:</label>
-		<h:inputTextarea required="true" styleClass="form-control"  id="toc" value="#{booksBean.book.toc}"/>
-		<br/>	
-		<label for="length">Tamanho(em páginas):</label>
-		<h:inputText required="true" type="number" styleClass="form-control"  value="#{booksBean.book.length}" id="length" min="1"/>
-		<br/>	
-		<label for="language">Idioma:</label>
-		<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.language}" id="language"/>
-		<br/>	
-		<h:commandButton styleClass="btn btn-default" action="#{booksBean.save}" value="Cadastrar"/>
-	</h:form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+		<div class="container-fluid">
+		<h:form>
+			<label for="name">#{msgs.name}:</label>
+			<h:inputText required="true" type="text" styleClass="form-control" value="#{booksBean.book.name}" id="name"/>
+			<br/>		
+			<label for="categories">#{msgs.selectCategories}:</label>
+			<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.categories}" id="categorias" converter="#{categoryConverter}">
+				<f:selectItems value="#{categoryBean.list}" var="category" itemLabel="#{category.name}" itemValue="#{category.id}" /> <br/>
+			</h:selectManyListbox>
+			<br/>		
+			<label for="publisher">#{msgs.selectPublisher}:</label>
+			<h:selectOneListbox styleClass="form-control" value="#{booksBean.book.publisher}" id="editora" converter="#{publisherConverter}">
+				<f:selectItems value="#{publisherBean.list}" var="publisher" itemLabel="#{publisher.name}" itemValue="#{publisher.id}" /> <br/>
+			</h:selectOneListbox>
+			<br/>		
+			<label for="price">#{msgs.price}:</label>
+			<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.price}" id="price">
+				<f:converter converterId="javax.faces.BigDecimal" />
+			</h:inputText>
+			<br/>	
+			<label for="authors">#{msgs.selectAuthors}:</label>
+			<h:selectManyListbox styleClass="form-control" value="#{booksBean.book.authors}" id="autores" converter="${authorConverter}">
+				<f:selectItems value="#{authorBean.list}" var="author" itemLabel="#{author.name}" itemValue="#{author.id}" /> <br/>
+			</h:selectManyListbox>
+			<br/>	
+			<label for="synopsis">#{msgs.synopsis}:</label>
+			<h:inputTextarea required="true" styleClass="form-control"  id="synopsis" value="#{booksBean.book.synopsis}"/>
+			<br/>	
+			<label for="toc">#{msgs.toc}:</label>
+			<h:inputTextarea required="true" styleClass="form-control"  id="toc" value="#{booksBean.book.toc}"/>
+			<br/>	
+			<label for="length">#{msgs.bookLength}:</label>
+			<h:inputText required="true" type="number" styleClass="form-control"  value="#{booksBean.book.length}" id="length" min="1"/>
+			<br/>	
+			<label for="language">#{msgs.language}:</label>
+			<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.language}" id="language"/>
+			<br/>	
+			<h:commandButton styleClass="btn btn-default" action="#{booksBean.save}" value="#{msgs.create}"/>
+		</h:form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

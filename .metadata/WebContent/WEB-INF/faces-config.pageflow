@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14406295719110" configfile="/a-commerce-jsf/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="book/list.xhtml" id="pf14437458949660" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14437458949661" path="/book/list.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="book/list.xhtml" id="pf14437458949660" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14437458949661" path="/book/list.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="cart/show.xhtml" id="pf14437458949662" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14437458949661 pf14437459395893" path="/cart/show.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="book/show.xhtml" id="pf14437459395894" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14437459395893" path="/book/show.xhtml"/>
   <links id="pf14437458949661" target="pf14437458949662" source="pf14437458949660" outcome="success?faces-redirect=true" fromaction="#{cartBean.add}"/>

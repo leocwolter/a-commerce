@@ -2,6 +2,7 @@
     <wb-module deploy-name="a-commerce-jsf">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
         <property name="context-root" value="a-commerce-jsf"/>
         <property name="java-output-path" value="/a-commerce-jsf/build/classes"/>
     </wb-module>

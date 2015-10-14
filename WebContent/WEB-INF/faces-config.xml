@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
 
 	<navigation-rule>
-	    <from-view-id>/book/list.xhtml</from-view-id>
-	    <navigation-case>
-	        <from-action>#{cartBean.add}</from-action>
-	        <from-outcome>success?faces-redirect=true</from-outcome>
-	        <to-view-id>/cart/show.xhtml</to-view-id>
-	    </navigation-case>
+		<from-view-id>/book/list.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{cartBean.add}</from-action>
+			<from-outcome>success?faces-redirect=true</from-outcome>
+			<to-view-id>/cart/show.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>
-	    <from-view-id>/book/show.xhtml</from-view-id>
-	    <navigation-case>
-	        <from-action>#{cartBean.add}</from-action>
-	        <from-outcome>success?faces-redirect=true</from-outcome>
-	        <to-view-id>/cart/show.xhtml</to-view-id>
-	    </navigation-case>
+		<from-view-id>/book/show.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{cartBean.add}</from-action>
+			<from-outcome>success?faces-redirect=true</from-outcome>
+			<to-view-id>/cart/show.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
+
+	<application>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+	</application>
 
 </faces-config>

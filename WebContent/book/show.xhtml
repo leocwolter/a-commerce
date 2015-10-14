@@ -10,54 +10,56 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
 </head>
 <body>
-	<f:metadata>
-		<f:viewParam name="id" value="#{booksBean.book}" converter="#{bookConverter}"/>
-	</f:metadata>
-
-	<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
-	<div class="container-fluid">
-	<h2>${book.name}</h2>
-	<p>
-		<label>Preço:</label>
-		<h:outputText value="#{booksBean.book.price}" >
-			<f:convertNumber locale="pt_BR" type="currency" minFractionDigits="2" />
-		</h:outputText>
-	</p>
-	<p>
-		<label>Categorias:</label>
-		#{booksBean.book.categoriesAsString}
-	</p>
-	<p>
-		<label>Editora:</label>
-		#{booksBean.book.publisher.name}
-	</p>
-	<p>
-		<label>Autores:</label>
-		#{booksBean.book.authorsAsString}
-	</p>
-	<p>
-		<label>Sinopse:</label>
-		#{booksBean.book.synopsis}
-	</p>
-	<p>
-		<label>Tabela de conteúdo:</label>
-		#{booksBean.book.toc}
-	</p>
-	<p>
-		<label>Tamanho:</label>
-		#{booksBean.book.length}
-	</p>
-	<p>
-		<label>Idioma:</label>
-		#{booksBean.book.language}
-	</p>
-	<h:form>
-		<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add}" value="Comprar">
-			<f:setPropertyActionListener value="#{booksBean.book}" target="#{cartBean.book}"/>
-		</h:commandLink>
-	</h:form>
-	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<f:metadata>
+			<f:viewParam name="id" value="#{booksBean.book}" converter="#{bookConverter}"/>
+		</f:metadata>
+	
+		<ui:include src="/WEB-INF/partials/_menu.xhtml"/>
+		<div class="container-fluid">
+		<h2>#{book.name}</h2>
+		<p>
+			<label>#{msgs.price}:</label>
+			<h:outputText value="#{booksBean.book.price}" >
+				<f:convertNumber type="currency" minFractionDigits="2" />
+			</h:outputText>
+		</p>
+		<p>
+			<label>#{msgs.categories}:</label>
+			#{booksBean.book.categoriesAsString}
+		</p>
+		<p>
+			<label>#{msgs.publisher}:</label>
+			#{booksBean.book.publisher.name}
+		</p>
+		<p>
+			<label>#{msgs.authors}:</label>
+			#{booksBean.book.authorsAsString}
+		</p>
+		<p>
+			<label>#{msgs.synopsis}:</label>
+			#{booksBean.book.synopsis}
+		</p>
+		<p>
+			<label>#{msgs.toc}:</label>
+			#{booksBean.book.toc}
+		</p>
+		<p>
+			<label>#{msgs.bookLength}:</label>
+			#{booksBean.book.length}
+		</p>
+		<p>
+			<label>#{msgs.language}:</label>
+			#{booksBean.book.language}
+		</p>
+		<h:form>
+			<h:commandLink styleClass="btn btn-primary" action="#{cartBean.add}" value="#{msgs.buy}">
+				<f:setPropertyActionListener value="#{booksBean.book}" target="#{cartBean.book}"/>
+			</h:commandLink>
+		</h:form>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

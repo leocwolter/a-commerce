@@ -11,63 +11,66 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 </head>
 <body>
-	<ui:include src="/WEB-INF/partials/_menu.xhtml" />
-	<div class="container-fluid">
-
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Autores</th>
-					<th>Editora</th>
-					<th>Preço</th>
-					<th>Idioma</th>
-					<th>Quantidade</th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
-			<ui:repeat value="#{cartBean.books}" var="book">
-				<tr>
-					<td><h:form>
-							<h:commandLink value="#{book.name}"
-								action="#{booksBean.show(book)}" />
-						</h:form></td>
-					<td>#{book.authorsAsString}</td>
-					<td>#{book.publisher.name}</td>
-					<td><h:outputText value="#{book.price}">
-							<f:convertNumber locale="pt_BR" type="currency"
-								minFractionDigits="2" />
-						</h:outputText></td>
-					<td>#{book.language}</td>
-					<td>#{cartBean.howManyOf(book)}</td>
-					<td><h:form>
-							<h:commandLink value="Remover do carrinho"
-								action="#{cartBean.remove(book)}" />
-						</h:form></td>
-				</tr>
-			</ui:repeat>
-		</table>
-		<br />
-		<div class="pull-left">
-			<label>Total: </label>
-			<h:outputText value="#{cartBean.totalPrice}">
-				<f:convertNumber locale="pt_BR" type="currency"
-					minFractionDigits="2" />
-			</h:outputText>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<ui:include src="/WEB-INF/partials/_menu.xhtml" />
+		<div class="container-fluid">
+	
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#{msgs.name}</th>
+						<th>#{msgs.authors}</th>
+						<th>#{msgs.publisher}</th>
+						<th>#{msgs.price}</th>
+						<th>#{msgs.language}</th>
+						<th>#{msgs.quantity}</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<ui:repeat value="#{cartBean.books}" var="book">
+					<tr>
+						<td><h:form>
+								<h:commandLink value="#{book.name}"
+									action="#{booksBean.show(book)}" />
+							</h:form></td>
+						<td>#{book.authorsAsString}</td>
+						<td>#{book.publisher.name}</td>
+						<td>
+							<h:outputText value="#{book.price}">
+								<f:convertNumber type="currency" minFractionDigits="2" />
+							</h:outputText>
+						</td>
+						<td>#{book.language}</td>
+						<td>#{cartBean.howManyOf(book)}</td>
+						<td><h:form>
+								<h:commandLink value="Remover do carrinho"
+									action="#{cartBean.remove(book)}" />
+							</h:form></td>
+					</tr>
+				</ui:repeat>
+			</table>
+			<br />
+			<div class="pull-left">
+				<label>Total: </label>
+				<h:outputText value="#{cartBean.totalPrice}">
+					<f:convertNumber locale="pt_BR" type="currency"
+						minFractionDigits="2" />
+				</h:outputText>
+			</div>
+			<div class="pull-right">
+				<h:panelGroup rendered="#{not userSessionBean.logged}">
+					Para comprar você precisa estar logado.
+					<h:link value="Clique aqui para se logar" outcome="/login/form">
+						<f:param name="page" value="cart" />
+					</h:link>
+				</h:panelGroup>
+				<h:link styleClass="btn btn-primary" rendered="#{userSessionBean.logged}" value="Comprar" outcome="/cart/show-shipping"/>
+			</div>
 		</div>
-		<div class="pull-right">
-			<h:panelGroup rendered="#{not userSessionBean.logged}">
-				Para comprar você precisa estar logado.
-				<h:link value="Clique aqui para se logar" outcome="/login/form">
-					<f:param name="page" value="cart" />
-				</h:link>
-			</h:panelGroup>
-			<h:link styleClass="btn btn-primary" rendered="#{userSessionBean.logged}" value="Comprar" outcome="/cart/show-shipping"/>
-		</div>
-	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</f:view>
 </body>
 </html>

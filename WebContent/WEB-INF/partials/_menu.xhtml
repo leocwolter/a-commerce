@@ -3,90 +3,92 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<h:link styleClass="navbar-brand" value="A-Commerce" outcome="/book/list"/>
-			</div>
-			
-			<ul class="nav navbar-nav">
-				<li><h:link value="Carrinho" outcome="/cart/show"/></li>
-					<h:panelGroup rendered="#{userSessionBean.logged}">
-						<li><h:link value="Perfil" outcome="/user/show"/></li>
-						<li><h:link value="Minhas compras" outcome="/order/list"/></li>
-						<li><h:link value="Minha lista de desejos" outcome="/wishlist/list"/></li>
-						<h:panelGroup rendered="#{userSessionBean.user.admin}">
-							<li role="presentation" class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							      Categorias <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu" role="menu">
-									<li><h:link value="Criar" outcome="/category/new-form"/></li>
-									<li><h:link value="Lista" outcome="/category/list"/></li>
-							    </ul>
-							</li>
+    <f:view locale="#{facesContext.externalContext.requestLocale}">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<h:link styleClass="navbar-brand" value="A-Commerce" outcome="/book/list"/>
+				</div>
 				
-							<li role="presentation" class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							      Editoras <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu" role="menu">
-									<li><h:link value="Criar" outcome="/publisher/new-form"/></li>
-									<li><h:link value="Lista" outcome="/publisher/list"/></li>
-							    </ul>
-							</li>
-						
-							<li role="presentation" class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							      Autores <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu" role="menu">
-									<li><h:link value="Criar" outcome="/author/new-form"/></li>
-									<li><h:link value="Lista" outcome="/author/list"/></li>
-							    </ul>
-							</li>
-						
-							<li role="presentation" class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							      Livros <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu" role="menu">
-									<li><h:link value="Criar" outcome="/book/new-form"/></li>
-									<li><h:link value="Lista" outcome="/book/list"/></li>
-							    </ul>
-							</li>
+				<ul class="nav navbar-nav">
+					<li><h:link value="#{msgs.cart}" outcome="/cart/show"/></li>
+						<h:panelGroup rendered="#{userSessionBean.logged}">
+							<li><h:link value="#{msgs.profile}" outcome="/user/show"/></li>
+							<li><h:link value="#{msgs.orders}" outcome="/order/list"/></li>
+							<li><h:link value="#{msgs.wishlist}" outcome="/wishlist/list"/></li>
+							<h:panelGroup rendered="#{userSessionBean.user.admin}">
+								<li role="presentation" class="dropdown">
+								    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								      #{msgs.categories} <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu" role="menu">
+										<li><h:link value="#{msgs.create}" outcome="/category/new-form"/></li>
+										<li><h:link value="#{msgs.list}" outcome="/category/list"/></li>
+								    </ul>
+								</li>
+					
+								<li role="presentation" class="dropdown">
+								    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								      #{msgs.publishers} <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu" role="menu">
+										<li><h:link value="#{msgs.create}" outcome="/publisher/new-form"/></li>
+										<li><h:link value="#{msgs.list}" outcome="/publisher/list"/></li>
+								    </ul>
+								</li>
 							
+								<li role="presentation" class="dropdown">
+								    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								      #{msgs.authors} <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu" role="menu">
+										<li><h:link value="#{msgs.create}" outcome="/author/new-form"/></li>
+										<li><h:link value="#{msgs.list}" outcome="/author/list"/></li>
+								    </ul>
+								</li>
 							
-							<li role="presentation" class="dropdown">
-							    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-							      Usuários <span class="caret"></span>
-							    </a>
-							    <ul class="dropdown-menu" role="menu">
-	   								<li><h:link value="Criar" outcome="/signup/form"/></li>
-									<li><h:link value="Lista" outcome="/user/list"/></li>
-							    </ul>
+								<li role="presentation" class="dropdown">
+								    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								      #{msgs.books} <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu" role="menu">
+										<li><h:link value="#{msgs.create}" outcome="/book/new-form"/></li>
+										<li><h:link value="#{msgs.list}" outcome="/book/list"/></li>
+								    </ul>
+								</li>
+								
+								
+								<li role="presentation" class="dropdown">
+								    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								      #{msgs.users} <span class="caret"></span>
+								    </a>
+								    <ul class="dropdown-menu" role="menu">
+		   								<li><h:link value="#{msgs.create}" outcome="/signup/form"/></li>
+										<li><h:link value="#{msgs.list}" outcome="/user/list"/></li>
+								    </ul>
+								</li>
+							</h:panelGroup>
+							<li>
+								<h:form>
+									<h:commandLink value="Sair" action="#{userSessionBean.logout}"/>
+								</h:form>
 							</li>
 						</h:panelGroup>
-						<li>
-							<h:form>
-								<h:commandLink value="Sair" action="#{userSessionBean.logout}"/>
-							</h:form>
-						</li>
-					</h:panelGroup>
-					<h:panelGroup rendered="#{not userSessionBean.logged}">
-						<li><h:link value="Cadastrar" outcome="/signup/form"/></li>
-						<li><h:link value="Entrar" outcome="/login/form"/></li>
-					</h:panelGroup>
-				<li><h:link value="Busca avançada" outcome="/search/form"/></li>
-			</ul>
-			<h:form styleClass="navbar-form navbar-left" role="search">
-				<div class="form-group">
-				  <h:inputText value="#{searchBean.query}" styleClass="form-control" placeholder="Busca..." required="true"/>
-				</div>
-				<h:commandButton styleClass="btn btn-default" value="Buscar" action="/search/result"/>
-			</h:form>
-		</div>
-	</nav>
-	<br/>
-	<h:messages errorClass="alert alert-danger" />
+						<h:panelGroup rendered="#{not userSessionBean.logged}">
+							<li><h:link value="#{msgs.signup}" outcome="/signup/form"/></li>
+							<li><h:link value="#{msgs.login}" outcome="/login/form"/></li>
+						</h:panelGroup>
+					<li><h:link value="#{msgs.advancedSearch}" outcome="/search/form"/></li>
+				</ul>
+				<h:form styleClass="navbar-form navbar-left" role="search">
+					<div class="form-group">
+					  <h:inputText value="#{searchBean.query}" styleClass="form-control" required="true"/>
+					</div>
+					<h:commandButton styleClass="btn btn-default" value="#{msgs.search}" action="/search/result"/>
+				</h:form>
+			</div>
+		</nav>
+		<br/>
+		<h:messages errorClass="alert alert-danger" />
+    </f:view>
 </ui:composition>

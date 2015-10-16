@@ -97,16 +97,7 @@ public class UserDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
-	private User createUser(ResultSet resultSet) throws SQLException {
-		String userEmail = resultSet.getString("email");
-		String userPassword = resultSet.getString("password");
-		User user = new User(userEmail, userPassword);
-		user.setAdmin(resultSet.getBoolean("admin"));
-		user.setId(resultSet.getLong("id"));
-		return user;
-	}
-
+	
 
 	public List<User> all() {
 		try {
@@ -122,5 +113,28 @@ public class UserDAO {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public boolean exists(String email) {
+		try {
+			String sql = "select * from user where email = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, email);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			return resultSet.next();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private User createUser(ResultSet resultSet) throws SQLException {
+		String userEmail = resultSet.getString("email");
+		String userPassword = resultSet.getString("password");
+		User user = new User(userEmail, userPassword);
+		user.setAdmin(resultSet.getBoolean("admin"));
+		user.setId(resultSet.getLong("id"));
+		return user;
+	}
+
+
 
 }

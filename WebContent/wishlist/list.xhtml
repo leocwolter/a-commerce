@@ -43,7 +43,7 @@
 											<f:setPropertyActionListener value="#{book}" target="#{cartBean.book}"/>
 										</h:commandLink>
 									</h:form>
-									<h:link outcome="show" value="#{msgs.details}">
+									<h:link outcome="/book/show" value="#{msgs.details}">
 										<f:param styleClass="btn btn-default" name="id" value="#{book.id}"/>
 									</h:link>
 								</p>

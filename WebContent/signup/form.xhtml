@@ -15,7 +15,7 @@
 		<div class="container-fluid">
 			<h:form>
 				<label for="email">#{msgs.email}:</label>
-				<h:inputText required="true" styleClass="form-control" value="#{email}" id="email">
+				<h:inputText validator="#{userSessionBean.validateNewUser}" required="true" styleClass="form-control" value="#{email}" id="email">
 					<f:validateLength minimum="2"/>
 				</h:inputText>
 				<br/>

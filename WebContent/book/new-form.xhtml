@@ -30,7 +30,7 @@
 			</h:selectOneListbox>
 			<br/>		
 			<label for="price">#{msgs.price}:</label>
-			<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.price}" id="price">
+			<h:inputText required="true" type="text" styleClass="form-control"  value="#{booksBean.book.price}" id="price" converterMessage="teste maroto {0}">
 				<f:converter converterId="javax.faces.BigDecimal" />
 			</h:inputText>
 			<br/>	

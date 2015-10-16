@@ -28,10 +28,12 @@ public class WishListBean {
 	
 	public void add(Book book){
 		wishList.add(book, userSessionBean.getUser());
+		setup();
 	}
 	
 	public void remove(Book book){
 		wishList.remove(book);
+		setup();
 	}
 	
 	public boolean contains(Book book){

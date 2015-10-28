@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14406295719110" configfile="/a-commerce-jsf/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="book/list.xhtml" id="pf14437458949660" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14437458949661" path="/book/list.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="cart/show.xhtml" id="pf14437458949662" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14437458949661 pf14437459395893" path="/cart/show.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="book/show.xhtml" id="pf14437459395894" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14437459395893" path="/book/show.xhtml"/>
-  <links id="pf14437458949661" target="pf14437458949662" source="pf14437458949660" outcome="success?faces-redirect=true" fromaction="#{cartBean.add}"/>
-  <links id="pf14437459395893" target="pf14437458949662" source="pf14437459395894" outcome="success?faces-redirect=true" fromaction="#{cartBean.add}"/>
+  <nodes xsi:type="pageflow:PFPage" name="book/list.xhtml" id="pf14437458949660" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14459983927234" inlinks="pf14459981840562" path="/book/list.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="cart/show.xhtml" id="pf14437458949662" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14459983927234 pf14459983927235" path="/cart/show.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14459981840563" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14459981840562" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="book/show.xhtml" id="pf14459983927236" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14459983927235" path="/book/show.xhtml"/>
+  <links id="pf14459981840562" target="pf14437458949660" source="pf14459981840563" outcome="home?faces-redirect=true" redirect="true"/>
+  <links id="pf14459983927234" target="pf14437458949662" source="pf14437458949660" outcome="success?faces-redirect=true" redirect="true" fromaction="#{cartBean.add}"/>
+  <links id="pf14459983927235" target="pf14437458949662" source="pf14459983927236" outcome="success?faces-redirect=true" redirect="true" fromaction="#{cartBean.add}"/>
 </pageflow:Pageflow>

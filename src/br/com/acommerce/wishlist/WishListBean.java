@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.acommerce.book.Book;
+import br.com.acommerce.infra.MessageContainer;
 import br.com.acommerce.user.UserSessionBean;
 
 @Named
@@ -18,22 +19,28 @@ public class WishListBean {
 	private UserSessionBean userSessionBean;
 	@Inject
 	private WishListDAO wishList;
+	@Inject
+	private MessageContainer messages;
 	
 	private List<Book> list;
 	
 	@PostConstruct
 	public void setup(){
-		list = wishList.of(userSessionBean.getUser());
+		if(userSessionBean.isLogged()){
+			list = wishList.of(userSessionBean.getUser());
+		}
 	}
 	
 	public void add(Book book){
 		wishList.add(book, userSessionBean.getUser());
 		setup();
+		messages.addInfo("itemAdded");
 	}
 	
 	public void remove(Book book){
 		wishList.remove(book);
 		setup();
+		messages.addInfo("itemRemoved");
 	}
 	
 	public boolean contains(Book book){

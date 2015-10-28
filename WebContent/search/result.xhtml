@@ -15,23 +15,11 @@
 	
 		<div class="container-fluid">
 			<ul class="row list-unstyled">
+				<h:outputText styleClass="alert alert-info" rendered="#{empty searchBean.result}" value="#{msgs.noResults}"/>
 				<ui:repeat value="#{searchBean.result}" var="book" varStatus="status">
 					<li class="col-sm-5 col-md-3 text-center">
 						<div class="thumbnail">
 							<div class="caption">
-								<h:panelGroup rendered="#{userSessionBean.logged}">
-									<h:form rendered="#{!wishListBean.contains(book)}">
-										<h:commandLink styleClass="pull-right" action="#{wishListBean.add(book)}">
-											<span class="glyphicon glyphicon glyphicon-heart-empty" />
-										</h:commandLink>
-									</h:form>
-									<h:form rendered="#{wishListBean.contains(book)}">
-										<h:commandLink styleClass="pull-right" action="#{wishListBean.remove(book)}">
-											<span class="glyphicon glyphicon glyphicon-heart" />
-										</h:commandLink>
-									</h:form>
-								</h:panelGroup>
-								
 								<h3>#{book.name}</h3>
 								<p>
 							        <h:outputText value="#{book.price}" >

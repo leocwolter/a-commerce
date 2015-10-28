@@ -15,16 +15,16 @@
 		<div class="container-fluid">
 			<h:form>
 				<label for="email">#{msgs.email}:</label>
-				<h:inputText validator="#{userSessionBean.validateNewUser}" required="true" styleClass="form-control" value="#{email}" id="email">
+				<h:inputText validator="#{userBean.validateNewUser}" required="true" styleClass="form-control" value="#{email}" id="email">
 					<f:validateLength minimum="2"/>
 				</h:inputText>
 				<br/>
 				<label for="password">#{msgs.password}:</label>
-				<h:inputText required="true" styleClass="form-control" value="#{password}" id="password">
+				<h:inputSecret required="true" styleClass="form-control" value="#{password}" id="password">
 					<f:validateLength minimum="2"/>
-				</h:inputText>
+				</h:inputSecret>
 				<br/>
-				<h:commandButton styleClass="btn btn-default" value="#{msgs.signup}" action="#{userSessionBean.signup(email, password)}" />
+				<h:commandButton styleClass="btn btn-default" value="#{msgs.signup}" action="#{signupBean.signup(email, password)}" />
 			</h:form>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

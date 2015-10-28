@@ -8,6 +8,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.acommerce.infra.MessageContainer;
+
 @Named
 @SessionScoped
 public class BooksBean implements Serializable{
@@ -16,12 +18,16 @@ public class BooksBean implements Serializable{
 
 	@Inject
 	private BookDAO books;
-	private Book book = new Book();
+	@Inject
+	private MessageContainer messages;
+	
+	private Book book;
 	private List<Book> all;
 	
 	@PostConstruct
 	public void setup(){
 		this.all = books.all();
+		this.book = new Book();
 	}
 	
 	public List<Book> getList(){
@@ -38,14 +44,15 @@ public class BooksBean implements Serializable{
 	
 	public String save(){
 		books.save(book);
+		messages.addInfo("created");
 		setup();
 		return "list?faces-redirect=true";
 	}
 	
-	public String delete(Book book){
+	public void delete(Book book){
 		books.remove(book.getId());
+		messages.addInfo("deleted");
 		setup();
-		return "list?faces-redirect=true";
 	}
 	
 }

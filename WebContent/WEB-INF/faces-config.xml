@@ -5,11 +5,21 @@
 	version="2.2">
 
 	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>home?faces-redirect=true</from-outcome>
+			<to-view-id>/book/list.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
 		<from-view-id>/book/list.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{cartBean.add}</from-action>
 			<from-outcome>success?faces-redirect=true</from-outcome>
 			<to-view-id>/cart/show.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 
@@ -19,6 +29,7 @@
 			<from-action>#{cartBean.add}</from-action>
 			<from-outcome>success?faces-redirect=true</from-outcome>
 			<to-view-id>/cart/show.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 

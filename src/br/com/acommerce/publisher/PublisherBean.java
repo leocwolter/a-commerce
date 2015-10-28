@@ -2,9 +2,12 @@ package br.com.acommerce.publisher;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import br.com.acommerce.infra.MessageContainer;
 
 @RequestScoped
 @Named
@@ -13,25 +16,34 @@ public class PublisherBean {
 	@Inject
 	private PublisherDAO publishers;
 	
-	private Publisher publisher = new Publisher();
+	@Inject
+	private MessageContainer messages;
+	
+	private Publisher publisher;
+	
+	@PostConstruct
+	public void setup(){
+		this.publisher = new Publisher();
+	}
 	
 	public List<Publisher> getList(){
 		return publishers.all();
 	}
 
-	public String save(){
+	public void save(){
 		publishers.save(publisher);
-		return "/list?faces-redirect=true";
+		setup();
+		messages.addInfo("created");
 	}
 	
-	public String update(){
+	public void update(){
 		publishers.update(publisher);
-		return "/list?faces-redirect=true";
+		messages.addInfo("updated");
 	}
 	
-	public String delete(Publisher publisher){
+	public void delete(Publisher publisher){
 		publishers.remove(publisher.getId());
-		return "/list?faces-redirect=true";
+		messages.addInfo("deleted");
 	}
 	
 	public Publisher getPublisher() {

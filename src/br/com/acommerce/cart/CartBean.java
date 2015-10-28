@@ -6,13 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.acommerce.book.Book;
+import br.com.acommerce.infra.MessageContainer;
 
 @SessionScoped
 @Named
 public class CartBean implements Serializable {
+	
+	@Inject
+	private MessageContainer messages;
 	
 	private Cart cart = new Cart();
 	private Book book;
@@ -22,9 +27,9 @@ public class CartBean implements Serializable {
 		return "success?faces-redirect=true";
 	}
 	
-	public String remove(Book book) {
+	public void remove(Book book) {
 		cart.remove(book);
-		return "show?faces-redirect=true";
+		messages.addInfo("itemRemoved");
 	}
 	
 	public String showFinalPrice() {

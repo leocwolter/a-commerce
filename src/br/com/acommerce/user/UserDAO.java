@@ -114,7 +114,7 @@ public class UserDAO {
 		}
 	}
 
-	public boolean exists(String email) {
+	public boolean existsWith(String email) {
 		try {
 			String sql = "select * from user where email = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
